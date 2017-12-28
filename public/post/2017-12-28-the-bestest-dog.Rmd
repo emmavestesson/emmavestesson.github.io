@@ -1,0 +1,66 @@
+---
+title: The bestest dog
+author: ~
+date: '2017-12-28'
+slug: the-bestest-dog
+categories: []
+tags: []
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+require(twitteR)
+require(ROAuth)
+library("purrr")
+library(stringr)
+library(readr)
+library("ggplot2")
+library(dplyr)
+library(tm)
+# Start -----
+setwd("/Users/emmavestesson/Documents/R folder")
+load("twitter_credentials.R")
+
+# This function wraps the OAuth authentication handshake functions
+# from the httr package for a twitteR session
+setup_twitter_oauth(
+  consumer_key = consumerKey,
+  consumer_secret = consumerSecret, 
+  access_token = accessToken, 
+  access_secret = accessSecret)
+
+```
+
+## Who is the bestest dog?
+
+After calling my parents' dog the bestest dog of all I wanted to find out who the internet thought was the bestest dog. "We rate dogs" on twitter was the obvious choice as the almighty judge of all dogs.
+
+I started by pulling all tweets by @rate_dogs
+
+```{r cars}
+rate_dogs_list <- userTimeline("dog_rates",n=500,includeRts = FALSE, excludeReplies=TRUE)
+
+rate_dogs_df <- twListToDF(rate_dogs_list)
+
+
+```
+
+I decide to not include retweets or replies as I only cared about the official opinion of @rate_dogs
+
+
+Once I had the raw data I needed to extract the scores. I did this using a regular expression that looked for a number followed by "/10". For some reason I don't understand the variable I created was added to the data set as a matrix so I had to add a step to make it a vector.  
+
+```{r pressure, echo=TRUE}
+
+rate_dogs_scored <- rate_dogs_df %>% 
+  mutate(score=str_match(text,pattern="[0-9]+/10")) 
+
+rate_dogs_scored$score <- as.vector(rate_dogs_scored$score)
+ 
+ggplot(rate_dogs_scored, aes(x=score,y=favoriteCount)) + geom_point() +
+  theme_bw() + ggtitle("Distribution of scores") + ylab("Favourites")
+
+
+```

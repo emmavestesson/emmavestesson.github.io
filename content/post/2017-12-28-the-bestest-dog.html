@@ -1,0 +1,29 @@
+---
+title: The bestest dog
+author: ~
+date: '2017-12-28'
+slug: the-bestest-dog
+categories: []
+tags: []
+---
+
+
+
+<div id="who-is-the-bestest-dog" class="section level2">
+<h2>Who is the bestest dog?</h2>
+<p>After calling my parents’ dog the bestest dog of all I wanted to find out who the internet thought was the bestest dog. “We rate dogs” on twitter was the obvious choice as the almighty judge of all dogs.</p>
+<p>I started by pulling all tweets by <span class="citation">@rate_dogs</span></p>
+<pre class="r"><code>rate_dogs_list &lt;- userTimeline(&quot;dog_rates&quot;,n=500,includeRts = FALSE, excludeReplies=TRUE)
+
+rate_dogs_df &lt;- twListToDF(rate_dogs_list)</code></pre>
+<p>I decide to not include retweets or replies as I only cared about the official opinion of <span class="citation">@rate_dogs</span></p>
+<p>Once I had the raw data I needed to extract the scores. I did this using a regular expression that looked for a number followed by “/10”. For some reason I don’t understand the variable I created was added to the data set as a matrix so I had to add a step to make it a vector.</p>
+<pre class="r"><code>rate_dogs_scored &lt;- rate_dogs_df %&gt;% 
+  mutate(score=str_match(text,pattern=&quot;[0-9]+/10&quot;)) 
+
+rate_dogs_scored$score &lt;- as.vector(rate_dogs_scored$score)
+ 
+ggplot(rate_dogs_scored, aes(x=score,y=favoriteCount)) + geom_point() +
+  theme_bw() + ggtitle(&quot;Distribution of scores&quot;) + ylab(&quot;Favourites&quot;)</code></pre>
+<p><img src="/https:/emmavestesson.github.io/post/2017-12-28-the-bestest-dog_files/figure-html/pressure-1.png" width="672" /></p>
+</div>
