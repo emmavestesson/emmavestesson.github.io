@@ -15,7 +15,7 @@
 baseURL = "https:/emmavestesson.github.io/"
 languageCode = "en-gb"
 defaultContentLanguage = "en-gb"
-title = "Hugo tranquilpeak theme"
+title = "Playing with data"
 theme = "hugo-tranquilpeak-theme"
 disqusShortname = "hugo-tranquilpeak-theme"
 # googleAnalytics = "UA-123-45"
