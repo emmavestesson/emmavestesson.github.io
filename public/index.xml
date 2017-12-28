@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Playing with data</title>
-    <link>/https:/emmavestesson.github.io/</link>
+    <link>/</link>
     <description>Recent content on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Thu, 28 Dec 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/https:/emmavestesson.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>The bestest dog</title>
-      <link>/https:/emmavestesson.github.io/2017/12/the-bestest-dog/</link>
+      <link>/2017/12/the-bestest-dog/</link>
       <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
       
-      <guid>/https:/emmavestesson.github.io/2017/12/the-bestest-dog/</guid>
+      <guid>/2017/12/the-bestest-dog/</guid>
       <description>Who is the bestest dog? After calling my parents’ dog the bestest dog of all I wanted to find out who the internet thought was the bestest dog. “We rate dogs” on twitter was the obvious choice as the almighty judge of all dogs.
 I started by pulling all tweets by @rate_dogs
 rate_dogs_list &amp;lt;- userTimeline(&amp;quot;dog_rates&amp;quot;,n=500,includeRts = FALSE, excludeReplies=TRUE) rate_dogs_df &amp;lt;- twListToDF(rate_dogs_list) I decide to not include retweets or replies as I only cared about the official opinion of @rate_dogs</description>
@@ -24,10 +24,10 @@ rate_dogs_list &amp;lt;- userTimeline(&amp;quot;dog_rates&amp;quot;,n=500,includ
     
     <item>
       <title>About</title>
-      <link>/https:/emmavestesson.github.io/about/</link>
+      <link>/about/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
-      <guid>/https:/emmavestesson.github.io/about/</guid>
+      <guid>/about/</guid>
       <description>This is a &amp;ldquo;hello world&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
     </item>
     
