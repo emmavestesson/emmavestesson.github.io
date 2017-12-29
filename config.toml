@@ -32,7 +32,7 @@ canonifyurls = true
 
 [author]
   name = "Emma Vestesson"
-  bio = "Playing with data"
+  bio = "I first started learning R in the autumn of 2012 but stopped after a couple of months as I didn't use it. In January 2017 I rediscovered R again and this time I am sticking with it. After discovering blogdown and realising how many different short snippets of code I have hidden away on my computer I decided to share them on this blog instead."
   job = "Data analyst"
   location = "London"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
@@ -135,7 +135,7 @@ canonifyurls = true
   # Current image is on AWS S3 and delivered by AWS CloudFront.
   # Otherwise put your image in folder `static/_images/` (development)  or in `source/assets/images/` if you can't or don't want to build the theme,
   # and use relative url : `your-image.png`
-  coverImage = "cover.jpg"
+  coverImage = "DSCF5410.jpg"
 
   # Display an image gallery at the end of a post which have photos variables (false: disabled, true: enabled)
   imageGallery = true
