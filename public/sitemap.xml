@@ -3,56 +3,78 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2017/12/the-bestest-dog/</loc>
+    <loc>/2018/01/maps/</loc>
+    <lastmod>2018-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/12/going-to-mexico/</loc>
+    <lastmod>2017-12-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2017/12/the-bestest-dog/</loc>
     <lastmod>2017-12-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2017/12/trying-something-new/</loc>
+    <loc>/2017/12/trying-something-new/</loc>
     <lastmod>2017-12-28T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/archives/</loc>
+    <loc>/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/dogs/</loc>
+    <loc>/tags/dogs/</loc>
     <lastmod>2017-12-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/</loc>
-    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+    <loc>/tags/fingertipr/</loc>
+    <lastmod>2018-01-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/post/</loc>
-    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+    <loc>/tags/leaflet/</loc>
+    <lastmod>2018-01-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/categories/r/</loc>
-    <lastmod>2017-12-28T00:00:00+00:00</lastmod>
+    <loc>/</loc>
+    <lastmod>2018-01-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/</loc>
+    <loc>/post/</loc>
+    <lastmod>2018-01-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2018-01-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
     <lastmod>2017-12-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

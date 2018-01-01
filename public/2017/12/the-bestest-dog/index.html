@@ -22,7 +22,7 @@
     <meta name="author" content="Emma Vestesson">
     <meta name="keywords" content="">
 
-    <link rel="icon" href="https://emmavestesson.netlify.com/favicon.png">
+    <link rel="icon" href="/favicon.png">
     
 
     
@@ -60,7 +60,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="https://emmavestesson.netlify.com/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
     
     
 
@@ -75,12 +75,12 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
       <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
-    <a class="header-title-link" href="https://emmavestesson.netlify.com/">Playing with data</a>
+    <a class="header-title-link" href="/">Playing with data</a>
   </div>
   
     
       <a class="header-right-picture "
-         href="https://emmavestesson.netlify.com/#about">
+         href="/#about">
     
     
     
@@ -97,7 +97,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://emmavestesson.netlify.com/">
+      <a class="sidebar-button-link " href="/">
     
       <i class="sidebar-button-icon fa fa-lg fa-home"></i>
       
@@ -107,7 +107,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://emmavestesson.netlify.com/categories">
+      <a class="sidebar-button-link " href="/categories">
     
       <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
       
@@ -117,7 +117,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://emmavestesson.netlify.com/tags">
+      <a class="sidebar-button-link " href="/tags">
     
       <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
       
@@ -127,7 +127,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://emmavestesson.netlify.com/archives">
+      <a class="sidebar-button-link " href="/archives">
     
       <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
       
@@ -137,7 +137,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://emmavestesson.netlify.com/#about">
+      <a class="sidebar-button-link " href="/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -151,11 +151,21 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://github.com/emmavestesson" target="_blank" rel="noopener">
+      <a class="sidebar-button-link " href="https://github.com/emmavestesson">
     
       <i class="sidebar-button-icon fa fa-lg fa-github"></i>
       
       <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/emmavestesson/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
     </a>
   </li>
 
@@ -165,7 +175,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://emmavestesson.netlify.com/index.xml">
+      <a class="sidebar-button-link " href="/index.xml">
     
       <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
       
@@ -207,7 +217,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
   
     <span></span>
     
-      <a class="category-link" href="https://emmavestesson.netlify.com/categories/r">R</a>
+      <a class="category-link" href="/categories/r">R</a>
     
   
 
@@ -277,14 +287,14 @@ untrunc_rows &lt;-  nrow(rate_dogs_scored %&gt;%
 untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;% 
                         filter(truncated==FALSE) %&gt;% 
                           select(score)))</code></pre>
-<p>There are 332 rows in my data frame but only 183 actually have a score. Some tweets will not have a score as they were not rating dogs but unfortunately some tweets are truncated. I am fairly certain that tweets without a score that were not truncuated were tweets that did not score dogs.</p>
+<p>There are 359 rows in my data frame but only 184 actually have a score. Some tweets will not have a score as they were not rating dogs but unfortunately some tweets are truncated. I am fairly certain that tweets without a score that were not truncuated were tweets that did not score dogs.</p>
 <p>After plotting the number of a times a</p>
 <pre class="r"><code>ggplot(rate_dogs_scored, aes(x=retweetCount,y=favoriteCount)) + geom_point() +
   theme_bw() + ggtitle(&quot;Distribution of scores&quot;) + ylab(&quot;Favourites&quot;)</code></pre>
-<p><img src="https://emmavestesson.netlify.com/post/2017-12-28-the-bestest-dog_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/2017-12-28-the-bestest-dog_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(rate_dogs_scored, aes(x=score,y=favoriteCount)) + geom_point() +
   theme_bw() + ggtitle(&quot;Number of times favourited&quot;) + ylab(&quot;Favourites&quot;)</code></pre>
-<p><img src="https://emmavestesson.netlify.com/post/2017-12-28-the-bestest-dog_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><img src="/post/2017-12-28-the-bestest-dog_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 </div>
 
               
@@ -298,7 +308,7 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small"></span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://emmavestesson.netlify.com/tags/dogs/">dogs</a>
+  <a class="tag tag--primary tag--small" href="/tags/dogs/">dogs</a>
 
                   </div>
                 
@@ -311,7 +321,7 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/going-to-mexico/" data-tooltip="Going to Mexico">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -319,7 +329,7 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://emmavestesson.netlify.com/2017/12/trying-something-new/" data-tooltip="Trying something new">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/trying-something-new/" data-tooltip="Trying something new">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -337,19 +347,19 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://emmavestesson.netlify.com/2017/12/the-bestest-dog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2017/12/the-bestest-dog/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://emmavestesson.netlify.com/2017/12/the-bestest-dog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2017/12/the-bestest-dog/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://emmavestesson.netlify.com/2017/12/the-bestest-dog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2017/12/the-bestest-dog/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -384,7 +394,7 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2017 Emma Vestesson. 
+    &copy; 2018 Emma Vestesson. 
   </span>
 </footer>
 
@@ -397,7 +407,7 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/going-to-mexico/" data-tooltip="Going to Mexico">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -405,7 +415,7 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://emmavestesson.netlify.com/2017/12/trying-something-new/" data-tooltip="Trying something new">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2017/12/trying-something-new/" data-tooltip="Trying something new">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -423,19 +433,19 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https://emmavestesson.netlify.com/2017/12/the-bestest-dog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2017/12/the-bestest-dog/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=https://emmavestesson.netlify.com/2017/12/the-bestest-dog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2017/12/the-bestest-dog/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=https://emmavestesson.netlify.com/2017/12/the-bestest-dog/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2017/12/the-bestest-dog/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -465,19 +475,19 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Femmavestesson.netlify.com%2F2017%2F12%2Fthe-bestest-dog%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2017%2F12%2Fthe-bestest-dog%2F">
           <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=https%3A%2F%2Femmavestesson.netlify.com%2F2017%2F12%2Fthe-bestest-dog%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2017%2F12%2Fthe-bestest-dog%2F">
           <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=https%3A%2F%2Femmavestesson.netlify.com%2F2017%2F12%2Fthe-bestest-dog%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2017%2F12%2Fthe-bestest-dog%2F">
           <i class="fa fa-google-plus"></i><span>%!(EXTRA string=Google&#43;)</span>
         </a>
       </li>
@@ -536,7 +546,41 @@ untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;%
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://emmavestesson.netlify.com/2017/12/the-bestest-dog/">
+              <a class="link-unstyled" href="/2018/01/maps/">
+                <h3 class="media-heading">Maps</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">R Markdown A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their [fingertips website] (fingertips.phe.gov.uk). I like maps so I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2017/12/going-to-mexico/">
+                <h3 class="media-heading">Going to Mexico</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Dec 12, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">In February next year I am going to Mexico with a group of friends.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2017/12/the-bestest-dog/">
                 <h3 class="media-heading">The bestest dog</h3>
               </a>
               <span class="media-meta">
@@ -554,7 +598,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="https://emmavestesson.netlify.com/2017/12/trying-something-new/">
+              <a class="link-unstyled" href="/2017/12/trying-something-new/">
                 <h3 class="media-heading">Trying something new</h3>
               </a>
               <span class="media-meta">
@@ -575,7 +619,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         2 posts found
+         4 posts found
       </p>
     </div>
   </div>
@@ -583,7 +627,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
     
   
     
-    <div id="cover" style="background-image:url('https://emmavestesson.netlify.com/images/DSCF5410.jpg');"></div>
+    <div id="cover" style="background-image:url('/images/DSCF5410.jpg');"></div>
   
 
 
@@ -595,7 +639,7 @@ I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packa
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="https://emmavestesson.netlify.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
 
 
 
@@ -616,7 +660,7 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = 'https:\/\/emmavestesson.netlify.com\/2017\/12\/the-bestest-dog\/';
+          this.page.url = '\/2017\/12\/the-bestest-dog\/';
           
             this.page.identifier = '\/2017\/12\/the-bestest-dog\/'
           

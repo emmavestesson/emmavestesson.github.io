@@ -1,0 +1,151 @@
+---
+title: Maps
+author: ~
+date: '2018-01-01'
+slug: maps
+categories:
+  - R
+tags:
+  - leaflet
+  - fingertipR
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(sp)
+library(leaflet)
+library(htmlwidgets)
+library(beepr)
+library(fingertipsR)
+library(tidyverse)
+library(snakecase)
+library(rgdal)
+library(here)
+```
+
+## R Markdown
+
+A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their [fingertips website] (fingertips.phe.gov.uk). I like maps so I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data. Sometimes the page will not load so be aware that you might have to try several times. 
+
+```{r, echo=FALSE}
+inds <- 92165 
+```
+
+
+```{r, eval=FALSE}
+
+inds <- select_indicators()
+
+```
+
+```{r}
+df <- fingertips_data(IndicatorID = inds,
+                        AreaTypeID = 152)
+glimpse(df)
+
+title <- df$IndicatorName[1]
+
+```
+
+```{r}
+
+df <- df %>% 
+  select_if(function(x) !all(is.na(x))) %>% # Drop columns with all missing values
+  select_if(function(x) !(is.factor(x) && nlevels(x)==1)) # Drop factors with only one level
+
+
+drop_no_var <- df %>% 
+  select_if(is.numeric) %>% 
+  select_if(function(x) var(x)==0) 
+
+```
+
+I don't like CamelCase so I use the to_snake_case function from the snakecase package to change the names to a format I like. 
+
+```{r }
+
+df_names <- names(df)
+snake_names <- to_snake_case(df_names)
+names(df)<- snake_names
+glimpse(df)
+```
+```{r}
+
+df <- df %>% 
+  select_if(function(x) !all(is.na(x))) %>% # Drop columns with all missing values
+  select_if(function(x) !(is.factor(x) && nlevels(x)==1)) # Drop factors with only one level
+
+
+drop_no_var <- df %>% 
+  select_if(is.numeric) %>% 
+  select_if(function(x) var(x)==0) 
+
+```
+
+I don't like CamelCase so I use the to_snake_case function from the snakecase package to change the names to a format I like. 
+
+```{r }
+
+df_names <- names(df)
+snake_names <- to_snake_case(df_names)
+names(df)<- snake_names
+glimpse(df)
+```
+
+I now have a smaller data frame with names that I like.
+
+I only care about the CCG so I filter my data based on area_type. At some point I want to create a map with time slider to show changes over time but for now I start with only one timeperiod.
+```{r}
+table(df$area_type)
+df_small <- df %>% 
+  filter(area_type=="CCGs (since 4/2017)") %>% 
+  filter(timeperiod=="2017 Q2") %>% 
+  droplevels()
+```
+
+
+
+I want to overlay the CCG borders so I googled CCG shapefile and found one on on data.gov.uk. 
+
+```{r eval=TRUE, echo=FALSE}
+
+shape <- readOGR(dsn = here("Data/Clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4.shp"))
+
+```
+I look at the shape data and the PHE data containing the information I want to map to identify which variables to merge on and then merge the PHE data to the shape data.
+
+```{r}
+glimpse(shape@data)
+glimpse(df_small)
+
+shape@data <- merge(shape@data, df_small, by.x = "ccg17cd", by.y = "area_code")
+
+```
+
+I now have everything I need to create the map. I add the variable name and the value I am mapping. 
+
+```{r , echo=FALSE, eval=TRUE}
+
+pal <- colorNumeric("magma", shape@data$count)
+
+leaflet(shape) %>% 
+  addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
+  addPolygons(stroke=TRUE, weight=1, color="black", 
+              fillColor = ~pal(count), fillOpacity=0.5,  
+              label = ~paste0(area_name, ": ", formatC(count, big.mark = ",")),
+              highlight = highlightOptions(
+                weight = 5,
+                color = "#666",
+                dashArray = "",
+                fillOpacity = 0.7,
+                bringToFront = TRUE)) %>%
+  addLegend("bottomright", pal = pal, values = ~count,
+            title = "",
+            labFormat = labelFormat(prefix = ""),
+            opacity = 1
+  )
+
+
+```

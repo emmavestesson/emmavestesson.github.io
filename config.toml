@@ -78,11 +78,18 @@ canonifyurls = true
   url = "/#about"
 
 [[menu.links]]
-  weight = 1
+  weight = 6
   identifier = "github"
   name = "GitHub"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
   url = "https://github.com/emmavestesson"
+  
+  [[menu.links]]
+  weight = 7
+  identifier = "linkedin"
+  name = "LinkedIn"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-linkedin\"></i>"
+  url = "https://www.linkedin.com/in/emmavestesson/"
 
 [[menu.misc]]
   weight = 1
