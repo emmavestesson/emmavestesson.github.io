@@ -3,6 +3,7 @@ title: The bestest dog
 author: ~
 date: '2017-12-28'
 slug: the-bestest-dog
+draft: true
 categories: ["R"]
 tags: ["dogs"]
 ---
@@ -69,7 +70,7 @@ untrunc_rows &lt;-  nrow(rate_dogs_scored %&gt;%
 untrunc_missing&lt;- sum(is.na(rate_dogs_scored %&gt;% 
                         filter(truncated==FALSE) %&gt;% 
                           select(score)))</code></pre>
-<p>There are 365 rows in my data frame but only 189 actually have a score. Some tweets will not have a score as they were not rating dogs but unfortunately some tweets are truncated. I am fairly certain that tweets without a score that were not truncuated were tweets that did not score dogs.</p>
+<p>There are 367 rows in my data frame but only 193 actually have a score. Some tweets will not have a score as they were not rating dogs but unfortunately some tweets are truncated. I am fairly certain that tweets without a score that were not truncuated were tweets that did not score dogs.</p>
 <p>After plotting the number of a times a</p>
 <pre class="r"><code>ggplot(rate_dogs_scored, aes(x=retweetCount,y=favoriteCount)) + geom_point() +
   theme_bw() + ggtitle(&quot;Distribution of scores&quot;) + ylab(&quot;Favourites&quot;)</code></pre>

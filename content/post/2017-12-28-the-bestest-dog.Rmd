@@ -3,6 +3,7 @@ title: The bestest dog
 author: ~
 date: '2017-12-28'
 slug: the-bestest-dog
+draft: true
 categories: ["R"]
 tags: ["dogs"]
 ---

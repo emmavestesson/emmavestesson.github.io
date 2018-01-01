@@ -1,5 +1,5 @@
 ---
-title: Maps
+title: Making a map (or my first blogpost)
 author: ~
 date: '2018-01-01'
 slug: maps
@@ -7,17 +7,14 @@ categories:
   - R
 tags:
   - leaflet
-  - fingertipR
+  - fingertipsR
+  - PHE
 ---
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-
 library(sp)
 library(leaflet)
-library(htmlwidgets)
-library(beepr)
 library(fingertipsR)
 library(tidyverse)
 library(snakecase)
@@ -26,8 +23,10 @@ library(rgeos)
 ```
 
 ## Getting the data
+A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their [fingertips website] (www.fingertips.phe.gov.uk). I wanted to try it and as I like maps I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data. Sometimes the page will not load so be aware that you might have to try several times. 
 
-A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their [fingertips website] (fingertips.phe.gov.uk). I like maps so I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data. Sometimes the page will not load so be aware that you might have to try several times. 
+
+
 
 ```{r, echo=FALSE}
 inds <- 92165 
@@ -47,7 +46,9 @@ glimpse(df)
 
 ```
 
-I picked a variable described as "`r df$IndicatorName[1]`"
+
+## Cleaning the data
+From a first look at the data I can see that there are a lot of variables with only one value or only missing values. I drop these variables as they add little value. 
 
 ```{r}
 
@@ -55,14 +56,9 @@ df <- df %>%
   select_if(function(x) !all(is.na(x))) %>% # Drop columns with all missing values
   select_if(function(x) !(is.factor(x) && nlevels(x)==1)) # Drop factors with only one level
 
-
-drop_no_var <- df %>% 
-  select_if(is.numeric) %>% 
-  select_if(function(x) var(x)==0) 
-
 ```
 
-I don't like CamelCase so I use the to_snake_case function from the snakecase package to change the names to a format I like. 
+I don't like CamelCase so I use the to_snake_case function from the snakecase package to change the names to a format I like (I also really wanted to try this package). 
 
 ```{r }
 
@@ -71,23 +67,8 @@ snake_names <- to_snake_case(df_names)
 names(df)<- snake_names
 names(df)
 ```
-```{r}
 
-df <- df %>% 
-  select_if(function(x) !all(is.na(x))) %>% # Drop columns with all missing values
-  select_if(function(x) !(is.factor(x) && nlevels(x)==1)) # Drop factors with only one level
-
-
-drop_no_var <- df %>% 
-  select_if(is.numeric) %>% 
-  select_if(function(x) var(x)==0) 
-
-```
-
-
-I now have a smaller data frame with variable names that I like.
-
-I only care about the CCG so I filter my data based on area_type. At some point I want to create a map with time slider to show changes over time but for now I start with only one timeperiod.
+I now have a smaller data frame with variable names that I like but there is still some data I will not use. I only care about the CCG so I filter my data based on area_type. At some point I want to create a map with time slider to show changes over time but for now I start with only one time period.
 ```{r}
 
 df_small <- df %>% 
@@ -98,6 +79,7 @@ df_small <- df %>%
 
 
 
+## Getting a shapefile
 I need a shapefile to create a map so I just googled CCG shapefile and found one on data.gov.uk. I ended up having to simplify the spatial dataframe as it is very large making the map very large and slow.
 
 ```{r eval=TRUE, echo=FALSE}
@@ -108,9 +90,9 @@ shape2 <- gSimplify(shape_temp, tol=0.01, topologyPreserve=TRUE)
 shape <- SpatialPolygonsDataFrame(shape2, data=shape_temp@data)
   
 ```
-I look at the shape data and the PHE data containing the information I want to map to identify which variables to merge on and then merge the PHE data to the shape data.
+I look at the shape data and the PHE data to identify which variables to merge on and then merge the PHE data to the shape data.
 
-```{r}
+```{r, echo=FALSE}
 glimpse(shape@data)
 glimpse(df_small)
 
@@ -118,19 +100,18 @@ shape@data <- merge(shape@data, df_small, by.x = "ccg17cd", by.y = "area_code")
 
 ```
 
-I now have everything I need to create the map. I add the variable name and the value I am mapping. 
+I now have everything I need to create the map. I add the variable name and the value I am mapping to a label as well as a legend. Pay no attention to the breaks used for colour fill, I just wanted to try the function.
 
-```{r , echo=FALSE, eval=TRUE}
-
+```{r , echo=TRUE, eval=TRUE}
 
 
 pal <- colorNumeric("magma", shape@data$count)
 
-p<- leaflet(shape, options= leafletOptions( minZoom=6, maxZoom=12) )%>% 
+leaflet(shape, options= leafletOptions( minZoom=6, maxZoom=12) )%>% 
   addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
   addPolygons(stroke=TRUE, weight=1, color="black", 
               fillColor = ~pal(count), fillOpacity=0.5,  
-              label = ~paste0(area_name, ": ", formatC(count, big.mark = ",")),
+              label = ~paste0(area_name, ": ", prettyNum(count, big.mark = ",", format="f")),
               highlight = highlightOptions(
                 weight = 5,
                 color = "#666",
@@ -141,12 +122,22 @@ p<- leaflet(shape, options= leafletOptions( minZoom=6, maxZoom=12) )%>%
             title = "Prescribed antibiotic items <br> per 1000 residents ",
             labFormat = labelFormat(prefix = ""),
             opacity = 1
-  )
+   )
 
 
 ```
 
-```{r, echo=TRUE,  width = 30, height = 20}
-p
-```
+## Next step
 
+I want to add a timeslider to display changes over time but I decided this was a good place to stop seeing how this is my first blog post. 
+
+## Packages I used
+```{r, eval=FALSE}
+library(sp)
+library(leaflet)
+library(fingertipsR)
+library(tidyverse)
+library(snakecase)
+library(rgdal)
+library(rgeos)
+```
