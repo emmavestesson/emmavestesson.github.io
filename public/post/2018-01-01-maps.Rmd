@@ -22,7 +22,7 @@ library(fingertipsR)
 library(tidyverse)
 library(snakecase)
 library(rgdal)
-library(here)
+library(rgeos)
 ```
 
 ## R Markdown
@@ -112,8 +112,10 @@ I want to overlay the CCG borders so I googled CCG shapefile and found one on on
 ```{r eval=TRUE, echo=FALSE}
 
 setwd("/Users/emmavestesson/Documents/R folder/Fingertips/Data/Clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4")
-shape <- readOGR(dsn = "clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4.shp")
-
+shape_temp <- readOGR(dsn = "clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4.shp")
+shape2 <- gSimplify(shape_temp, tol=0.01, topologyPreserve=TRUE)
+shape <- SpatialPolygonsDataFrame(shape2, data=shape_temp@data)
+  
 ```
 I look at the shape data and the PHE data containing the information I want to map to identify which variables to merge on and then merge the PHE data to the shape data.
 
@@ -129,9 +131,11 @@ I now have everything I need to create the map. I add the variable name and the 
 
 ```{r , echo=FALSE, eval=TRUE}
 
+
+
 pal <- colorNumeric("magma", shape@data$count)
 
-leaflet(shape) %>% 
+p<- leaflet(shape, options= leafletOptions( minZoom=6, maxZoom=12) )%>% 
   addProviderTiles(providers$OpenStreetMap.Mapnik) %>%
   addPolygons(stroke=TRUE, weight=1, color="black", 
               fillColor = ~pal(count), fillOpacity=0.5,  
@@ -142,11 +146,16 @@ leaflet(shape) %>%
                 dashArray = "",
                 fillOpacity = 0.7,
                 bringToFront = TRUE)) %>%
-  addLegend("bottomright", pal = pal, values = ~count,
-            title = "",
+  addLegend("topleft", pal = pal, values = ~count,
+            title = "Prescribed antibiotic items <br> per 1000 residents ",
             labFormat = labelFormat(prefix = ""),
             opacity = 1
   )
 
 
 ```
+
+```{r, echo=TRUE,  width = 30, height = 20}
+p
+```
+
