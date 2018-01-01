@@ -3,6 +3,7 @@ title: Trying something new
 author: ~
 date: '2017-12-28'
 slug: trying-something-new
+
 categories: []
 tags: []
 ---
