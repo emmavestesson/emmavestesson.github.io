@@ -25,7 +25,7 @@ library(rgdal)
 library(rgeos)
 ```
 
-## R Markdown
+## Getting the data
 
 A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their [fingertips website] (fingertips.phe.gov.uk). I like maps so I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data. Sometimes the page will not load so be aware that you might have to try several times. 
 
@@ -45,9 +45,9 @@ df <- fingertips_data(IndicatorID = inds,
                         AreaTypeID = 152)
 glimpse(df)
 
-title <- df$IndicatorName[1]
-
 ```
+
+I picked a variable described as "`r df$IndicatorName[1]`"
 
 ```{r}
 
@@ -69,7 +69,7 @@ I don't like CamelCase so I use the to_snake_case function from the snakecase pa
 df_names <- names(df)
 snake_names <- to_snake_case(df_names)
 names(df)<- snake_names
-glimpse(df)
+names(df)
 ```
 ```{r}
 
@@ -84,21 +84,12 @@ drop_no_var <- df %>%
 
 ```
 
-I don't like CamelCase so I use the to_snake_case function from the snakecase package to change the names to a format I like. 
 
-```{r }
-
-df_names <- names(df)
-snake_names <- to_snake_case(df_names)
-names(df)<- snake_names
-glimpse(df)
-```
-
-I now have a smaller data frame with names that I like.
+I now have a smaller data frame with variable names that I like.
 
 I only care about the CCG so I filter my data based on area_type. At some point I want to create a map with time slider to show changes over time but for now I start with only one timeperiod.
 ```{r}
-table(df$area_type)
+
 df_small <- df %>% 
   filter(area_type=="CCGs (since 4/2017)") %>% 
   filter(timeperiod=="2017 Q2") %>% 
@@ -107,7 +98,7 @@ df_small <- df %>%
 
 
 
-I want to overlay the CCG borders so I googled CCG shapefile and found one on on data.gov.uk. 
+I need a shapefile to create a map so I just googled CCG shapefile and found one on data.gov.uk. I ended up having to simplify the spatial dataframe as it is very large making the map very large and slow.
 
 ```{r eval=TRUE, echo=FALSE}
 
