@@ -111,7 +111,8 @@ I want to overlay the CCG borders so I googled CCG shapefile and found one on on
 
 ```{r eval=TRUE, echo=FALSE}
 
-shape <- readOGR(dsn = here("Data/Clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4.shp"))
+setwd("/Users/emmavestesson/Documents/R folder/Fingertips/Data/Clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4")
+shape <- readOGR(dsn = "clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4.shp")
 
 ```
 I look at the shape data and the PHE data containing the information I want to map to identify which variables to merge on and then merge the PHE data to the shape data.
