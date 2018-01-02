@@ -20,24 +20,5 @@
       <description>Getting the data A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their [fingertips website] (www.fingertips.phe.gov.uk). I wanted to try it and as I like maps I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data.</description>
     </item>
     
-    <item>
-      <title>The bestest dog</title>
-      <link>/2017/12/the-bestest-dog/</link>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/the-bestest-dog/</guid>
-      <description>Who is the bestest dog? After calling my parents’ dog the bestest dog of all I wanted to find out who the internet thought was the bestest dog. “We rate dogs” on twitter was the obvious choice as the almighty judge of all dogs.
-I started by pulling all tweets by @rate_dogs using the twitteR and ROAuth packages. I decide to not include retweets or replies as I only cared about the official opinion of @rate_dogs.</description>
-    </item>
-    
-    <item>
-      <title>Trying something new</title>
-      <link>/2017/12/trying-something-new/</link>
-      <pubDate>Thu, 28 Dec 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/2017/12/trying-something-new/</guid>
-      <description>I write a lot of short snippets of code that that end up in a folder on my computer (often half-finished) never to been seen by anyone. I decided to make</description>
-    </item>
-    
   </channel>
 </rss>
