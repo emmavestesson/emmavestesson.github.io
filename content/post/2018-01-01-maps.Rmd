@@ -80,14 +80,14 @@ df_small <- df %>%
 
 
 ## Getting a shapefile
-I need a shapefile to create a map so I just googled CCG shapefile and found one on data.gov.uk. I ended up having to simplify the spatial dataframe as it is very large making the map very large and slow.
+I need a shapefile to create a map so I just googled CCG shapefile and found one on data.gov.uk. I ended up having to simplify the spatial dataframe and create a new spatial object with the data in as the very large file size made the map massive and slow.
 
-```{r eval=TRUE, echo=FALSE}
+```{r eval=TRUE, echo=TRUE}
 
 setwd("/Users/emmavestesson/Documents/R folder/Fingertips/Data/Clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4")
 shape_temp <- readOGR(dsn = "clinical_Commissioning_Groups_April_2017_Full_Clipped_Boundaries_in_England_V4.shp")
-shape2 <- gSimplify(shape_temp, tol=0.01, topologyPreserve=TRUE)
-shape <- SpatialPolygonsDataFrame(shape2, data=shape_temp@data)
+shape2 <- gSimplify(shape_temp, tol=0.01, topologyPreserve=TRUE) # simplify shapefile
+shape <- SpatialPolygonsDataFrame(shape2, data=shape_temp@data) # add data object 
   
 ```
 I look at the shape data and the PHE data to identify which variables to merge on and then merge the PHE data to the shape data.
