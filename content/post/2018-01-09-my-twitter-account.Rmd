@@ -1,0 +1,70 @@
+---
+title: My twitter account
+author: ~
+date: '2018-01-09'
+slug: my-twitter-account
+draft: TRUE
+categories:
+  - R
+tags:
+  - TwitteR
+---
+
+```{r, echo=FALSE}
+require(twitteR)
+require(ROAuth)
+library("purrr")
+library(stringr)
+library(readr)
+library("ggplot2")
+library(dplyr)
+library(tm)
+
+```
+
+# Twitter
+
+A week ago I published my first blog post thinking that no one would read it. I decided to check out my twitter activity.
+
+# Getting access to twitter
+I followed the instructions in the twitteR vignette to get access to Twitter. I saved the information in a file that I load.
+
+```{r}
+
+setwd("/Users/emmavestesson/Documents/R folder")
+load("twitter_credentials.R")
+
+# This function wraps the OAuth authentication handshake functions
+# from the httr package for a twitteR session
+setup_twitter_oauth(
+  consumer_key = consumerKey,
+  consumer_secret = consumerSecret, 
+  access_token = accessToken, 
+  access_secret = accessSecret)
+
+```
+
+
+
+```{r}
+my_tweets <- userTimeline("gummifot",n=3200,includeRts = FALSE, excludeReplies=TRUE)
+my_tweets_df <- twListToDF(my_tweets)
+
+```
+
+
+
+```{r}
+ggplot(my_tweets_df, aes(x=favoriteCount)) + geom_bar(fill="plum1") + 
+  ggtitle("Times my tweets have been favourited") +theme_light()
+```
+
+
+```{r}
+id_best_tweet <- my_tweets_df %>% 
+  filter(favoriteCount==max(favoriteCount)) %>% 
+  select(id) 
+t<-retweets(id_best_tweet)
+showStatus(id_best_tweet)
+```
+

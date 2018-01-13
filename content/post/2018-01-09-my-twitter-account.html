@@ -1,0 +1,67 @@
+---
+title: My twitter account
+author: ~
+date: '2018-01-09'
+slug: my-twitter-account
+draft: TRUE
+categories:
+  - R
+tags:
+  - TwitteR
+---
+
+
+
+<pre><code>## Loading required package: twitteR</code></pre>
+<pre><code>## Loading required package: ROAuth</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:twitteR&#39;:
+## 
+##     id, location</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre><code>## Loading required package: NLP</code></pre>
+<pre><code>## 
+## Attaching package: &#39;NLP&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     annotate</code></pre>
+<div id="twitter" class="section level1">
+<h1>Twitter</h1>
+<p>A week ago I published my first blog post thinking that no one would read it. I decided to check out my twitter activity.</p>
+</div>
+<div id="getting-access-to-twitter" class="section level1">
+<h1>Getting access to twitter</h1>
+<p>I followed the instructions in the twitteR vignette to get access to Twitter. I saved the information in a file that I load.</p>
+<pre class="r"><code>setwd(&quot;/Users/emmavestesson/Documents/R folder&quot;)
+load(&quot;twitter_credentials.R&quot;)
+
+# This function wraps the OAuth authentication handshake functions
+# from the httr package for a twitteR session
+setup_twitter_oauth(
+  consumer_key = consumerKey,
+  consumer_secret = consumerSecret, 
+  access_token = accessToken, 
+  access_secret = accessSecret)</code></pre>
+<pre><code>## [1] &quot;Using direct authentication&quot;</code></pre>
+<pre class="r"><code>my_tweets &lt;- userTimeline(&quot;gummifot&quot;,n=3200,includeRts = FALSE, excludeReplies=TRUE)
+my_tweets_df &lt;- twListToDF(my_tweets)</code></pre>
+<pre class="r"><code>ggplot(my_tweets_df, aes(x=favoriteCount)) + geom_bar(fill=&quot;plum1&quot;) + 
+  ggtitle(&quot;Times my tweets have been favourited&quot;) +theme_light()</code></pre>
+<p><img src="/post/2018-01-09-my-twitter-account_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>id_best_tweet &lt;- my_tweets_df %&gt;% 
+  filter(favoriteCount==max(favoriteCount)) %&gt;% 
+  select(id) 
+t&lt;-retweets(id_best_tweet)</code></pre>
+<pre><code>## Warning in check_id(id): Using numeric id value can lead to unexpected
+## results for very large ids</code></pre>
+<pre class="r"><code>showStatus(id_best_tweet)</code></pre>
+<pre><code>## Warning in check_id(id): Using numeric id value can lead to unexpected
+## results for very large ids</code></pre>
+<pre><code>## [1] &quot;Gummifot: Decided to start the year by starting a blog. I have created an interactive map using #leaflet and data from… https://t.co/mdxnbSLMPK&quot;</code></pre>
+</div>

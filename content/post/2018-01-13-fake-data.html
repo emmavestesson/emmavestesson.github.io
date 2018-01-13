@@ -1,0 +1,229 @@
+---
+title: Regressions using completly fake data!
+author: ~
+date: '2018-01-13'
+slug: fake-data
+categories:
+  - R
+tags:
+  - simstudy
+  - texreg
+  - tableone
+  - purrr
+---
+
+
+
+<div id="why-cant-i-just-have-all-of-the-data" class="section level1">
+<h1>Why can’t I just have all of the data?</h1>
+<p>I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the <code>survival</code> package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the <code>simstudy</code> package and decided to give it a go. It worked beautifully and made updating my code so much easier. It also made me realise how much R I have learnt in the last year so I wanted to show the difference between the old and the new code with you.</p>
+</div>
+<div id="creating-data" class="section level1">
+<h1>Creating data</h1>
+<p>Start by defining the variables you want in your data set and create the survival part of the data and before creating the full data set.</p>
+<pre class="r"><code>def &lt;- defData(varname = &quot;v1_6&quot;, dist = &quot;binary&quot;, formula = 0.6, id = &quot;idnum&quot;, link = &quot;logit&quot;)
+def &lt;- defData(def, varname = &quot;v1_5&quot;, dist = &quot;uniformInt&quot;, formula = &quot;18;110&quot;)
+def &lt;- defData(def, varname = &quot;v2_1_1&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;v2_1_2&quot;, dist = &quot;binary&quot;, formula = 0.6)
+def &lt;- defData(def, varname = &quot;v2_1_3&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;v2_1_4&quot;, dist = &quot;binary&quot;, formula = 0.55)
+def &lt;- defData(def, varname = &quot;v2_1_5&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;v2_5&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;v7_4&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;event&quot;, dist = &quot;binary&quot;, formula = 0.1)
+def &lt;- defData(def, varname = &quot;died&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;NIHSS_15&quot;, dist = &quot;uniformInt&quot;, formula = &quot;0;42&quot;, link=&quot;identity&quot;)
+def &lt;- defData(def, varname = &quot;age_group&quot;, dist = &quot;categorical&quot;, formula = &quot;0.5;0.2;0.3&quot;, link=&quot;identity&quot;)
+# Define survival data part
+sdef &lt;- defSurv(varname = &quot;survTime&quot;, formula = &quot;v1_5/2&quot;, scale = 20, 
+                shape = &quot;v2_5*1 + (1-v2_5)*1.5&quot;)
+sdef &lt;- defSurv(sdef, varname = &quot;censorTime&quot;, scale = 80, shape = 1)
+# Create data
+df &lt;- genData(5000, def)
+df &lt;- genSurv(df, sdef)</code></pre>
+<p>What a lovely data set I created!</p>
+</div>
+<div id="descriptive-statistics" class="section level1">
+<h1>Descriptive statistics</h1>
+<p>Now that I have data I want to compare the group that experienced the event to the group that didn’t. I use CreateTableOne from the <code>tableone</code> package. I need to specify which variables I want to include (or all variables will be included) and which ones I want to be factors (will be shown as %) or nonnormal variables (will be shown as median).</p>
+<pre class="r"><code>table_var&lt;- c(&quot;v1_5&quot;, &quot;v1_6&quot;, &quot;v2_1_1&quot;, &quot;v2_1_2&quot;, &quot;v2_1_3&quot;, &quot;v2_1_4&quot;, &quot;v2_1_5&quot;, &quot;v2_5&quot;,&quot;v7_4&quot;, &quot;age_group&quot;)
+median_var &lt;- median_var&lt;- c(&quot;v1_5&quot;, &quot;NIHSS_15&quot;, &quot;v2_2&quot;, &quot;v7_4&quot;)
+factor_var &lt;- c(&quot;v1_6&quot;,&quot;v2_5&quot;,&quot;v2_1_1&quot;, &quot;v2_1_2&quot;, &quot;v2_1_3&quot;, &quot;v2_1_4&quot;, &quot;v2_1_5&quot;,&quot;age_group&quot;)
+
+table1&lt;- CreateTableOne(table_var, data = df,  strata = &quot;event&quot;, factorVars = factor_var,
+                        testNonNormal = kruskal.test, argsNonNormal = median_var)
+table1_print&lt;-print(table1, nonnormal = median_var, contDigits=0, 
+                 exact = &quot;LOC&quot;,  printToggle = TRUE, factorVars = factor_var)</code></pre>
+<pre><code>##                      Stratified by event
+##                       0             1            p      test   
+##   n                   4528          472                        
+##   v1_5 (median [IQR])   65 [41, 87]  68 [43, 88]  NA    nonnorm
+##   v1_6 = 1 (%)        2887 (63.8)   306 (64.8)    0.681        
+##   v2_1_1 = 1 (%)      2211 (48.8)   248 (52.5)    0.137        
+##   v2_1_2 = 1 (%)      2714 (59.9)   293 (62.1)    0.393        
+##   v2_1_3 = 1 (%)      2232 (49.3)   239 (50.6)    0.612        
+##   v2_1_4 = 1 (%)      2456 (54.2)   262 (55.5)    0.633        
+##   v2_1_5 = 1 (%)      2237 (49.4)   246 (52.1)    0.283        
+##   v2_5 = 1 (%)        2253 (49.8)   218 (46.2)    0.153        
+##   v7_4 (median [IQR])    1 [0, 1]     1 [0, 1]    NA    nonnorm
+##   age_group (%)                                   0.998        
+##      1                2290 (50.6)   238 (50.4)                 
+##      2                 909 (20.1)    95 (20.1)                 
+##      3                1329 (29.4)   139 (29.4)</code></pre>
+<p>You might want to save the table in a different format such as a csv file. This code should help you do that. Note that the print options are slightly different.</p>
+<pre class="r"><code>table1_print &lt;- print(table1, nonnormal = median_var, contDigits=0, 
+                 exact = &quot;LOC&quot;, quote = FALSE, noSpaces = TRUE, printToggle = FALSE, factorVars = factor_var)
+## Save to a CSV file
+write.csv(table1_print, file = &quot;my_table1.csv&quot;)</code></pre>
+</div>
+<div id="regressions" class="section level1">
+<h1>Regressions</h1>
+<p>Time to move on to the regressions! I wrote the first version of this code about 9 months ago and it looked a bit like this but with more models:</p>
+<pre class="r"><code>surv_data &lt;- Surv(time=df$survTime, event=df$event, type=&quot;right&quot;)
+
+coxph.fit.v1.6 &lt;- coxph(surv_data ~ v1_6 , data=df, method=&quot;breslow&quot;)
+coxph.fit.v1.5 &lt;- coxph(surv_data ~ v1_5 , data=df, method=&quot;breslow&quot;)
+coxph.fit.v2.5 &lt;- coxph(surv_data ~ v2_5 , data=df, method=&quot;breslow&quot;)</code></pre>
+<p>As you can imagine this made my code really long and included a lot of copying and pasting.</p>
+<p>As I learnt more and more R (and discovered the power of <code>purrr</code> after an R ladies event where Charlotte Wickham presented) I decided to update the code before giving to the person who will run it. I start by putting all of my predictors in a vector. I specify all the predictors I care about and use <code>map</code> to fit the model for each one.</p>
+<pre class="r"><code>predictors &lt;- c(&quot;v1_5&quot;, &quot;v1_6&quot;, &quot;v2_1_1&quot;, &quot;v2_1_2&quot;, &quot;v2_1_3&quot;, &quot;v2_1_4&quot;, &quot;v2_1_5&quot;, &quot;v2_5&quot;,&quot;v7_4&quot;, &quot;age_group&quot;)
+
+surv_data &lt;- Surv(time=df$survTime, event=df$event, type=&quot;right&quot;)
+
+unadjusted &lt;- map(predictors, ~coxph(as.formula(paste(&quot;surv_data&quot;, .x, sep=&quot;~&quot;)), data=df))</code></pre>
+<p>I refuse to copy numbers off the screen because I know I will get it wrong so I use the <code>texreg</code> package to create nice regression tables. I need to override the coefficients as I am interested in exp(coef) and this is how I did it 9 months ago. I spent most of my time terrified that I would accidentally use coefficients from the wrong model and adding new models took forever.</p>
+<pre class="r"><code>screenreg(list(coxph.fit.v1.6, coxph.fit.v1.5, coxph.fit.v2.5 ),  
+        single.row= TRUE , ci.force= TRUE, include.aic = TRUE, include.rsquared =  TRUE, include.maxrs= FALSE,
+        ci.test = 1,
+        override.coef = list(summary(coxph.fit.v1.6)$coef[,2],
+                             summary(coxph.fit.v1.5)$coef[,2],
+                             summary(coxph.fit.v2.5)$coef[,2])
+        )</code></pre>
+<p>Once again the <code>map</code> function saved me. I create lists with the coefficients and upper and lower confidence intervals. This way I don’t have to worry about using the wrong coefficients and it is real easy to add more models.</p>
+<pre class="r"><code>unadjusted_coef &lt;- map(unadjusted, summary ) %&gt;% 
+  map(&quot;coefficients&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;exp(coef)&quot;)
+
+unadjusted_lower_conf &lt;- map(unadjusted, summary) %&gt;% 
+  map(&quot;conf.int&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;lower .95&quot;)
+
+unadjusted_upper_conf &lt;- map(unadjusted, summary) %&gt;% 
+  map(&quot;conf.int&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;upper .95&quot;)
+
+screenreg(unadjusted, single.row= FALSE, ci.force= TRUE, ci.test=1,
+          override.coef = unadjusted_coef,
+          override.ci.low=unadjusted_lower_conf,
+          overide.ci.up=unadjusted_upper_conf)</code></pre>
+<pre><code>## 
+## =======================================================================================================================================================
+##              Model 1       Model 2       Model 3       Model 4       Model 5       Model 6       Model 7       Model 8       Model 9       Model 10    
+## -------------------------------------------------------------------------------------------------------------------------------------------------------
+## v1_5            1.00                                                                                                                                   
+##              [1.00; 1.01]                                                                                                                              
+## v1_6                          1.04                                                                                                                     
+##                            [0.85; 1.23]                                                                                                                
+## v2_1_1                                      1.14                                                                                                       
+##                                          [0.96; 1.32]                                                                                                  
+## v2_1_2                                                    1.10                                                                                         
+##                                                        [0.91; 1.28]                                                                                    
+## v2_1_3                                                                  1.05                                                                           
+##                                                                      [0.87; 1.23]                                                                      
+## v2_1_4                                                                                1.04                                                             
+##                                                                                    [0.86; 1.22]                                                        
+## v2_1_5                                                                                              1.11                                               
+##                                                                                                  [0.92; 1.29]                                          
+## v2_5                                                                                                              0.83                                 
+##                                                                                                                [0.65; 1.02]                            
+## v7_4                                                                                                                            1.03                   
+##                                                                                                                              [0.85; 1.21]              
+## age_group                                                                                                                                     1.00     
+##                                                                                                                                            [0.90; 1.11]
+## -------------------------------------------------------------------------------------------------------------------------------------------------------
+## AIC          7902.52       7904.99       7903.13       7904.15       7904.83       7904.98       7903.95       7901.24       7905.04       7905.13     
+## R^2             0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00     
+## Max. R^2        0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79     
+## Num. events   472           472           472           472           472           472           472           472           472           472        
+## Num. obs.    5000          5000          5000          5000          5000          5000          5000          5000          5000          5000        
+## Missings        0             0             0             0             0             0             0             0             0             0        
+## PH test         0.98          0.65          0.16          0.69          0.07          0.96          0.15          0.93          0.96          0.63     
+## =======================================================================================================================================================
+## * 1 outside the confidence interval</code></pre>
+<p>It is now super easy to add/remove variables to my models. I already know that I want to include two variables - v1_5 and v1_6 - in my full model so I add them to the model. I remove v1_5 from my predictors or I will have two models for just v1_5 and v1_6.</p>
+<pre class="r"><code>predictors &lt;- c(&quot;v1_6&quot;, &quot;v2_1_1&quot;, &quot;v2_1_2&quot;, &quot;v2_1_3&quot;, &quot;v2_1_4&quot;, &quot;v2_1_5&quot;, &quot;v2_5&quot;,&quot;v7_4&quot;, &quot;age_group&quot;)
+
+adjusted &lt;- map(predictors, ~coxph(as.formula(paste(&quot;surv_data ~ v1_5 + v1_6&quot;, .x, sep=&quot;+&quot;)),
+                                   data=df))
+
+adjusted_coef &lt;- map(adjusted, summary ) %&gt;% 
+  map(&quot;coefficients&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;exp(coef)&quot;)
+
+adjusted_lower_conf &lt;- map(adjusted, summary) %&gt;% 
+  map(&quot;conf.int&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;lower .95&quot;)
+  
+adjusted_upper_conf &lt;- map(adjusted, summary) %&gt;% 
+  map(&quot;conf.int&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;upper .95&quot;)
+
+screenreg(adjusted, single.row= FALSE, ci.force= TRUE, ci.test=1, 
+          override.coef = adjusted_coef,
+          override.ci.low=adjusted_lower_conf,
+          overide.ci.up=adjusted_upper_conf)</code></pre>
+<pre><code>## 
+## =========================================================================================================================================
+##              Model 1       Model 2       Model 3       Model 4       Model 5       Model 6       Model 7       Model 8       Model 9     
+## -----------------------------------------------------------------------------------------------------------------------------------------
+## v1_5            1.00          1.00          1.00          1.00          1.00          1.00          1.00          1.00          1.00     
+##              [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]
+## v1_6            1.04          1.03          1.04          1.04          1.04          1.04          1.04          1.04          1.04     
+##              [0.85; 1.23]  [0.85; 1.22]  [0.85; 1.22]  [0.85; 1.22]  [0.85; 1.23]  [0.85; 1.23]  [0.85; 1.23]  [0.85; 1.23]  [0.85; 1.23]
+## v2_1_1                        1.15                                                                                                       
+##                            [0.96; 1.33]                                                                                                  
+## v2_1_2                                      1.10                                                                                         
+##                                          [0.91; 1.28]                                                                                    
+## v2_1_3                                                    1.05                                                                           
+##                                                        [0.87; 1.23]                                                                      
+## v2_1_4                                                                  1.04                                                             
+##                                                                      [0.86; 1.22]                                                        
+## v2_1_5                                                                                1.11                                               
+##                                                                                    [0.93; 1.29]                                          
+## v2_5                                                                                                0.83                                 
+##                                                                                                  [0.65; 1.02]                            
+## v7_4                                                                                                              1.03                   
+##                                                                                                                [0.85; 1.21]              
+## age_group                                                                                                                       1.00     
+##                                                                                                                              [0.90; 1.10]
+## -----------------------------------------------------------------------------------------------------------------------------------------
+## AIC          7904.38       7904.21       7905.43       7906.06       7906.23       7905.16       7902.49       7906.27       7906.38     
+## R^2             0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00     
+## Max. R^2        0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79     
+## Num. events   472           472           472           472           472           472           472           472           472        
+## Num. obs.    5000          5000          5000          5000          5000          5000          5000          5000          5000        
+## Missings        0             0             0             0             0             0             0             0             0        
+## PH test         0.90          0.54          0.95          0.33          0.98          0.52          0.98          0.98          0.93     
+## =========================================================================================================================================
+## * 1 outside the confidence interval</code></pre>
+<p>If you want to save the models in a word document this is how to do it.</p>
+<pre class="r"><code>htmlreg(adjusted, single.row= FALSE, ci.force= TRUE, ci.test=1, type=&quot;html&quot;, file=&quot;My_regressions.doc&quot;,
+          override.coef = adjusted_coef,
+          override.ci.low=adjusted_lower_conf,
+          overide.ci.up=adjusted_upper_conf)</code></pre>
+<pre><code>## The table was written to the file &#39;My_regressions.doc&#39;.</code></pre>
+</div>
+<div id="packages-i-used" class="section level1">
+<h1>Packages I used</h1>
+<pre class="r"><code>library(&quot;tidyverse&quot;)
+library(&quot;survival&quot;)
+library(&quot;simstudy&quot;)
+library(&quot;texreg&quot;)
+library(&quot;tableone&quot;)</code></pre>
+</div>

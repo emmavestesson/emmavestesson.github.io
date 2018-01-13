@@ -1,0 +1,819 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.31.1 with theme Tranquilpeak 0.4.3-BETA">
+    <title>Regressions using completly fake data!</title>
+    <meta name="author" content="Emma Vestesson">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+    <meta name="description" content="Why can’t I just have all of the data? I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the survival package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the simstudy package and decided to give it a go.">
+    <meta property="og:description" content="Why can’t I just have all of the data? I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the survival package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the simstudy package and decided to give it a go.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Regressions using completly fake data!">
+    <meta property="og:url" content="/2018/01/fake-data/">
+    <meta property="og:site_name" content="Playing with data">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Playing with data">
+    <meta name="twitter:description" content="Why can’t I just have all of the data? I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the survival package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the simstudy package and decided to give it a go.">
+    
+      <meta name="twitter:creator" content="@gummifot">
+    
+    
+
+    
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Playing with data</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/emmavestesson">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/emmavestesson/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Regressions using completly fake data!
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-01-13T00:00:00Z">
+        
+   13, 2018
+
+      </time>
+    
+    
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="/categories/r">R</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div id="why-cant-i-just-have-all-of-the-data" class="section level1">
+<h1>Why can’t I just have all of the data?</h1>
+<p>I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the <code>survival</code> package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the <code>simstudy</code> package and decided to give it a go. It worked beautifully and made updating my code so much easier. It also made me realise how much R I have learnt in the last year so I wanted to show the difference between the old and the new code with you.</p>
+</div>
+<div id="creating-data" class="section level1">
+<h1>Creating data</h1>
+<p>Start by defining the variables you want in your data set and create the survival part of the data and before creating the full data set.</p>
+<pre class="r"><code>def &lt;- defData(varname = &quot;v1_6&quot;, dist = &quot;binary&quot;, formula = 0.6, id = &quot;idnum&quot;, link = &quot;logit&quot;)
+def &lt;- defData(def, varname = &quot;v1_5&quot;, dist = &quot;uniformInt&quot;, formula = &quot;18;110&quot;)
+def &lt;- defData(def, varname = &quot;v2_1_1&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;v2_1_2&quot;, dist = &quot;binary&quot;, formula = 0.6)
+def &lt;- defData(def, varname = &quot;v2_1_3&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;v2_1_4&quot;, dist = &quot;binary&quot;, formula = 0.55)
+def &lt;- defData(def, varname = &quot;v2_1_5&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;v2_5&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;v7_4&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;event&quot;, dist = &quot;binary&quot;, formula = 0.1)
+def &lt;- defData(def, varname = &quot;died&quot;, dist = &quot;binary&quot;, formula = 0.5)
+def &lt;- defData(def, varname = &quot;NIHSS_15&quot;, dist = &quot;uniformInt&quot;, formula = &quot;0;42&quot;, link=&quot;identity&quot;)
+def &lt;- defData(def, varname = &quot;age_group&quot;, dist = &quot;categorical&quot;, formula = &quot;0.5;0.2;0.3&quot;, link=&quot;identity&quot;)
+# Define survival data part
+sdef &lt;- defSurv(varname = &quot;survTime&quot;, formula = &quot;v1_5/2&quot;, scale = 20, 
+                shape = &quot;v2_5*1 + (1-v2_5)*1.5&quot;)
+sdef &lt;- defSurv(sdef, varname = &quot;censorTime&quot;, scale = 80, shape = 1)
+# Create data
+df &lt;- genData(5000, def)
+df &lt;- genSurv(df, sdef)</code></pre>
+<p>What a lovely data set I created!</p>
+</div>
+<div id="descriptive-statistics" class="section level1">
+<h1>Descriptive statistics</h1>
+<p>Now that I have data I want to compare the group that experienced the event to the group that didn’t. I use CreateTableOne from the <code>tableone</code> package. I need to specify which variables I want to include (or all variables will be included) and which ones I want to be factors (will be shown as %) or nonnormal variables (will be shown as median).</p>
+<pre class="r"><code>table_var&lt;- c(&quot;v1_5&quot;, &quot;v1_6&quot;, &quot;v2_1_1&quot;, &quot;v2_1_2&quot;, &quot;v2_1_3&quot;, &quot;v2_1_4&quot;, &quot;v2_1_5&quot;, &quot;v2_5&quot;,&quot;v7_4&quot;, &quot;age_group&quot;)
+median_var &lt;- median_var&lt;- c(&quot;v1_5&quot;, &quot;NIHSS_15&quot;, &quot;v2_2&quot;, &quot;v7_4&quot;)
+factor_var &lt;- c(&quot;v1_6&quot;,&quot;v2_5&quot;,&quot;v2_1_1&quot;, &quot;v2_1_2&quot;, &quot;v2_1_3&quot;, &quot;v2_1_4&quot;, &quot;v2_1_5&quot;,&quot;age_group&quot;)
+
+table1&lt;- CreateTableOne(table_var, data = df,  strata = &quot;event&quot;, factorVars = factor_var,
+                        testNonNormal = kruskal.test, argsNonNormal = median_var)
+table1_print&lt;-print(table1, nonnormal = median_var, contDigits=0, 
+                 exact = &quot;LOC&quot;,  printToggle = TRUE, factorVars = factor_var)</code></pre>
+<pre><code>##                      Stratified by event
+##                       0             1            p      test   
+##   n                   4528          472                        
+##   v1_5 (median [IQR])   65 [41, 87]  68 [43, 88]  NA    nonnorm
+##   v1_6 = 1 (%)        2887 (63.8)   306 (64.8)    0.681        
+##   v2_1_1 = 1 (%)      2211 (48.8)   248 (52.5)    0.137        
+##   v2_1_2 = 1 (%)      2714 (59.9)   293 (62.1)    0.393        
+##   v2_1_3 = 1 (%)      2232 (49.3)   239 (50.6)    0.612        
+##   v2_1_4 = 1 (%)      2456 (54.2)   262 (55.5)    0.633        
+##   v2_1_5 = 1 (%)      2237 (49.4)   246 (52.1)    0.283        
+##   v2_5 = 1 (%)        2253 (49.8)   218 (46.2)    0.153        
+##   v7_4 (median [IQR])    1 [0, 1]     1 [0, 1]    NA    nonnorm
+##   age_group (%)                                   0.998        
+##      1                2290 (50.6)   238 (50.4)                 
+##      2                 909 (20.1)    95 (20.1)                 
+##      3                1329 (29.4)   139 (29.4)</code></pre>
+<p>You might want to save the table in a different format such as a csv file. This code should help you do that. Note that the print options are slightly different.</p>
+<pre class="r"><code>table1_print &lt;- print(table1, nonnormal = median_var, contDigits=0, 
+                 exact = &quot;LOC&quot;, quote = FALSE, noSpaces = TRUE, printToggle = FALSE, factorVars = factor_var)
+## Save to a CSV file
+write.csv(table1_print, file = &quot;my_table1.csv&quot;)</code></pre>
+</div>
+<div id="regressions" class="section level1">
+<h1>Regressions</h1>
+<p>Time to move on to the regressions! I wrote the first version of this code about 9 months ago and it looked a bit like this but with more models:</p>
+<pre class="r"><code>surv_data &lt;- Surv(time=df$survTime, event=df$event, type=&quot;right&quot;)
+
+coxph.fit.v1.6 &lt;- coxph(surv_data ~ v1_6 , data=df, method=&quot;breslow&quot;)
+coxph.fit.v1.5 &lt;- coxph(surv_data ~ v1_5 , data=df, method=&quot;breslow&quot;)
+coxph.fit.v2.5 &lt;- coxph(surv_data ~ v2_5 , data=df, method=&quot;breslow&quot;)</code></pre>
+<p>As you can imagine this made my code really long and included a lot of copying and pasting.</p>
+<p>As I learnt more and more R (and discovered the power of <code>purrr</code> after an R ladies event where Charlotte Wickham presented) I decided to update the code before giving to the person who will run it. I start by putting all of my predictors in a vector. I specify all the predictors I care about and use <code>map</code> to fit the model for each one.</p>
+<pre class="r"><code>predictors &lt;- c(&quot;v1_5&quot;, &quot;v1_6&quot;, &quot;v2_1_1&quot;, &quot;v2_1_2&quot;, &quot;v2_1_3&quot;, &quot;v2_1_4&quot;, &quot;v2_1_5&quot;, &quot;v2_5&quot;,&quot;v7_4&quot;, &quot;age_group&quot;)
+
+surv_data &lt;- Surv(time=df$survTime, event=df$event, type=&quot;right&quot;)
+
+unadjusted &lt;- map(predictors, ~coxph(as.formula(paste(&quot;surv_data&quot;, .x, sep=&quot;~&quot;)), data=df))</code></pre>
+<p>I refuse to copy numbers off the screen because I know I will get it wrong so I use the <code>texreg</code> package to create nice regression tables. I need to override the coefficients as I am interested in exp(coef) and this is how I did it 9 months ago. I spent most of my time terrified that I would accidentally use coefficients from the wrong model and adding new models took forever.</p>
+<pre class="r"><code>screenreg(list(coxph.fit.v1.6, coxph.fit.v1.5, coxph.fit.v2.5 ),  
+        single.row= TRUE , ci.force= TRUE, include.aic = TRUE, include.rsquared =  TRUE, include.maxrs= FALSE,
+        ci.test = 1,
+        override.coef = list(summary(coxph.fit.v1.6)$coef[,2],
+                             summary(coxph.fit.v1.5)$coef[,2],
+                             summary(coxph.fit.v2.5)$coef[,2])
+        )</code></pre>
+<p>Once again the <code>map</code> function saved me. I create lists with the coefficients and upper and lower confidence intervals. This way I don’t have to worry about using the wrong coefficients and it is real easy to add more models.</p>
+<pre class="r"><code>unadjusted_coef &lt;- map(unadjusted, summary ) %&gt;% 
+  map(&quot;coefficients&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;exp(coef)&quot;)
+
+unadjusted_lower_conf &lt;- map(unadjusted, summary) %&gt;% 
+  map(&quot;conf.int&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;lower .95&quot;)
+
+unadjusted_upper_conf &lt;- map(unadjusted, summary) %&gt;% 
+  map(&quot;conf.int&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;upper .95&quot;)
+
+screenreg(unadjusted, single.row= FALSE, ci.force= TRUE, ci.test=1,
+          override.coef = unadjusted_coef,
+          override.ci.low=unadjusted_lower_conf,
+          overide.ci.up=unadjusted_upper_conf)</code></pre>
+<pre><code>## 
+## =======================================================================================================================================================
+##              Model 1       Model 2       Model 3       Model 4       Model 5       Model 6       Model 7       Model 8       Model 9       Model 10    
+## -------------------------------------------------------------------------------------------------------------------------------------------------------
+## v1_5            1.00                                                                                                                                   
+##              [1.00; 1.01]                                                                                                                              
+## v1_6                          1.04                                                                                                                     
+##                            [0.85; 1.23]                                                                                                                
+## v2_1_1                                      1.14                                                                                                       
+##                                          [0.96; 1.32]                                                                                                  
+## v2_1_2                                                    1.10                                                                                         
+##                                                        [0.91; 1.28]                                                                                    
+## v2_1_3                                                                  1.05                                                                           
+##                                                                      [0.87; 1.23]                                                                      
+## v2_1_4                                                                                1.04                                                             
+##                                                                                    [0.86; 1.22]                                                        
+## v2_1_5                                                                                              1.11                                               
+##                                                                                                  [0.92; 1.29]                                          
+## v2_5                                                                                                              0.83                                 
+##                                                                                                                [0.65; 1.02]                            
+## v7_4                                                                                                                            1.03                   
+##                                                                                                                              [0.85; 1.21]              
+## age_group                                                                                                                                     1.00     
+##                                                                                                                                            [0.90; 1.11]
+## -------------------------------------------------------------------------------------------------------------------------------------------------------
+## AIC          7902.52       7904.99       7903.13       7904.15       7904.83       7904.98       7903.95       7901.24       7905.04       7905.13     
+## R^2             0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00     
+## Max. R^2        0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79     
+## Num. events   472           472           472           472           472           472           472           472           472           472        
+## Num. obs.    5000          5000          5000          5000          5000          5000          5000          5000          5000          5000        
+## Missings        0             0             0             0             0             0             0             0             0             0        
+## PH test         0.98          0.65          0.16          0.69          0.07          0.96          0.15          0.93          0.96          0.63     
+## =======================================================================================================================================================
+## * 1 outside the confidence interval</code></pre>
+<p>It is now super easy to add/remove variables to my models. I already know that I want to include two variables - v1_5 and v1_6 - in my full model so I add them to the model. I remove v1_5 from my predictors or I will have two models for just v1_5 and v1_6.</p>
+<pre class="r"><code>predictors &lt;- c(&quot;v1_6&quot;, &quot;v2_1_1&quot;, &quot;v2_1_2&quot;, &quot;v2_1_3&quot;, &quot;v2_1_4&quot;, &quot;v2_1_5&quot;, &quot;v2_5&quot;,&quot;v7_4&quot;, &quot;age_group&quot;)
+
+adjusted &lt;- map(predictors, ~coxph(as.formula(paste(&quot;surv_data ~ v1_5 + v1_6&quot;, .x, sep=&quot;+&quot;)),
+                                   data=df))
+
+adjusted_coef &lt;- map(adjusted, summary ) %&gt;% 
+  map(&quot;coefficients&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;exp(coef)&quot;)
+
+adjusted_lower_conf &lt;- map(adjusted, summary) %&gt;% 
+  map(&quot;conf.int&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;lower .95&quot;)
+  
+adjusted_upper_conf &lt;- map(adjusted, summary) %&gt;% 
+  map(&quot;conf.int&quot;) %&gt;% 
+  map(as.data.frame) %&gt;% 
+  map(&quot;upper .95&quot;)
+
+screenreg(adjusted, single.row= FALSE, ci.force= TRUE, ci.test=1, 
+          override.coef = adjusted_coef,
+          override.ci.low=adjusted_lower_conf,
+          overide.ci.up=adjusted_upper_conf)</code></pre>
+<pre><code>## 
+## =========================================================================================================================================
+##              Model 1       Model 2       Model 3       Model 4       Model 5       Model 6       Model 7       Model 8       Model 9     
+## -----------------------------------------------------------------------------------------------------------------------------------------
+## v1_5            1.00          1.00          1.00          1.00          1.00          1.00          1.00          1.00          1.00     
+##              [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]
+## v1_6            1.04          1.03          1.04          1.04          1.04          1.04          1.04          1.04          1.04     
+##              [0.85; 1.23]  [0.85; 1.22]  [0.85; 1.22]  [0.85; 1.22]  [0.85; 1.23]  [0.85; 1.23]  [0.85; 1.23]  [0.85; 1.23]  [0.85; 1.23]
+## v2_1_1                        1.15                                                                                                       
+##                            [0.96; 1.33]                                                                                                  
+## v2_1_2                                      1.10                                                                                         
+##                                          [0.91; 1.28]                                                                                    
+## v2_1_3                                                    1.05                                                                           
+##                                                        [0.87; 1.23]                                                                      
+## v2_1_4                                                                  1.04                                                             
+##                                                                      [0.86; 1.22]                                                        
+## v2_1_5                                                                                1.11                                               
+##                                                                                    [0.93; 1.29]                                          
+## v2_5                                                                                                0.83                                 
+##                                                                                                  [0.65; 1.02]                            
+## v7_4                                                                                                              1.03                   
+##                                                                                                                [0.85; 1.21]              
+## age_group                                                                                                                       1.00     
+##                                                                                                                              [0.90; 1.10]
+## -----------------------------------------------------------------------------------------------------------------------------------------
+## AIC          7904.38       7904.21       7905.43       7906.06       7906.23       7905.16       7902.49       7906.27       7906.38     
+## R^2             0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00     
+## Max. R^2        0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79          0.79     
+## Num. events   472           472           472           472           472           472           472           472           472        
+## Num. obs.    5000          5000          5000          5000          5000          5000          5000          5000          5000        
+## Missings        0             0             0             0             0             0             0             0             0        
+## PH test         0.90          0.54          0.95          0.33          0.98          0.52          0.98          0.98          0.93     
+## =========================================================================================================================================
+## * 1 outside the confidence interval</code></pre>
+<p>If you want to save the models in a word document this is how to do it.</p>
+<pre class="r"><code>htmlreg(adjusted, single.row= FALSE, ci.force= TRUE, ci.test=1, type=&quot;html&quot;, file=&quot;My_regressions.doc&quot;,
+          override.coef = adjusted_coef,
+          override.ci.low=adjusted_lower_conf,
+          overide.ci.up=adjusted_upper_conf)</code></pre>
+<pre><code>## The table was written to the file &#39;My_regressions.doc&#39;.</code></pre>
+</div>
+<div id="packages-i-used" class="section level1">
+<h1>Packages I used</h1>
+<pre class="r"><code>library(&quot;tidyverse&quot;)
+library(&quot;survival&quot;)
+library(&quot;simstudy&quot;)
+library(&quot;texreg&quot;)
+library(&quot;tableone&quot;)</code></pre>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/simstudy/">simstudy</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/texreg/">texreg</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/tableone/">tableone</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/purrr/">purrr</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/my-twitter-account/" data-tooltip="My twitter account">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/01/fake-data/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/01/fake-data/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/01/fake-data/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Emma Vestesson. 
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/my-twitter-account/" data-tooltip="My twitter account">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/01/fake-data/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/01/fake-data/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/01/fake-data/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F01%2Ffake-data%2F">
+          <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F01%2Ffake-data%2F">
+          <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F01%2Ffake-data%2F">
+          <i class="fa fa-google-plus"></i><span>%!(EXTRA string=Google&#43;)</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+    <h4 id="about-card-name">Emma Vestesson</h4>
+    
+      <div id="about-card-bio">I first started learning R in the autumn of 2012 but stopped after a couple of months as I didn&rsquo;t use it. In January 2017 I rediscovered R again and this time I am sticking with it. After discovering blogdown and realising how many different short snippets of code I have hidden away on my computer I decided to share them on this blog instead.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data analyst
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        London
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/fake-data/">
+                <h3 class="media-heading">Regressions using completly fake data!</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Why can’t I just have all of the data? I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the survival package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the simstudy package and decided to give it a go.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/my-twitter-account/">
+                <h3 class="media-heading">My twitter account</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">## Loading required package: twitteR ## Loading required package: ROAuth ## ## Attaching package: &#39;dplyr&#39; ## The following objects are masked from &#39;package:twitteR&#39;: ## ## id, location ## The following objects are masked from &#39;package:stats&#39;: ## ## filter, lag ## The following objects are masked from &#39;package:base&#39;: ## ## intersect, setdiff, setequal, union ## Loading required package: NLP ## ## Attaching package: &#39;NLP&#39; ## The following object is masked from &#39;package:ggplot2&#39;: ## ## annotate Twitter A week ago I published my first blog post thinking that no one would read it.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/maps/">
+                <h3 class="media-heading">Making a map (or my first blogpost)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Getting the data A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their fingertips website (https://fingertips.phe.org.uk/). I wanted to try it and as I like maps I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         3 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/DSCF5410.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/01\/fake-data\/';
+          
+            this.page.identifier = '\/2018\/01\/fake-data\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,196 @@
+---
+title: Regressions using completly fake data!
+author: ~
+date: '2018-01-13'
+slug: fake-data
+categories:
+  - R
+tags:
+  - simstudy
+  - texreg
+  - tableone
+  - purrr
+---
+
+
+```{r packages, include=FALSE}
+library("tidyverse")
+library("survival")
+library("simstudy")
+library("texreg")
+library("tableone")
+```
+
+# Why can't I just have all of the data?
+
+I have been updating some code that uses data that I don't have access to. I used one of the data sets from the `survival` package but it annoyed me that the variable names were not what I wanted them to be and I couldn't be bothered changing them. I was killing time on a train the other day and discovered the `simstudy` package and decided to give it a go. It worked beautifully and made updating my code so much easier. It also made me realise how much R I have learnt in the last year so I wanted to show the difference between the old and the new code with you.   
+
+# Creating data
+Start by defining the variables you want in your data set and create the survival part of the data and before creating the full data set.
+```{r}
+def <- defData(varname = "v1_6", dist = "binary", formula = 0.6, id = "idnum", link = "logit")
+def <- defData(def, varname = "v1_5", dist = "uniformInt", formula = "18;110")
+def <- defData(def, varname = "v2_1_1", dist = "binary", formula = 0.5)
+def <- defData(def, varname = "v2_1_2", dist = "binary", formula = 0.6)
+def <- defData(def, varname = "v2_1_3", dist = "binary", formula = 0.5)
+def <- defData(def, varname = "v2_1_4", dist = "binary", formula = 0.55)
+def <- defData(def, varname = "v2_1_5", dist = "binary", formula = 0.5)
+def <- defData(def, varname = "v2_5", dist = "binary", formula = 0.5)
+def <- defData(def, varname = "v7_4", dist = "binary", formula = 0.5)
+def <- defData(def, varname = "event", dist = "binary", formula = 0.1)
+def <- defData(def, varname = "died", dist = "binary", formula = 0.5)
+def <- defData(def, varname = "NIHSS_15", dist = "uniformInt", formula = "0;42", link="identity")
+def <- defData(def, varname = "age_group", dist = "categorical", formula = "0.5;0.2;0.3", link="identity")
+# Define survival data part
+sdef <- defSurv(varname = "survTime", formula = "v1_5/2", scale = 20, 
+                shape = "v2_5*1 + (1-v2_5)*1.5")
+sdef <- defSurv(sdef, varname = "censorTime", scale = 80, shape = 1)
+# Create data
+df <- genData(5000, def)
+df <- genSurv(df, sdef)
+```
+
+What a lovely data set I created!
+
+# Descriptive statistics
+
+Now that I have data I want to compare the group that experienced the event to the group that didn't. I use CreateTableOne from the `tableone` package. I need to specify which variables I want to include (or all variables will be included) and which ones I want to be factors (will be shown as %) or nonnormal variables (will be shown as median). 
+```{r}
+table_var<- c("v1_5", "v1_6", "v2_1_1", "v2_1_2", "v2_1_3", "v2_1_4", "v2_1_5", "v2_5","v7_4", "age_group")
+median_var <- median_var<- c("v1_5", "NIHSS_15", "v2_2", "v7_4")
+factor_var <- c("v1_6","v2_5","v2_1_1", "v2_1_2", "v2_1_3", "v2_1_4", "v2_1_5","age_group")
+
+table1<- CreateTableOne(table_var, data = df,  strata = "event", factorVars = factor_var,
+                        testNonNormal = kruskal.test, argsNonNormal = median_var)
+table1_print<-print(table1, nonnormal = median_var, contDigits=0, 
+                 exact = "LOC",  printToggle = TRUE, factorVars = factor_var)
+
+```
+
+You might want to save the table in a different format such as a csv file. This code should help you do that. Note that the print options are slightly different. 
+```{r}
+
+table1_print <- print(table1, nonnormal = median_var, contDigits=0, 
+                 exact = "LOC", quote = FALSE, noSpaces = TRUE, printToggle = FALSE, factorVars = factor_var)
+## Save to a CSV file
+write.csv(table1_print, file = "my_table1.csv")
+
+```
+
+
+# Regressions
+ 
+Time to move on to the regressions! I wrote the first version of this code about 9 months ago and it looked a bit like this but with more models:
+
+```{r silly way, eval=FALSE}
+
+surv_data <- Surv(time=df$survTime, event=df$event, type="right")
+
+coxph.fit.v1.6 <- coxph(surv_data ~ v1_6 , data=df, method="breslow")
+coxph.fit.v1.5 <- coxph(surv_data ~ v1_5 , data=df, method="breslow")
+coxph.fit.v2.5 <- coxph(surv_data ~ v2_5 , data=df, method="breslow")
+
+                            
+```
+
+As you can imagine this made my code really long and included a lot of copying and pasting. 
+
+As I learnt more and more R (and discovered the power of `purrr` after an R ladies event where Charlotte Wickham presented) I decided to update the code before giving to the person who will run it. I start by putting all of my predictors in a vector.  I specify all the predictors I care about and  use `map` to fit the model for each one. 
+
+```{r}
+
+predictors <- c("v1_5", "v1_6", "v2_1_1", "v2_1_2", "v2_1_3", "v2_1_4", "v2_1_5", "v2_5","v7_4", "age_group")
+
+surv_data <- Surv(time=df$survTime, event=df$event, type="right")
+
+unadjusted <- map(predictors, ~coxph(as.formula(paste("surv_data", .x, sep="~")), data=df))
+
+```
+ 
+I refuse to copy numbers off the screen because I know I will get it wrong so I use the `texreg` package to create nice regression tables. I need to override the coefficients as I am interested in exp(coef) and this is how I did it 9 months ago. I spent most of my time terrified that I would accidentally use coefficients from the wrong model and adding new models took forever. 
+```{r, eval=FALSE}
+screenreg(list(coxph.fit.v1.6, coxph.fit.v1.5, coxph.fit.v2.5 ),  
+        single.row= TRUE , ci.force= TRUE, include.aic = TRUE, include.rsquared =  TRUE, include.maxrs= FALSE,
+        ci.test = 1,
+        override.coef = list(summary(coxph.fit.v1.6)$coef[,2],
+                             summary(coxph.fit.v1.5)$coef[,2],
+                             summary(coxph.fit.v2.5)$coef[,2])
+        )
+```
+
+
+Once again the `map` function saved me. I create lists with the coefficients and upper and lower confidence intervals. This way I don't have to worry about using the wrong coefficients and it is real easy to add more models. 
+ 
+```{r}
+unadjusted_coef <- map(unadjusted, summary ) %>% 
+  map("coefficients") %>% 
+  map(as.data.frame) %>% 
+  map("exp(coef)")
+
+unadjusted_lower_conf <- map(unadjusted, summary) %>% 
+  map("conf.int") %>% 
+  map(as.data.frame) %>% 
+  map("lower .95")
+
+unadjusted_upper_conf <- map(unadjusted, summary) %>% 
+  map("conf.int") %>% 
+  map(as.data.frame) %>% 
+  map("upper .95")
+
+screenreg(unadjusted, single.row= FALSE, ci.force= TRUE, ci.test=1,
+          override.coef = unadjusted_coef,
+          override.ci.low=unadjusted_lower_conf,
+          overide.ci.up=unadjusted_upper_conf)
+```
+
+
+It is now super easy to add/remove variables to my models. I already know that I want to include two variables - v1_5 and v1_6 - in my full model so I add them to the model. I remove v1_5 from my predictors or I will have two models for just v1_5 and v1_6.  
+
+```{r}
+
+predictors <- c("v1_6", "v2_1_1", "v2_1_2", "v2_1_3", "v2_1_4", "v2_1_5", "v2_5","v7_4", "age_group")
+
+adjusted <- map(predictors, ~coxph(as.formula(paste("surv_data ~ v1_5 + v1_6", .x, sep="+")),
+                                   data=df))
+
+adjusted_coef <- map(adjusted, summary ) %>% 
+  map("coefficients") %>% 
+  map(as.data.frame) %>% 
+  map("exp(coef)")
+
+adjusted_lower_conf <- map(adjusted, summary) %>% 
+  map("conf.int") %>% 
+  map(as.data.frame) %>% 
+  map("lower .95")
+  
+adjusted_upper_conf <- map(adjusted, summary) %>% 
+  map("conf.int") %>% 
+  map(as.data.frame) %>% 
+  map("upper .95")
+
+screenreg(adjusted, single.row= FALSE, ci.force= TRUE, ci.test=1, 
+          override.coef = adjusted_coef,
+          override.ci.low=adjusted_lower_conf,
+          overide.ci.up=adjusted_upper_conf)
+```
+
+
+If you want to save the models in a word document this is how to do it. 
+
+```{r}
+
+htmlreg(adjusted, single.row= FALSE, ci.force= TRUE, ci.test=1, type="html", file="My_regressions.doc",
+          override.coef = adjusted_coef,
+          override.ci.low=adjusted_lower_conf,
+          overide.ci.up=adjusted_upper_conf)
+ 
+```
+
+# Packages I used
+```{r , eval=FALSE}
+library("tidyverse")
+library("survival")
+library("simstudy")
+library("texreg")
+library("tableone")
+```
