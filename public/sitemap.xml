@@ -8,11 +8,6 @@
   </url>
   
   <url>
-    <loc>/2018/01/my-twitter-account/</loc>
-    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/2018/01/maps/</loc>
     <lastmod>2018-01-01T00:00:00+00:00</lastmod>
   </url>
@@ -95,12 +90,6 @@
   <url>
     <loc>/tags/texreg/</loc>
     <lastmod>2018-01-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/twitter/</loc>
-    <lastmod>2018-01-09T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

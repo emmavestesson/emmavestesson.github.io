@@ -21,15 +21,6 @@
     </item>
     
     <item>
-      <title>My twitter account</title>
-      <link>/2018/01/my-twitter-account/</link>
-      <pubDate>Tue, 09 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/01/my-twitter-account/</guid>
-      <description>## Loading required package: twitteR ## Loading required package: ROAuth ## ## Attaching package: &amp;#39;dplyr&amp;#39; ## The following objects are masked from &amp;#39;package:twitteR&amp;#39;: ## ## id, location ## The following objects are masked from &amp;#39;package:stats&amp;#39;: ## ## filter, lag ## The following objects are masked from &amp;#39;package:base&amp;#39;: ## ## intersect, setdiff, setequal, union ## Loading required package: NLP ## ## Attaching package: &amp;#39;NLP&amp;#39; ## The following object is masked from &amp;#39;package:ggplot2&amp;#39;: ## ## annotate Twitter A week ago I published my first blog post thinking that no one would read it.</description>
-    </item>
-    
-    <item>
       <title>Making a map (or my first blogpost)</title>
       <link>/2018/01/maps/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
