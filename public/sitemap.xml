@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/01/please-like-me/</loc>
+    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/01/fake-data/</loc>
     <lastmod>2018-01-13T00:00:00+00:00</lastmod>
   </url>
@@ -47,13 +52,13 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -65,7 +70,13 @@
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2018-01-13T00:00:00+00:00</lastmod>
+    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/rvest/</loc>
+    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -90,6 +101,18 @@
   <url>
     <loc>/tags/texreg/</loc>
     <lastmod>2018-01-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/tidytext/</loc>
+    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/wordcloud/</loc>
+    <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

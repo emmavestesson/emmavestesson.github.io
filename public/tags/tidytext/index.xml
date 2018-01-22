@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tidytext on Playing with data</title>
+    <link>/tags/tidytext/</link>
+    <description>Recent content in Tidytext on Playing with data</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 21 Jan 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tidytext/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Please like me</title>
+      <link>/2018/01/please-like-me/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/please-like-me/</guid>
+      <description>Sundays When I woke up this morning I wrote a long to do list. Instead of working through the list I somehow ended up spending most of my day playing in R.
+ Scraping the web I have been keen to try web scraping in R for a while so I gave rvest a go. I was a bit too restless to actually read any tutorials so I just started trying different commands.</description>
+    </item>
+    
+  </channel>
+</rss>

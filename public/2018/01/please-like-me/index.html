@@ -1,6 +1,8 @@
 
 
   
+    
+  
 
 
   
@@ -16,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.31.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>About</title>
+    <title>Please like me</title>
     <meta name="author" content="Emma Vestesson">
     <meta name="keywords" content="">
 
@@ -24,15 +26,18 @@
     
 
     
-    <meta name="description" content="This is a &ldquo;hello world&rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.">
-    <meta property="og:description" content="This is a &ldquo;hello world&rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.">
+    <meta name="description" content="Sundays When I woke up this morning I wrote a long to do list. Instead of working through the list I somehow ended up spending most of my day playing in R.
+ Scraping the web I have been keen to try web scraping in R for a while so I gave rvest a go. I was a bit too restless to actually read any tutorials so I just started trying different commands.">
+    <meta property="og:description" content="Sundays When I woke up this morning I wrote a long to do list. Instead of working through the list I somehow ended up spending most of my day playing in R.
+ Scraping the web I have been keen to try web scraping in R for a while so I gave rvest a go. I was a bit too restless to actually read any tutorials so I just started trying different commands.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="About">
-    <meta property="og:url" content="/about/">
+    <meta property="og:title" content="Please like me">
+    <meta property="og:url" content="/2018/01/please-like-me/">
     <meta property="og:site_name" content="Playing with data">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Playing with data">
-    <meta name="twitter:description" content="This is a &ldquo;hello world&rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.">
+    <meta name="twitter:description" content="Sundays When I woke up this morning I wrote a long to do list. Instead of working through the list I somehow ended up spending most of my day playing in R.
+ Scraping the web I have been keen to try web scraping in R for a while so I gave rvest a go. I was a bit too restless to actually read any tutorials so I just started trying different commands.">
     
       <meta name="twitter:creator" content="@gummifot">
     
@@ -77,7 +82,7 @@ ga('send', 'pageview');
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">Playing with data</a>
@@ -95,7 +100,7 @@ ga('send', 'pageview');
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
     <ul class="sidebar-buttons">
@@ -195,7 +200,7 @@ ga('send', 'pageview');
 
       
 
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
@@ -205,32 +210,161 @@ ga('send', 'pageview');
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      About
+      Please like me
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2016-05-05T21:48:51-07:00">
+      <time itemprop="datePublished" datetime="2018-01-21T00:00:00Z">
         
-   5, 2016
+   21, 2018
 
       </time>
     
     
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="/categories/r">R</a>
+    
+  
+
   </div>
 
 </div>
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>This is a &ldquo;hello world&rdquo; example website for the <a href="https://github.com/rstudio/blogdown"><strong>blogdown</strong></a> package. The theme was forked from <a href="https://github.com/jrutheiser/hugo-lithium-theme">@jrutheiser/hugo-lithium-theme</a> and modified by <a href="https://github.com/yihui/hugo-lithium-theme">Yihui Xie</a>.</p>
+              <div id="sundays" class="section level1">
+<h1>Sundays</h1>
+<p>When I woke up this morning I wrote a long to do list. Instead of working through the list I somehow ended up spending most of my day playing in R.</p>
+</div>
+<div id="scraping-the-web" class="section level1">
+<h1>Scraping the web</h1>
+<p>I have been keen to try web scraping in R for a while so I gave <code>rvest</code> a go. I was a bit too restless to actually read any tutorials so I just started trying different commands. To be honest I think that was a mistake as I spent quite a while without anything to show for it.</p>
+<p>The title of this blog post is not a desperate cry for attention. The Australian show “Please Like Me” is probably my favourite show ever. It made me laugh and it made me cry and one of the main characters is a super cute dog. I wanted to scrape data from IMBD and I wanted to start out simple so I tried getting a list of the characters. I already had selectorgadget (<a href="http://selectorgadget.com/" class="uri">http://selectorgadget.com/</a>) installed which I used to identify parts of the website.</p>
+<pre class="r"><code>PLM_IMDB &lt;- read_html(&quot;http://www.imdb.com/title/tt2155025&quot;)
+character &lt;- html_nodes(PLM_IMDB, &quot;.character&quot;)
+html_text(character)</code></pre>
+<pre><code>## [1] &quot;\n              \n         Josh\n                      32 episodes, 2013-2016\n                            \n\n              \n          &quot;        
+## [2] &quot;\n              \n         Tom\n                      30 episodes, 2013-2016\n                            \n\n              \n          &quot;         
+## [3] &quot;\n              \n         John the Dog\n                      30 episodes, 2013-2016\n                            \n\n              \n          &quot;
+## [4] &quot;\n              \n         Mum\n                      29 episodes, 2013-2016\n                            \n\n              \n          &quot;         
+## [5] &quot;\n              \n         Dad\n                      27 episodes, 2013-2016\n                            \n\n              \n          &quot;         
+## [6] &quot;\n              \n         Mae\n                      22 episodes, 2013-2016\n                            \n\n              \n          &quot;         
+## [7] &quot;\n              \n         Hannah\n                      22 episodes, 2014-2016\n                            \n\n              \n          &quot;      
+## [8] &quot;\n              \n         Arnold\n                      22 episodes, 2014-2016\n                            \n\n              \n          &quot;      
+## [9] &quot;\n              \n         Claire\n                      21 episodes, 2013-2016\n                            \n\n              \n          &quot;</code></pre>
+<p>As you can see this is quite messy and I only have 9 names even though I can see way more on the website. I tried a few different options and google and suggested I should look for the word “table”. I was sick of IMDB and turned to wikipedia. As you can see below the data frame that I get is not very tidy.</p>
+<pre class="r"><code>website &lt;- read_html(&quot;https://en.wikipedia.org/wiki/List_of_Please_Like_Me_episodes&quot;) 
+cast &lt;- html_nodes(website, xpath = &#39;//*[@id=&quot;mw-content-text&quot;]/div/table[2]&#39;)
+table1 &lt;- html_table(cast) %&gt;% 
+  as.data.frame()
+table2 &lt;- html_table(cast, fill=TRUE) %&gt;% 
+  as.data.frame()
+table3 &lt;- html_table(cast, header=TRUE) %&gt;% 
+  as.data.frame()
+
+head(table1$Title,3)</code></pre>
+<pre><code>## [1] &quot;\&quot;Rhubarb and Custard\&quot;&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+## [2] &quot;Josh (Josh Thomas) is dumped by his girlfriend Claire (Caitlin Stasey) because she believes he’s gay, which he thought was just a phase. While visiting his friend Tom (Thomas Ward) at work, he meets Tom’s new attractive gay workmate Geoffrey (Wade Briggs), who asks to come to dinner. At dinner, Josh has a confrontation with Tom’s overbearing girlfriend Niamh (Nikita Leigh-Pritchard), who he wants to dump, and Geoffrey asks to stay the night. Later the two share a bed and an awkward kiss. The next morning Josh learns his mother, Rose (Debra Lawrance), has attempted suicide. Alan (David Roberts), Josh’s dad, fears it’s because of their divorce and his new girlfriend, Mae (Renee Lim), who Rose doesn’t know about. On the way to the hospital, Josh tells Tom about Geoffrey with both of them ignoring Josh’s coming out. Worried over her safety, Rose’s psychiatrist cannot release her unless she has someone at home with her. After pretending to hold it together, Josh sheds a private tear at home before resolving to move back in with his mother.&quot;
+## [3] &quot;\&quot;French Toast\&quot;&quot;</code></pre>
+<p>Again, I tried a few different ways but I just couldn’t create a nice table. I was becoming more and more disillusioned so I decided to try to extract one column at a time and then combine them.</p>
+<pre class="r"><code>website &lt;- read_html(&quot;https://en.wikipedia.org/wiki/List_of_Please_Like_Me_episodes&quot;) 
+PLM_nodes  &lt;- website %&gt;% 
+  html_nodes(&quot;.summary&quot;)
+
+PLM_nodes1  &lt;- website %&gt;% 
+  html_nodes(&quot;.description&quot;)
+
+PLM_text &lt;-html_text(PLM_nodes)
+PLM_text1 &lt;-html_text(PLM_nodes1)
+
+PLM &lt;- data_frame(PLM_text, PLM_text1)
+names(PLM) &lt;- c(&quot;episode_title&quot;, &quot;description&quot;)</code></pre>
+<p>It worked! When I had been thinking about web scraping and I always had some kind of sentiment analysis in mind. By the time I actually had some data it was pretty late so I have only scraped the surface of fun things I can do with this data but here is my first attempt.</p>
+</div>
+<div id="getting-that-sweet-word-cloud" class="section level1">
+<h1>Getting that sweet word cloud</h1>
+<p>Let’s split the description variable so that each word is on a separate row and then we can look at the most common words.</p>
+<pre class="r"><code>tidy_PLM &lt;- PLM %&gt;%
+  unnest_tokens(output=word, description, to_lower = TRUE)
+
+cleaned_PLM &lt;- tidy_PLM %&gt;% 
+  anti_join(stop_words, by=&quot;word&quot;) # remove stop words (words that are very common)
+
+cleaned_PLM %&gt;%
+  count(word, sort = TRUE) %&gt;% 
+  head(10)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    word       n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 josh     252
+##  2 tom       99
+##  3 arnold    95
+##  4 rose      78
+##  5 claire    58
+##  6 alan      51
+##  7 tells     38
+##  8 ella      29
+##  9 mae       29
+## 10 hannah    28</code></pre>
+<p>Almost all of the top 10 words are character names.</p>
+<p>One of my favourite characters is John the dog and I wanted to see how often he was mentioned and in what context. I split the data frame into sentences instead of words.</p>
+<pre class="r"><code>tidy_PLM_sentence &lt;- PLM %&gt;%
+  unnest_tokens(sentence, description, token = &quot;sentences&quot;, to_lower = FALSE) %&gt;% 
+  mutate(john=str_detect(sentence, regex(&quot;john&quot;, ignore_case = TRUE)))
+
+tidy_PLM_sentence %&gt;% 
+  filter(john==TRUE) %&gt;% 
+  select(sentence)</code></pre>
+<pre><code>## # A tibble: 3 x 1
+##   sentence                                                                
+##   &lt;chr&gt;                                                                   
+## 1 In the end, Josh spends Christmas day alone in the park eating trifle w…
+## 2 At the house, Alan wanders around sadly, telling John the dog he’s gett…
+## 3 With Arnold and Claire’s bad moods, Tom decides the day has come to des…</code></pre>
+<p>I did of course create the obligatory word cloud. It probably would have been a good idea to remove the character names.</p>
+<pre class="r"><code>cleaned_PLM %&gt;%
+  count(word) %&gt;% 
+  with(wordcloud(word, n, max.words = 100))</code></pre>
+<p><img src="/post/2018-01-21-please-like-me_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="next-steps" class="section level1">
+<h1>Next steps</h1>
+<p>The coded I ended up with is very different to that I set out to write. In hindsight I should have read a few <code>rvest</code> and <code>tidytext</code> tutorials as this would have saved me time. There are so many things I want to with this data. I want to add the season and episode number to the data set to see if the language changed over time. I should probably remove the character names from the data I use for the word cloud so that is shows the topics of show rather than just the names of the characters. Mostly I want to include a picture of John the dog. Since this blog is as much about the learning process as the actual results of any code I decided to publish the few successful lines of code that I wrote today.</p>
+</div>
+<div id="packages-i-used" class="section level1">
+<h1>Packages I used</h1>
+<pre class="r"><code>library(wordcloud)
+library(tidyr)
+library(reshape2)
+library(rvest)
+library(tidytext)
+library(tidyverse)</code></pre>
+</div>
 
               
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
             
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/rvest/">rvest</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/wordcloud/">wordcloud</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/tidytext/">tidytext</a>
+
+                  </div>
+                
               
             
             
@@ -248,7 +382,7 @@ ga('send', 'pageview');
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/fake-data/" data-tooltip="Regressions using completly fake data!">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -266,19 +400,19 @@ ga('send', 'pageview');
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/01/please-like-me/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/01/please-like-me/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/01/please-like-me/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -318,7 +452,7 @@ ga('send', 'pageview');
 </footer>
 
       </div>
-      <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
         
   <div class="post-actions-wrap">
       <nav >
@@ -334,7 +468,7 @@ ga('send', 'pageview');
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/fake-data/" data-tooltip="Regressions using completly fake data!">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -352,19 +486,19 @@ ga('send', 'pageview');
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/01/please-like-me/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/01/please-like-me/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/01/please-like-me/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -389,24 +523,24 @@ ga('send', 'pageview');
 
 
       </div>
-      <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
   <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2Fabout%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F01%2Fplease-like-me%2F">
           <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2Fabout%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F01%2Fplease-like-me%2F">
           <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2Fabout%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F01%2Fplease-like-me%2F">
           <i class="fa fa-google-plus"></i><span>%!(EXTRA string=Google&#43;)</span>
         </a>
       </li>
@@ -562,9 +696,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/about\/';
+          this.page.url = '\/2018\/01\/please-like-me\/';
           
-            this.page.identifier = '\/about\/'
+            this.page.identifier = '\/2018\/01\/please-like-me\/'
           
         };
         (function() {

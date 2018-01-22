@@ -48,6 +48,15 @@
     </item>
     
     <item>
+      <title>Rvest</title>
+      <link>/tags/rvest/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rvest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Simstudy</title>
       <link>/tags/simstudy/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
@@ -71,6 +80,24 @@
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/texreg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tidytext</title>
+      <link>/tags/tidytext/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tidytext/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wordcloud</title>
+      <link>/tags/wordcloud/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/wordcloud/</guid>
       <description></description>
     </item>
     

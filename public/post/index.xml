@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 13 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Please like me</title>
+      <link>/2018/01/please-like-me/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/please-like-me/</guid>
+      <description>Sundays When I woke up this morning I wrote a long to do list. Instead of working through the list I somehow ended up spending most of my day playing in R.
+ Scraping the web I have been keen to try web scraping in R for a while so I gave rvest a go. I was a bit too restless to actually read any tutorials so I just started trying different commands.</description>
+    </item>
     
     <item>
       <title>Regressions using completly fake data!</title>
