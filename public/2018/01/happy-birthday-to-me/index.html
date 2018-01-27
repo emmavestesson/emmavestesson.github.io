@@ -250,7 +250,7 @@ ga('send', 'pageview');
 <p>The next step is to actually get the data. I used the <code>get_guardian</code> command from the <code>guardianR</code> package to get all articles. You need to register at <a href="http://open-platform.theguardian.com/access" class="uri">http://open-platform.theguardian.com/access</a> to get the API but this only took a few minutes. I get a few warnings about “Unequal factor levels” but I ignore them because this is most likely because I can’t find any articles for a few of the earlier years.</p>
 <p>The data need some cleaning.</p>
 <pre class="r"><code>glimpse(theguardian_jan27)</code></pre>
-<pre><code>## Observations: 5,503
+<pre><code>## Observations: 5,536
 ## Variables: 27
 ## $ id                   &lt;chr&gt; &quot;uk-news/2018/jan/27/diners-rescued-in-bo...
 ## $ sectionId            &lt;chr&gt; &quot;uk-news&quot;, &quot;australia-news&quot;, &quot;lifeandstyl...
@@ -318,17 +318,17 @@ cleaned_theguardian_jan27 %&gt;%
 <pre><code>## # A tibble: 10 x 2
 ##    word        n
 ##    &lt;chr&gt;   &lt;int&gt;
-##  1 â         457
-##  2 review    206
-##  3 uk         83
-##  4 cup        79
-##  5 media      77
-##  6 video      74
-##  7 day        71
-##  8 letters    70
-##  9 david      64
-## 10 london     63</code></pre>
-<p>As you can the most common word is just the letter a with a hat. Since it is a not a real word I am going to remove it.</p>
+##  1 â         469
+##  2 review    212
+##  3 uk         89
+##  4 cup        80
+##  5 media      75
+##  6 video      73
+##  7 letters    72
+##  8 day        70
+##  9 london     64
+## 10 david      63</code></pre>
+<p>As you can see the most common word is just the letter a with a hat. Since it is a not a real word I am going to remove it.</p>
 <pre class="r"><code>cleaned_theguardian_jan27 &lt;- cleaned_theguardian_jan27 %&gt;% 
   filter(word!=&quot;â&quot;)
 
@@ -338,16 +338,16 @@ cleaned_theguardian_jan27 %&gt;%
 <pre><code>## # A tibble: 10 x 2
 ##    word        n
 ##    &lt;chr&gt;   &lt;int&gt;
-##  1 review    206
-##  2 uk         83
-##  3 cup        79
-##  4 media      77
-##  5 video      74
-##  6 day        71
-##  7 letters    70
-##  8 david      64
-##  9 london     63
-## 10 top        62</code></pre>
+##  1 review    212
+##  2 uk         89
+##  3 cup        80
+##  4 media      75
+##  5 video      73
+##  6 letters    72
+##  7 day        70
+##  8 london     64
+##  9 david      63
+## 10 world      62</code></pre>
 <p>I also checked for other short words but there were no other suspiciously short words.</p>
 <pre class="r"><code>cleaned_theguardian_jan27 &lt;- cleaned_theguardian_jan27 %&gt;% 
 mutate(word_length=nchar(word, type = &quot;chars&quot;, allowNA = FALSE, keepNA = NA)) 
@@ -355,8 +355,8 @@ mutate(word_length=nchar(word, type = &quot;chars&quot;, allowNA = FALSE, keepNA
  table(cleaned_theguardian_jan27$word_length)</code></pre>
 <pre><code>## 
 ##    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15 
-##  150  688 1962 4462 5412 5122 4695 3040 1862 1154  513  233  124   49   15 
-##   16   17   21 
+##  159  706 1971 4474 5453 5154 4686 3000 1842 1139  499  242  117   48   13 
+##   16   20   21 
 ##    4    1    1</code></pre>
 <p>I want to assign a sentiment to each word to see if the words used in the article titles were positive or negative. (I realise that the “hat a that”&quot; I removed would have disappeared when doing the inner join but I think that there is value in doing some cleaning.)</p>
 <pre class="r"><code>bing &lt;- get_sentiments(&quot;bing&quot;)
@@ -370,7 +370,7 @@ cleaned_theguardian_jan27_sentiment&lt;- cleaned_theguardian_jan27 %&gt;%
   distinct() %&gt;% 
 ggplot(data=., aes(x=web_publication_year, y=sentiment_count, fill=sentiment)) + geom_col() + ylab(&quot;Count&quot;) + xlab(&quot;Year of publication&quot;) + ggtitle(&quot;Sentiment of words in titles&quot;)</code></pre>
 <p><img src="/post/2018-01-27-happy-birthday-to-me_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>Unfortunately it looks like most of the words used in the titles on my birthday over the years have been negative. I am not going to let that stop me from having a good time today.</p>
+<p>Unfortunately it looks like most of the words used in the titles on my birthday over the years have been negative. Causality? I am not going to let that stop me from having a good time today.</p>
 </div>
 
               

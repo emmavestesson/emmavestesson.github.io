@@ -83,7 +83,7 @@ cleaned_theguardian_jan27 %>%
   head(10)
 
 ```
-As you can the most common word is just the letter a with a hat. Since it is a not a real word I am going to remove it. 
+As you can see the most common word is just the letter a with a hat. Since it is a not a real word I am going to remove it. 
 ```{r}
 cleaned_theguardian_jan27 <- cleaned_theguardian_jan27 %>% 
   filter(word!="â")
@@ -126,6 +126,6 @@ ggplot(data=., aes(x=web_publication_year, y=sentiment_count, fill=sentiment)) +
 ```
 
 
-Unfortunately it looks like most of the words used in the titles on my birthday over the years have been negative. I am not going to let that stop me from having a good time today. 
+Unfortunately it looks like most of the words used in the titles on my birthday over the years have been negative. Causality? I am not going to let that stop me from having a good time today. 
 
 
