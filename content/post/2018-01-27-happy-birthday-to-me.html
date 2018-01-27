@@ -25,7 +25,7 @@ tags:
 <p>The next step is to actually get the data. I used the <code>get_guardian</code> command from the <code>guardianR</code> package to get all articles. You need to register at <a href="http://open-platform.theguardian.com/access" class="uri">http://open-platform.theguardian.com/access</a> to get the API but this only took a few minutes. I get a few warnings about “Unequal factor levels” but I ignore them because this is most likely because I can’t find any articles for a few of the earlier years.</p>
 <p>The data need some cleaning.</p>
 <pre class="r"><code>glimpse(theguardian_jan27)</code></pre>
-<pre><code>## Observations: 5,578
+<pre><code>## Observations: 5,511
 ## Variables: 27
 ## $ id                   &lt;chr&gt; &quot;sport/blog/2018/jan/27/talking-horses-de...
 ## $ sectionId            &lt;chr&gt; &quot;sport&quot;, &quot;uk-news&quot;, &quot;australia-news&quot;, &quot;li...
@@ -93,16 +93,16 @@ cleaned_theguardian_jan27 %&gt;%
 <pre><code>## # A tibble: 10 x 2
 ##    word        n
 ##    &lt;chr&gt;   &lt;int&gt;
-##  1 â         475
-##  2 review    231
-##  3 uk         89
-##  4 cup        76
-##  5 media      74
-##  6 letters    73
-##  7 video      73
-##  8 day        72
-##  9 london     65
-## 10 david      63</code></pre>
+##  1 â         466
+##  2 review    226
+##  3 uk         85
+##  4 cup        81
+##  5 video      72
+##  6 letters    71
+##  7 london     70
+##  8 day        68
+##  9 media      68
+## 10 world      62</code></pre>
 <p>As you can the most common word is just the letter a with a hat. Since it is a not a real word I am going to remove it.</p>
 <pre class="r"><code>cleaned_theguardian_jan27 &lt;- cleaned_theguardian_jan27 %&gt;% 
   filter(word!=&quot;â&quot;)
@@ -113,16 +113,16 @@ cleaned_theguardian_jan27 %&gt;%
 <pre><code>## # A tibble: 10 x 2
 ##    word        n
 ##    &lt;chr&gt;   &lt;int&gt;
-##  1 review    231
-##  2 uk         89
-##  3 cup        76
-##  4 media      74
-##  5 letters    73
-##  6 video      73
-##  7 day        72
-##  8 london     65
-##  9 david      63
-## 10 city       61</code></pre>
+##  1 review    226
+##  2 uk         85
+##  3 cup        81
+##  4 video      72
+##  5 letters    71
+##  6 london     70
+##  7 day        68
+##  8 media      68
+##  9 world      62
+## 10 david      61</code></pre>
 <p>I also checked for other short words but there were no other suspiciously short words.</p>
 <pre class="r"><code>cleaned_theguardian_jan27 &lt;- cleaned_theguardian_jan27 %&gt;% 
 mutate(word_length=nchar(word, type = &quot;chars&quot;, allowNA = FALSE, keepNA = NA)) 
@@ -130,8 +130,8 @@ mutate(word_length=nchar(word, type = &quot;chars&quot;, allowNA = FALSE, keepNA
  table(cleaned_theguardian_jan27$word_length)</code></pre>
 <pre><code>## 
 ##    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15 
-##  155  697 1992 4485 5469 5205 4716 3067 1872 1157  510  238  122   50   17 
-##   16   17   21 
+##  159  702 1979 4431 5434 5118 4677 2986 1854 1112  508  219  119   51   16 
+##   16   20   21 
 ##    4    1    1</code></pre>
 <p>I want to assign a sentiment to each word to see if the words used in the article titles were positive or negative. (I realise that the “hat a that”&quot; I removed would have disappeared when doing the inner join but I think that there is value in doing some cleaning.)</p>
 <pre class="r"><code>bing &lt;- get_sentiments(&quot;bing&quot;)
