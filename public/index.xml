@@ -6,10 +6,20 @@
     <description>Recent content on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 21 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 27 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Happy Birthday To Me!</title>
+      <link>/2018/01/happy-birthday-to-me/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/01/happy-birthday-to-me/</guid>
+      <description>Happy Birthday To Me! Today is my birthday. To celebrate I decided to look at what was in the news on January 27 every year since I was born. Mainly I want to see if the news were positive or negative.
+ Getting the data I start buy creating a list of dates. I feel like there is probably a more straightforward way of doing this but I am currently obsessed with map so this is how I did it.</description>
+    </item>
     
     <item>
       <title>Please like me</title>

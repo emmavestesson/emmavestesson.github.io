@@ -276,20 +276,20 @@ table1_print&lt;-print(table1, nonnormal = median_var, contDigits=0,
                  exact = &quot;LOC&quot;,  printToggle = TRUE, factorVars = factor_var)</code></pre>
 <pre><code>##                      Stratified by event
 ##                       0             1            p      test   
-##   n                   4461          539                        
-##   v1_5 (median [IQR])   64 [41, 88]  66 [41, 87]  NA    nonnorm
-##   v1_6 = 1 (%)        2873 (64.4)   368 (68.3)    0.084        
-##   v2_1_1 = 1 (%)      2221 (49.8)   275 (51.0)    0.620        
-##   v2_1_2 = 1 (%)      2684 (60.2)   311 (57.7)    0.290        
-##   v2_1_3 = 1 (%)      2237 (50.1)   257 (47.7)    0.300        
-##   v2_1_4 = 1 (%)      2502 (56.1)   279 (51.8)    0.063        
-##   v2_1_5 = 1 (%)      2281 (51.1)   287 (53.2)    0.378        
-##   v2_5 = 1 (%)        2255 (50.5)   273 (50.6)    1.000        
+##   n                   4516          484                        
+##   v1_5 (median [IQR])   64 [40, 88]  68 [44, 88]  NA    nonnorm
+##   v1_6 = 1 (%)        2921 (64.7)   319 (65.9)    0.626        
+##   v2_1_1 = 1 (%)      2304 (51.0)   240 (49.6)    0.582        
+##   v2_1_2 = 1 (%)      2725 (60.3)   292 (60.3)    1.000        
+##   v2_1_3 = 1 (%)      2288 (50.7)   242 (50.0)    0.818        
+##   v2_1_4 = 1 (%)      2541 (56.3)   273 (56.4)    0.992        
+##   v2_1_5 = 1 (%)      2273 (50.3)   268 (55.4)    0.039        
+##   v2_5 = 1 (%)        2231 (49.4)   243 (50.2)    0.773        
 ##   v7_4 (median [IQR])    0 [0, 1]     0 [0, 1]    NA    nonnorm
-##   age_group (%)                                   0.540        
-##      1                2221 (49.8)   282 (52.3)                 
-##      2                 863 (19.3)    99 (18.4)                 
-##      3                1377 (30.9)   158 (29.3)</code></pre>
+##   age_group (%)                                   0.059        
+##      1                2219 (49.1)   220 (45.5)                 
+##      2                 898 (19.9)   118 (24.4)                 
+##      3                1399 (31.0)   146 (30.2)</code></pre>
 <p>You might want to save the table in a different format such as a csv file. This code should help you do that. Note that the print options are slightly different.</p>
 <pre class="r"><code>table1_print &lt;- print(table1, nonnormal = median_var, contDigits=0, 
                  exact = &quot;LOC&quot;, quote = FALSE, noSpaces = TRUE, printToggle = FALSE, factorVars = factor_var)
@@ -344,33 +344,33 @@ screenreg(unadjusted, single.row= FALSE, ci.force= TRUE, ci.test=1,
 ##              Model 1       Model 2       Model 3       Model 4       Model 5       Model 6       Model 7       Model 8       Model 9       Model 10    
 ## -------------------------------------------------------------------------------------------------------------------------------------------------------
 ## v1_5            1.00                                                                                                                                   
-##              [1.00; 1.00]                                                                                                                              
-## v1_6                          1.18 *                                                                                                                   
-##                            [1.00; 1.36]                                                                                                                
-## v2_1_1                                      1.05                                                                                                       
-##                                          [0.88; 1.22]                                                                                                  
-## v2_1_2                                                    0.91                                                                                         
-##                                                        [0.74; 1.08]                                                                                    
-## v2_1_3                                                                  0.91                                                                           
-##                                                                      [0.74; 1.08]                                                                      
-## v2_1_4                                                                                0.84                                                             
-##                                                                                    [0.67; 1.01]                                                        
-## v2_1_5                                                                                              1.08                                               
-##                                                                                                  [0.91; 1.25]                                          
-## v2_5                                                                                                              0.96                                 
-##                                                                                                                [0.79; 1.13]                            
-## v7_4                                                                                                                            0.99                   
-##                                                                                                                              [0.83; 1.16]              
-## age_group                                                                                                                                     0.95     
-##                                                                                                                                            [0.86; 1.05]
+##              [1.00; 1.01]                                                                                                                              
+## v1_6                          1.06                                                                                                                     
+##                            [0.87; 1.25]                                                                                                                
+## v2_1_1                                      0.95                                                                                                       
+##                                          [0.77; 1.13]                                                                                                  
+## v2_1_2                                                    1.01                                                                                         
+##                                                        [0.82; 1.19]                                                                                    
+## v2_1_3                                                                  0.98                                                                           
+##                                                                      [0.80; 1.15]                                                                      
+## v2_1_4                                                                                1.01                                                             
+##                                                                                    [0.83; 1.19]                                                        
+## v2_1_5                                                                                              1.21 *                                             
+##                                                                                                  [1.03; 1.39]                                          
+## v2_5                                                                                                              1.01                                 
+##                                                                                                                [0.83; 1.19]                            
+## v7_4                                                                                                                            0.92                   
+##                                                                                                                              [0.74; 1.10]              
+## age_group                                                                                                                                     1.04     
+##                                                                                                                                            [0.94; 1.14]
 ## -------------------------------------------------------------------------------------------------------------------------------------------------------
-## AIC          9020.57       9017.94       9020.94       9020.03       9020.05       9017.32       9020.52       9021.07       9021.26       9020.39     
+## AIC          8134.73       8137.56       8137.65       8137.93       8137.86       8137.93       8133.72       8137.93       8137.02       8137.34     
 ## R^2             0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00     
-## Max. R^2        0.84          0.84          0.84          0.84          0.84          0.84          0.84          0.84          0.84          0.84     
-## Num. events   539           539           539           539           539           539           539           539           539           539        
+## Max. R^2        0.80          0.80          0.80          0.80          0.80          0.80          0.80          0.80          0.80          0.80     
+## Num. events   484           484           484           484           484           484           484           484           484           484        
 ## Num. obs.    5000          5000          5000          5000          5000          5000          5000          5000          5000          5000        
 ## Missings        0             0             0             0             0             0             0             0             0             0        
-## PH test         0.99          0.90          0.91          0.02          0.75          0.04          0.61          0.92          0.29          0.14     
+## PH test         0.93          0.27          0.08          0.15          0.18          0.65          0.79          0.87          0.06          0.61     
 ## =======================================================================================================================================================
 ## * 1 outside the confidence interval</code></pre>
 <p>It is now super easy to add/remove variables to my models. I already know that I want to include two variables - v1_5 and v1_6 - in my full model so I add them to the model. I remove v1_5 from my predictors or I will have two models for just v1_5 and v1_6.</p>
@@ -403,33 +403,33 @@ screenreg(adjusted, single.row= FALSE, ci.force= TRUE, ci.test=1,
 ##              Model 1       Model 2       Model 3       Model 4       Model 5       Model 6       Model 7       Model 8       Model 9     
 ## -----------------------------------------------------------------------------------------------------------------------------------------
 ## v1_5            1.00          1.00          1.00          1.00          1.00          1.00          1.00          1.00          1.00     
-##              [1.00; 1.00]  [1.00; 1.00]  [1.00; 1.00]  [1.00; 1.00]  [1.00; 1.00]  [1.00; 1.00]  [1.00; 1.00]  [1.00; 1.00]  [1.00; 1.00]
-## v1_6            1.18 *        1.18 *        1.18          1.18 *        1.18 *        1.18 *        1.18 *        1.18 *        1.18 *   
-##              [1.00; 1.37]  [1.00; 1.36]  [1.00; 1.36]  [1.00; 1.37]  [1.00; 1.36]  [1.00; 1.37]  [1.00; 1.36]  [1.00; 1.37]  [1.00; 1.36]
-## v2_1_1                        1.05                                                                                                       
-##                            [0.88; 1.22]                                                                                                  
-## v2_1_2                                      0.91                                                                                         
-##                                          [0.74; 1.08]                                                                                    
-## v2_1_3                                                    0.91                                                                           
-##                                                        [0.74; 1.08]                                                                      
-## v2_1_4                                                                  0.84                                                             
-##                                                                      [0.67; 1.01]                                                        
-## v2_1_5                                                                                1.08                                               
-##                                                                                    [0.91; 1.25]                                          
-## v2_5                                                                                                0.97                                 
-##                                                                                                  [0.79; 1.14]                            
-## v7_4                                                                                                              0.99                   
-##                                                                                                                [0.82; 1.16]              
-## age_group                                                                                                                       0.96     
-##                                                                                                                              [0.86; 1.05]
+##              [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]  [1.00; 1.01]
+## v1_6            1.06          1.06          1.06          1.06          1.06          1.06          1.06          1.06          1.06     
+##              [0.87; 1.25]  [0.87; 1.25]  [0.87; 1.25]  [0.87; 1.25]  [0.87; 1.25]  [0.87; 1.25]  [0.87; 1.25]  [0.87; 1.25]  [0.87; 1.25]
+## v2_1_1                        0.96                                                                                                       
+##                            [0.78; 1.13]                                                                                                  
+## v2_1_2                                      1.01                                                                                         
+##                                          [0.83; 1.19]                                                                                    
+## v2_1_3                                                    0.98                                                                           
+##                                                        [0.80; 1.15]                                                                      
+## v2_1_4                                                                  1.01                                                             
+##                                                                      [0.83; 1.19]                                                        
+## v2_1_5                                                                                1.21 *                                             
+##                                                                                    [1.03; 1.39]                                          
+## v2_5                                                                                                1.01                                 
+##                                                                                                  [0.83; 1.19]                            
+## v7_4                                                                                                              0.92                   
+##                                                                                                                [0.74; 1.10]              
+## age_group                                                                                                                       1.04     
+##                                                                                                                              [0.94; 1.14]
 ## -----------------------------------------------------------------------------------------------------------------------------------------
-## AIC          9019.19       9020.89       9020.11       9019.93       9017.30       9020.40       9021.02       9021.18       9020.33     
+## AIC          8136.36       8138.12       8138.35       8138.29       8138.35       8134.05       8138.35       8137.46       8137.78     
 ## R^2             0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00          0.00     
-## Max. R^2        0.84          0.84          0.84          0.84          0.84          0.84          0.84          0.84          0.84     
-## Num. events   539           539           539           539           539           539           539           539           539        
+## Max. R^2        0.80          0.80          0.80          0.80          0.80          0.80          0.80          0.80          0.80     
+## Num. events   484           484           484           484           484           484           484           484           484        
 ## Num. obs.    5000          5000          5000          5000          5000          5000          5000          5000          5000        
 ## Missings        0             0             0             0             0             0             0             0             0        
-## PH test         0.99          1.00          0.14          0.98          0.23          0.98          1.00          0.80          0.56     
+## PH test         0.54          0.22          0.35          0.38          0.69          0.72          0.74          0.18          0.69     
 ## =========================================================================================================================================
 ## * 1 outside the confidence interval</code></pre>
 <p>If you want to save the models in a word document this is how to do it.</p>
@@ -703,6 +703,24 @@ library(&quot;tableone&quot;)</code></pre>
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/happy-birthday-to-me/">
+                <h3 class="media-heading">Happy Birthday To Me!</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Happy Birthday To Me! Today is my birthday. To celebrate I decided to look at what was in the news on January 27 every year since I was born. Mainly I want to see if the news were positive or negative.
+ Getting the data I start buy creating a list of dates. I feel like there is probably a more straightforward way of doing this but I am currently obsessed with map so this is how I did it.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/01/please-like-me/">
                 <h3 class="media-heading">Please like me</h3>
               </a>
@@ -759,7 +777,7 @@ library(&quot;tableone&quot;)</code></pre>
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         3 posts found
+         4 posts found
       </p>
     </div>
   </div>
