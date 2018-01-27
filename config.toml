@@ -120,7 +120,7 @@ canonifyurls = true
   hierarchicalCategories = true
 
   description = "Hugo tranquilpeak theme demo"
-
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   # Customization
   # Define the behavior of the sidebar
   # 1: Display extra large sidebar on extra large screen, large sidebar on large screen,

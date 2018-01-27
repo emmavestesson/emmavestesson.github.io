@@ -1,0 +1,131 @@
+---
+title: Happy Birthday To Me!
+author: ~
+date: '2018-01-27'
+slug: happy-birthday-to-me
+categories:
+  - R
+tags:
+  - guardianR
+  - Birthday
+---
+
+```{r, include=FALSE}
+library(GuardianR)
+library(tidyverse)
+library("lubridate")
+library(snakecase)
+library("tidytext")
+```
+
+
+# Happy Birthday To Me!
+
+Today is my birthday. To celebrate I decided to look at what was in the news on January 27 every year since I was born. Mainly I want to see if the news were positive or negative.
+
+# Getting the data
+I start buy creating a list of dates. I feel like there is probably a more straightforward way of doing this but I am currently obsessed with `map` so this is how I did it. 
+
+```{r}
+dates <-map(list(0:30), ~ymd("2018-01-27") - years(.x)) %>% 
+  map(~as.list(.x)) %>% 
+  flatten()
+```
+
+The next step is to actually get the data. I used the `get_guardian` command from the `guardianR` package to get all articles. You need to register at http://open-platform.theguardian.com/access to get the API but this only took a few minutes. I get a few warnings about "Unequal factor levels" but I ignore them because this is most likely because I can't find any articles for a few of the earlier years. 
+
+```{r, include=FALSE}
+source('~/Documents/R folder/guardian_api_key.R')
+```
+
+```{r, echo=FALSE, warning=FALSE, results='hide'}
+
+theguardian_jan27<-map_df(dates, ~get_guardian(keywords="", from.date=.x, 
+             to.date=.x, api.key=guardian_api_key)) 
+```
+
+The data need some cleaning. 
+```{r}
+glimpse(theguardian_jan27)
+```
+
+First of all, I want to change the variable names so that they have underscores instead of capital letters.
+
+```{r}
+df_names <- names(theguardian_jan27)
+snake_names <- to_snake_case(df_names)
+names(theguardian_jan27)<- snake_names
+names(theguardian_jan27)
+```
+
+I am also going to get rid of some variables that I don't need. 
+```{r}
+theguardian_jan27 <- theguardian_jan27 %>% 
+  select_if(function(x) !all(is.na(x))) %>% # Drop columns with all missing values
+  select_if(function(x) !(is.factor(x) && nlevels(x)==1)) # Drop factors with only one level
+```
+
+
+Time to look at the titles using `tidytext`. I want my analysis to be done by year so I create a new variable with the year of web publication.
+```{r}
+
+theguardian_jan27 <- theguardian_jan27  %>% 
+  mutate(web_publication_year=year(web_publication_date))
+
+tidy_theguardian_jan27<- theguardian_jan27 %>%
+  unnest_tokens(output=word, web_title, to_lower = TRUE)
+
+cleaned_theguardian_jan27 <- tidy_theguardian_jan27 %>% 
+  anti_join(stop_words, by="word") # remove stop words (words that are very common)
+
+cleaned_theguardian_jan27 %>%
+  count(word, sort = TRUE) %>% 
+  head(10)
+
+```
+As you can the most common word is just the letter a with a hat. Since it is a not a real word I am going to remove it. 
+```{r}
+cleaned_theguardian_jan27 <- cleaned_theguardian_jan27 %>% 
+  filter(word!="â")
+
+cleaned_theguardian_jan27 %>%
+  count(word, sort = TRUE) %>% 
+  head(10)
+
+```
+
+I also checked for other short words but there were no other suspiciously short words.
+
+```{r}
+cleaned_theguardian_jan27 <- cleaned_theguardian_jan27 %>% 
+mutate(word_length=nchar(word, type = "chars", allowNA = FALSE, keepNA = NA)) 
+
+ table(cleaned_theguardian_jan27$word_length)
+ 
+ 
+```
+
+I want to assign a sentiment to each word to see if the words used in the article titles were positive or negative. (I realise that the "hat a that"" I removed would have disappeared when doing the inner join but I think that there is value in doing some cleaning.)
+```{r}
+bing <- get_sentiments("bing")
+cleaned_theguardian_jan27_sentiment<- cleaned_theguardian_jan27 %>%
+  inner_join(bing, by="word") 
+
+```
+
+Now each word has been classified as either negative or positive and we can look at the distribution over time.
+
+```{r}
+
+cleaned_theguardian_jan27_sentiment %>% 
+  select(web_publication_year, sentiment) %>% 
+  group_by(web_publication_year, sentiment) %>% 
+  mutate(sentiment_count=n()) %>% 
+  distinct() %>% 
+ggplot(data=., aes(x=web_publication_year, y=sentiment_count, fill=sentiment)) + geom_col() + ylab("Count") + xlab("Year of publication") + ggtitle("Sentiment of words in titles")
+```
+
+
+Unfortunately it looks like most of the words used in the titles on my birthday over the years have been negative. I am not going to let that stop me from having a good time today. 
+
+

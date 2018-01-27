@@ -1,0 +1,149 @@
+---
+title: Happy Birthday To Me!
+author: ~
+date: '2018-01-27'
+slug: happy-birthday-to-me
+categories:
+  - R
+tags:
+  - guardianR
+  - Birthday
+---
+
+
+
+<div id="happy-birthday-to-me" class="section level1">
+<h1>Happy Birthday To Me!</h1>
+<p>Today is my birthday. To celebrate I decided to look at what was in the news on January 27 every year since I was born. Mainly I want to see if the news were positive or negative.</p>
+</div>
+<div id="getting-the-data" class="section level1">
+<h1>Getting the data</h1>
+<p>I start buy creating a list of dates. I feel like there is probably a more straightforward way of doing this but I am currently obsessed with <code>map</code> so this is how I did it.</p>
+<pre class="r"><code>dates &lt;-map(list(0:30), ~ymd(&quot;2018-01-27&quot;) - years(.x)) %&gt;% 
+  map(~as.list(.x)) %&gt;% 
+  flatten()</code></pre>
+<p>The next step is to actually get the data. I used the <code>get_guardian</code> command from the <code>guardianR</code> package to get all articles. You need to register at <a href="http://open-platform.theguardian.com/access" class="uri">http://open-platform.theguardian.com/access</a> to get the API but this only took a few minutes. I get a few warnings about “Unequal factor levels” but I ignore them because this is most likely because I can’t find any articles for a few of the earlier years.</p>
+<p>The data need some cleaning.</p>
+<pre class="r"><code>glimpse(theguardian_jan27)</code></pre>
+<pre><code>## Observations: 5,578
+## Variables: 27
+## $ id                   &lt;chr&gt; &quot;sport/blog/2018/jan/27/talking-horses-de...
+## $ sectionId            &lt;chr&gt; &quot;sport&quot;, &quot;uk-news&quot;, &quot;australia-news&quot;, &quot;li...
+## $ sectionName          &lt;chr&gt; &quot;Sport&quot;, &quot;UK news&quot;, &quot;Australia news&quot;, &quot;Li...
+## $ webPublicationDate   &lt;chr&gt; &quot;2018-01-27T00:01:35Z&quot;, &quot;2018-01-27T00:43...
+## $ webTitle             &lt;chr&gt; &quot;Talking Horses: Definitly Red on course ...
+## $ webUrl               &lt;chr&gt; &quot;https://www.theguardian.com/sport/blog/2...
+## $ apiUrl               &lt;chr&gt; &quot;https://content.guardianapis.com/sport/b...
+## $ newspaperPageNumber  &lt;chr&gt; NA, NA, NA, &quot;72&quot;, &quot;6&quot;, &quot;65&quot;, &quot;55&quot;, &quot;85&quot;, ...
+## $ trailText            &lt;chr&gt; &quot;&lt;strong&gt;Chris Cook:&lt;/strong&gt; The Cotswol...
+## $ headline             &lt;chr&gt; &quot;Talking Horses: Definitly Red on course ...
+## $ showInRelatedContent &lt;chr&gt; &quot;true&quot;, &quot;true&quot;, &quot;true&quot;, &quot;true&quot;, &quot;true&quot;, &quot;...
+## $ lastModified         &lt;chr&gt; &quot;2018-01-27T00:03:01Z&quot;, &quot;2018-01-27T00:51...
+## $ hasStoryPackage      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ score                &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ standfirst           &lt;chr&gt; &quot;The Cotswold Chase runner was short of h...
+## $ shortUrl             &lt;chr&gt; &quot;https://gu.com/p/822aj&quot;, &quot;https://gu.com...
+## $ wordcount            &lt;chr&gt; &quot;602&quot;, &quot;188&quot;, &quot;470&quot;, &quot;1517&quot;, &quot;727&quot;, &quot;417&quot;...
+## $ commentable          &lt;chr&gt; &quot;false&quot;, &quot;false&quot;, NA, &quot;false&quot;, &quot;true&quot;, &quot;t...
+## $ allowUgc             &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ isPremoderated       &lt;chr&gt; &quot;false&quot;, &quot;false&quot;, &quot;false&quot;, &quot;false&quot;, &quot;fals...
+## $ byline               &lt;chr&gt; &quot;Chris Cook&quot;, &quot;Patrick Greenfield&quot;, &quot;Chri...
+## $ publication          &lt;chr&gt; &quot;The Guardian&quot;, &quot;theguardian.com&quot;, &quot;thegu...
+## $ newspaperEditionDate &lt;chr&gt; NA, NA, NA, &quot;2018-01-27T00:00:00Z&quot;, &quot;2018...
+## $ shouldHideAdverts    &lt;chr&gt; &quot;false&quot;, &quot;false&quot;, &quot;false&quot;, &quot;false&quot;, &quot;fals...
+## $ liveBloggingNow      &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
+## $ commentCloseDate     &lt;chr&gt; NA, &quot;2018-01-30T00:45:00Z&quot;, NA, NA, &quot;2018...
+## $ body                 &lt;chr&gt; &quot;&lt;p&gt;Bristol De Mai has a favouriteâ\u0080...</code></pre>
+<p>First of all, I want to change the variable names so that they have underscores instead of capital letters.</p>
+<pre class="r"><code>df_names &lt;- names(theguardian_jan27)
+snake_names &lt;- to_snake_case(df_names)
+names(theguardian_jan27)&lt;- snake_names
+names(theguardian_jan27)</code></pre>
+<pre><code>##  [1] &quot;id&quot;                      &quot;section_id&quot;             
+##  [3] &quot;section_name&quot;            &quot;web_publication_date&quot;   
+##  [5] &quot;web_title&quot;               &quot;web_url&quot;                
+##  [7] &quot;api_url&quot;                 &quot;newspaper_page_number&quot;  
+##  [9] &quot;trail_text&quot;              &quot;headline&quot;               
+## [11] &quot;show_in_related_content&quot; &quot;last_modified&quot;          
+## [13] &quot;has_story_package&quot;       &quot;score&quot;                  
+## [15] &quot;standfirst&quot;              &quot;short_url&quot;              
+## [17] &quot;wordcount&quot;               &quot;commentable&quot;            
+## [19] &quot;allow_ugc&quot;               &quot;is_premoderated&quot;        
+## [21] &quot;byline&quot;                  &quot;publication&quot;            
+## [23] &quot;newspaper_edition_date&quot;  &quot;should_hide_adverts&quot;    
+## [25] &quot;live_blogging_now&quot;       &quot;comment_close_date&quot;     
+## [27] &quot;body&quot;</code></pre>
+<p>I am also going to get rid of some variables that I don’t need.</p>
+<pre class="r"><code>theguardian_jan27 &lt;- theguardian_jan27 %&gt;% 
+  select_if(function(x) !all(is.na(x))) %&gt;% # Drop columns with all missing values
+  select_if(function(x) !(is.factor(x) &amp;&amp; nlevels(x)==1)) # Drop factors with only one level</code></pre>
+<p>Time to look at the titles using <code>tidytext</code>. I want my analysis to be done by year so I create a new variable with the year of web publication.</p>
+<pre class="r"><code>theguardian_jan27 &lt;- theguardian_jan27  %&gt;% 
+  mutate(web_publication_year=year(web_publication_date))
+
+tidy_theguardian_jan27&lt;- theguardian_jan27 %&gt;%
+  unnest_tokens(output=word, web_title, to_lower = TRUE)
+
+cleaned_theguardian_jan27 &lt;- tidy_theguardian_jan27 %&gt;% 
+  anti_join(stop_words, by=&quot;word&quot;) # remove stop words (words that are very common)
+
+cleaned_theguardian_jan27 %&gt;%
+  count(word, sort = TRUE) %&gt;% 
+  head(10)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    word        n
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 â         475
+##  2 review    231
+##  3 uk         89
+##  4 cup        76
+##  5 media      74
+##  6 letters    73
+##  7 video      73
+##  8 day        72
+##  9 london     65
+## 10 david      63</code></pre>
+<p>As you can the most common word is just the letter a with a hat. Since it is a not a real word I am going to remove it.</p>
+<pre class="r"><code>cleaned_theguardian_jan27 &lt;- cleaned_theguardian_jan27 %&gt;% 
+  filter(word!=&quot;â&quot;)
+
+cleaned_theguardian_jan27 %&gt;%
+  count(word, sort = TRUE) %&gt;% 
+  head(10)</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##    word        n
+##    &lt;chr&gt;   &lt;int&gt;
+##  1 review    231
+##  2 uk         89
+##  3 cup        76
+##  4 media      74
+##  5 letters    73
+##  6 video      73
+##  7 day        72
+##  8 london     65
+##  9 david      63
+## 10 city       61</code></pre>
+<p>I also checked for other short words but there were no other suspiciously short words.</p>
+<pre class="r"><code>cleaned_theguardian_jan27 &lt;- cleaned_theguardian_jan27 %&gt;% 
+mutate(word_length=nchar(word, type = &quot;chars&quot;, allowNA = FALSE, keepNA = NA)) 
+
+ table(cleaned_theguardian_jan27$word_length)</code></pre>
+<pre><code>## 
+##    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15 
+##  155  697 1992 4485 5469 5205 4716 3067 1872 1157  510  238  122   50   17 
+##   16   17   21 
+##    4    1    1</code></pre>
+<p>I want to assign a sentiment to each word to see if the words used in the article titles were positive or negative. (I realise that the “hat a that”&quot; I removed would have disappeared when doing the inner join but I think that there is value in doing some cleaning.)</p>
+<pre class="r"><code>bing &lt;- get_sentiments(&quot;bing&quot;)
+cleaned_theguardian_jan27_sentiment&lt;- cleaned_theguardian_jan27 %&gt;%
+  inner_join(bing, by=&quot;word&quot;) </code></pre>
+<p>Now each word has been classified as either negative or positive and we can look at the distribution over time.</p>
+<pre class="r"><code>cleaned_theguardian_jan27_sentiment %&gt;% 
+  select(web_publication_year, sentiment) %&gt;% 
+  group_by(web_publication_year, sentiment) %&gt;% 
+  mutate(sentiment_count=n()) %&gt;% 
+  distinct() %&gt;% 
+ggplot(data=., aes(x=web_publication_year, y=sentiment_count, fill=sentiment)) + geom_col() + ylab(&quot;Count&quot;) + xlab(&quot;Year of publication&quot;) + ggtitle(&quot;Sentiment of words in titles&quot;)</code></pre>
+<p><img src="/post/2018-01-27-happy-birthday-to-me_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Unfortunately it looks like most of the words used in the titles on my birthday over the years have been negative. I am not going to let that stop me from having a good time today.</p>
+</div>
