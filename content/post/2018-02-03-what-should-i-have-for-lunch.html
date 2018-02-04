@@ -1,0 +1,181 @@
+---
+title: What should I have for lunch?
+author: ~
+date: '2018-02-03'
+slug: what-should-i-have-for-lunch
+runtime: shiny
+categories:
+  - R
+tags:
+  - sf
+  - leaflet
+  - osmdata
+  - shiny
+---
+
+
+
+<div id="section-inspiration" class="section level1">
+<h1>Inspiration</h1>
+<p>I was having lunch with some colleagues the other day when they told me about a spreadsheet of restaurants that they used to have to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.</p>
+<p>I had also seen a really cool blog post (<a href="https://rgeomatic.hypotheses.org/1244" class="uri">https://rgeomatic.hypotheses.org/1244</a>) using the <code>osmdata</code> package to look at the number of pubs close to metro stations in Paris. I had been keen to try to replicate some of the things in that post and this seemed like the perfect opportunity.</p>
+</div>
+<div id="section-prepping-for-this-post" class="section level1">
+<h1>Prepping for this post</h1>
+<p>A few weeks ago I attempted to do some web scraping in R. I basically did no research before starting and ended up, for lack of a better word, wasting a lot of time. I didn’t want to make the same mistake again so I worked through the first three chapters of this datacamp course (<a href="https://www.datacamp.com/courses/spatial-analysis-in-r-with-sf-and-raster" class="uri">https://www.datacamp.com/courses/spatial-analysis-in-r-with-sf-and-raster</a>) at the same time as writing this post.</p>
+</div>
+<div id="section-getting-the-data" class="section level1">
+<h1>Getting the data</h1>
+<p>I used data from the <code>osmdata</code> package the first step is to create a bounding box. I used [this website] <a href="http://boundingbox.klokantech.com/" class="uri">http://boundingbox.klokantech.com/</a> to get the coordinates but I am sure that there are loads other. The first object can also be a string e.g. “London” but since I only want restaurant close to work I used a bounding box.</p>
+<pre class="r"><code>q0 &lt;- opq(bbox=c(-0.131461,51.506123,-0.10863,51.520224)) 
+res0 &lt;- osmdata_sf(q0) # create dataframe</code></pre>
+<p>The information that I am after is stored in <code>osm_point</code> and within <code>osm_point</code> the type of point is stored in <code>amenity</code>. I had a closer look at <code>amenity</code> to identify which amenities I am interested in.</p>
+<pre><code>## amenity
+##              archives           art_gallery           arts_centre 
+##                     1                     1                     1 
+##                   atm             bandstand                  bank 
+##                    36                     1                    23 
+##                   bar                 bench       bicycle_parking 
+##                    43                   162                   143 
+##        bicycle_rental            box_office      bureau_de_change 
+##                    32                     1                     3 
+##                  cafe                casino      charging_station 
+##                   141                     3                     2 
+##                cinema                 clock                  club 
+##                     6                     5                     1 
+##               college      community_centre            courthouse 
+##                     2                     1                     1 
+##       coworking_space               dentist               doctors 
+##                     1                     6                     3 
+##        drinking_water               embassy     employment_agency 
+##                     2                     3                     1 
+##             fast_food        ferry_terminal              fountain 
+##                    55                    23                     4 
+##              grit_bin         health_centre             ice_cream 
+##                     4                     1                     2 
+##             juice_bar               library         lost_property 
+##                     1                     1                     1 
+##           marketplace    motorcycle_parking             nightclub 
+##                     1                    46                     6 
+##               parking      parking_entrance              pharmacy 
+##                    14                     1                     7 
+##                 phone           photo_booth      place_of_worship 
+##                     3                     1                     5 
+##              post_box           post_office                   pub 
+##                    56                     3                    56 
+##             recycling            restaurant                school 
+##                    10                   267                     3 
+##               shelter             stripclub                studio 
+##                     1                     1                     1 
+##                  taxi             telephone temporary_toilet_site 
+##                     4                   181                     1 
+##               theatre               toilets              training 
+##                     7                    16                     1 
+##            university       vending_machine          waste_basket 
+##                     2                     5                    51 
+##        waste_disposal           water_point 
+##                     1                     1</code></pre>
+<p>I decided that I wanted to include restaurants, cafés and fast food places. Becasue of the way <code>add_osm_feature</code> works I extract the points one by one, create a data frame and then I combine them afterwards.</p>
+<pre class="r"><code>restaurants &lt;- add_osm_feature(opq = q0, key = &#39;amenity&#39;, value = &quot;restaurant&quot;) %&gt;% 
+  osmdata_sf()
+
+cafe &lt;- add_osm_feature(opq = q0, key = &#39;amenity&#39;, value = &quot;cafe&quot;) %&gt;% 
+  osmdata_sf() 
+
+fast_food &lt;- add_osm_feature(opq = q0, key = &#39;amenity&#39;, value = &quot;fast_food&quot;)  %&gt;% 
+  osmdata_sf() 
+
+# Combine different food place
+food_places &lt;- c(restaurants, cafe, fast_food) 
+food_places &lt;- food_places$osm_points </code></pre>
+<p>I drop the observations without a name because how am I supposed to find a restaurant without a name?</p>
+<pre class="r"><code>food_places_cg &lt;- food_places %&gt;% 
+  filter(!is.na(name)) %&gt;% 
+  mutate(as.character(cuisine))
+
+food_places_cg &lt;- st_transform(food_places_cg, crs = 4326)</code></pre>
+</div>
+<div id="section-how-far-will-i-have-to-walk" class="section level1">
+<h1>How far will I have to walk?</h1>
+<p>I now have all the data I need to plot restaurants near work but I also want to calculate the distance from work to each restaurant. This is where the datacamp course came in handy.</p>
+<p>I calculate the distance using the <code>st_distance</code> function. I also look at the values I get to make sure that they have face validity. It is always important to remember that just because you don’t get an error message it doesn’t mean that your code has done what you wanted to. The first time I tried running this code I all the food places were ~20,000 meters away even though there are multiple cafés just across the road. It turned out I had missed out the “-” in the longitude when entering the coordinates for my work place.</p>
+<pre class="r"><code>work_coor &lt;-data.frame(longitude=-0.12331, latitude=51.514171)
+work_coor &lt;- st_as_sf(work_coor, coords = c(&quot;longitude&quot;, &quot;latitude&quot;), crs = 4326)
+work_coor &lt;- st_transform(work_coor, crs=st_crs(food_places_cg, asText = TRUE))
+distance &lt;- st_distance(work_coor, food_places_cg)
+head(distance) </code></pre>
+<pre><code>## Units: m
+## [1] 329.3377 511.4786 977.0436 516.7534 291.7285 723.4870</code></pre>
+<pre class="r"><code>food_places_cg$distance_from_work &lt;- t(round(distance))</code></pre>
+<p>Add a label.</p>
+<pre class="r"><code>food_places_cg$label &lt;- paste0(&quot;&lt;b&gt;&quot;, food_places_cg$name, &quot;&lt;/b&gt; &lt;br&gt;&quot;, 
+                         &quot;Distance: &quot;, food_places_cg$distance_from_work, &quot;m&quot;)</code></pre>
+</div>
+<div id="section-shiny-app" class="section level1">
+<h1>Shiny app</h1>
+<p>Becasue I want my map to be reactive I have to use shiny. I save the data I have created up until now and save it for the app.</p>
+<pre class="r"><code>saveRDS(food_places_cg,file=here(&quot;/Covent_garden_map/Random_map/cov_gar.rds&quot;))</code></pre>
+<iframe src="https://emmamariavestesson.shinyapps.io/Random_map/?showcase=0" width="672" height="600px">
+</iframe>
+<p>The shiny code is quite basic and I spent longer trying to figure out how to include a shiny app in a blogdown post than actually creating the app but here is the code for the app for good measure. (This is how I embedded the shiny app knitr::include_app(“URL”, height = “600px”).)</p>
+<pre class="r"><code>library(shiny)
+library(leaflet)
+library(tidyverse)
+library(sf)
+
+ui &lt;- fluidPage(
+  leafletOutput(&quot;mymap&quot;),
+  h3(textOutput(&quot;selected_var&quot;)),
+  actionButton(&quot;recalc&quot;, &quot;Generate new lunch option&quot;)
+)
+
+# Define server 
+server &lt;- function(input, output, session) {
+
+  cov_gar &lt;- readRDS(file=&quot;cov_gar.rds&quot;)
+
+  points &lt;- eventReactive(input$recalc, {
+ 
+    sample_n(cov_gar,1)
+  }, ignoreNULL = FALSE)
+  
+
+  # create the interactive map...
+  output$mymap &lt;- renderLeaflet({
+    leaflet(padding = 0, options= leafletOptions( minZoom=10, maxZoom=18) ) %&gt;% 
+      addTiles()  %&gt;%
+      addMarkers( group = &quot;The office&quot;,
+                        lng = -0.12331,
+                        lat = 51.514171, 
+                  popup=&quot;The office&quot;) %&gt;% 
+      addCircleMarkers( group = &quot;All lunch places&quot;,
+                          lng = st_coordinates(cov_gar)[,1],
+                          lat = st_coordinates(cov_gar)[,2],
+                          radius = 8, weight = 0.25,
+                          stroke = TRUE, opacity = 75,
+                          fill = TRUE, fillColor = &quot;deeppink&quot;,
+                          fillOpacity = 100,
+                          popup = cov_gar$label,
+                          color = &quot;white&quot;) %&gt;%
+      addCircleMarkers(data = points(), group=&quot;Random lunch place&quot;, 
+                       radius = 8, weight = 0.25,
+                       stroke = TRUE, opacity = 100,
+                       fill = TRUE, fillColor = &quot;purple&quot;,
+                       fillOpacity = 100,     
+                       popup = points()$label,
+                       color = &quot;white&quot;) %&gt;% 
+
+      addLayersControl(
+        overlayGroups = c(&quot;All lunch places&quot;, &quot;Random lunch place&quot;),
+        options = layersControlOptions(collapsed = FALSE))
+      
+  })
+  
+  output$selected_var &lt;- renderText({ 
+    paste0(&quot;Maybe you should go to &quot;,points()$name, &quot; for lunch? It is &quot;, points()$distance, &quot;m from the office.&quot;) 
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
