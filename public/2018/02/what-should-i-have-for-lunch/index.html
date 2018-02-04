@@ -218,7 +218,12 @@ ga('send', 'pageview');
     
       <time itemprop="datePublished" datetime="2018-02-03T00:00:00Z">
         
-   3, 2018
+  
+  
+  
+  
+    3  2018
+  
 
       </time>
     
@@ -252,52 +257,9 @@ ga('send', 'pageview');
 <pre class="r"><code>q0 &lt;- opq(bbox=c(-0.131461,51.506123,-0.10863,51.520224)) 
 res0 &lt;- osmdata_sf(q0) # create dataframe</code></pre>
 <p>The information that I am after is stored in <code>osm_point</code> and within <code>osm_point</code> the type of point is stored in <code>amenity</code>. I had a closer look at <code>amenity</code> to identify which amenities I am interested in.</p>
-<pre><code>## amenity
-##              archives           art_gallery           arts_centre 
-##                     1                     1                     1 
-##                   atm             bandstand                  bank 
-##                    36                     1                    23 
-##                   bar                 bench       bicycle_parking 
-##                    43                   162                   143 
-##        bicycle_rental            box_office      bureau_de_change 
-##                    32                     1                     3 
-##                  cafe                casino      charging_station 
-##                   141                     3                     2 
-##                cinema                 clock                  club 
-##                     6                     5                     1 
-##               college      community_centre            courthouse 
-##                     2                     1                     1 
-##       coworking_space               dentist               doctors 
-##                     1                     6                     3 
-##        drinking_water               embassy     employment_agency 
-##                     2                     3                     1 
-##             fast_food        ferry_terminal              fountain 
-##                    55                    23                     4 
-##              grit_bin         health_centre             ice_cream 
-##                     4                     1                     2 
-##             juice_bar               library         lost_property 
-##                     1                     1                     1 
-##           marketplace    motorcycle_parking             nightclub 
-##                     1                    46                     6 
-##               parking      parking_entrance              pharmacy 
-##                    14                     1                     7 
-##                 phone           photo_booth      place_of_worship 
-##                     3                     1                     5 
-##              post_box           post_office                   pub 
-##                    56                     3                    56 
-##             recycling            restaurant                school 
-##                    10                   267                     3 
-##               shelter             stripclub                studio 
-##                     1                     1                     1 
-##                  taxi             telephone temporary_toilet_site 
-##                     4                   181                     1 
-##               theatre               toilets              training 
-##                     7                    16                     1 
-##            university       vending_machine          waste_basket 
-##                     2                     5                    51 
-##        waste_disposal           water_point 
-##                     1                     1</code></pre>
-<p>I decided that I wanted to include restaurants, cafés and fast food places. Becasue of the way <code>add_osm_feature</code> works I extract the points one by one, create a data frame and then I combine them afterwards.</p>
+<pre class="r"><code>amenity&lt;- res0[[&quot;osm_points&quot;]][[&quot;amenity&quot;]]
+table(amenity)</code></pre>
+<p>I decided that I wanted to include restaurants, cafés and fast food places. Because of the way <code>add_osm_feature</code> works I extract the points one by one, create a data frame and then I combine them afterwards.</p>
 <pre class="r"><code>restaurants &lt;- add_osm_feature(opq = q0, key = &#39;amenity&#39;, value = &quot;restaurant&quot;) %&gt;% 
   osmdata_sf()
 
@@ -335,7 +297,7 @@ head(distance) </code></pre>
 </div>
 <div id="section-shiny-app" class="section level1">
 <h1>Shiny app</h1>
-<p>Becasue I want my map to be reactive I have to use shiny. I save the data I have created up until now and save it for the app.</p>
+<p>Because I want my map to be reactive I have to use shiny. I save the data I have created up until now and save it for the app.</p>
 <pre class="r"><code>saveRDS(food_places_cg,file=here(&quot;/Covent_garden_map/Random_map/cov_gar.rds&quot;))</code></pre>
 <iframe src="https://emmamariavestesson.shinyapps.io/Random_map/?showcase=0" width="672" height="600px">
 </iframe>

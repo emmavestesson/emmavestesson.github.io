@@ -45,12 +45,12 @@ res0 <- osmdata_sf(q0) # create dataframe
 ```
 
 The information that I am after is stored in `osm_point` and within `osm_point` the type of point is stored in `amenity`. I had a closer look at `amenity` to identify which amenities I am interested in. 
-```{r, echo= FALSE}
+```{r, eval= FALSE}
 amenity<- res0[["osm_points"]][["amenity"]]
 table(amenity)
 ```
 
-I decided that I wanted to include restaurants, cafés and fast food places. Becasue of the way `add_osm_feature` works I extract the points one by one, create a data frame and then I combine them afterwards.
+I decided that I wanted to include restaurants, cafés and fast food places. Because of the way `add_osm_feature` works I extract the points one by one, create a data frame and then I combine them afterwards.
 ```{r}
 restaurants <- add_osm_feature(opq = q0, key = 'amenity', value = "restaurant") %>% 
   osmdata_sf()
@@ -99,7 +99,7 @@ food_places_cg$label <- paste0("<b>", food_places_cg$name, "</b> <br>",
 ```
 
 # Shiny app
-Becasue I want my map to be reactive I have to use shiny. I save the data I have created up until now and save it for the app. 
+Because I want my map to be reactive I have to use shiny. I save the data I have created up until now and save it for the app. 
 
 ```{r,eval=TRUE }
 
