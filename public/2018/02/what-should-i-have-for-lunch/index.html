@@ -1,0 +1,820 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.31.1 with theme Tranquilpeak 0.4.3-BETA">
+    <title>What should I have for lunch?</title>
+    <meta name="author" content="Emma Vestesson">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+    <meta name="description" content="Inspiration I was having lunch with some colleagues the other day when they told me about a spreadsheet of restaurants that they used to have to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
+I had also seen a really cool blog post (https://rgeomatic.hypotheses.org/1244) using the osmdata package to look at the number of pubs close to metro stations in Paris.">
+    <meta property="og:description" content="Inspiration I was having lunch with some colleagues the other day when they told me about a spreadsheet of restaurants that they used to have to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
+I had also seen a really cool blog post (https://rgeomatic.hypotheses.org/1244) using the osmdata package to look at the number of pubs close to metro stations in Paris.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="What should I have for lunch?">
+    <meta property="og:url" content="/2018/02/what-should-i-have-for-lunch/">
+    <meta property="og:site_name" content="Playing with data">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Playing with data">
+    <meta name="twitter:description" content="Inspiration I was having lunch with some colleagues the other day when they told me about a spreadsheet of restaurants that they used to have to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
+I had also seen a really cool blog post (https://rgeomatic.hypotheses.org/1244) using the osmdata package to look at the number of pubs close to metro stations in Paris.">
+    
+      <meta name="twitter:creator" content="@gummifot">
+    
+    
+
+    
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-112742782-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Playing with data</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/emmavestesson">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/emmavestesson/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      What should I have for lunch?
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-02-03T00:00:00Z">
+        
+   3, 2018
+
+      </time>
+    
+    
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="/categories/r">R</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div id="section-inspiration" class="section level1">
+<h1>Inspiration</h1>
+<p>I was having lunch with some colleagues the other day when they told me about a spreadsheet of restaurants that they used to have to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.</p>
+<p>I had also seen a really cool blog post (<a href="https://rgeomatic.hypotheses.org/1244" class="uri">https://rgeomatic.hypotheses.org/1244</a>) using the <code>osmdata</code> package to look at the number of pubs close to metro stations in Paris. I had been keen to try to replicate some of the things in that post and this seemed like the perfect opportunity.</p>
+</div>
+<div id="section-prepping-for-this-post" class="section level1">
+<h1>Prepping for this post</h1>
+<p>A few weeks ago I attempted to do some web scraping in R. I basically did no research before starting and ended up, for lack of a better word, wasting a lot of time. I didn’t want to make the same mistake again so I worked through the first three chapters of this datacamp course (<a href="https://www.datacamp.com/courses/spatial-analysis-in-r-with-sf-and-raster" class="uri">https://www.datacamp.com/courses/spatial-analysis-in-r-with-sf-and-raster</a>) at the same time as writing this post.</p>
+</div>
+<div id="section-getting-the-data" class="section level1">
+<h1>Getting the data</h1>
+<p>I used data from the <code>osmdata</code> package the first step is to create a bounding box. I used [this website] <a href="http://boundingbox.klokantech.com/" class="uri">http://boundingbox.klokantech.com/</a> to get the coordinates but I am sure that there are loads other. The first object can also be a string e.g. “London” but since I only want restaurant close to work I used a bounding box.</p>
+<pre class="r"><code>q0 &lt;- opq(bbox=c(-0.131461,51.506123,-0.10863,51.520224)) 
+res0 &lt;- osmdata_sf(q0) # create dataframe</code></pre>
+<p>The information that I am after is stored in <code>osm_point</code> and within <code>osm_point</code> the type of point is stored in <code>amenity</code>. I had a closer look at <code>amenity</code> to identify which amenities I am interested in.</p>
+<pre><code>## amenity
+##              archives           art_gallery           arts_centre 
+##                     1                     1                     1 
+##                   atm             bandstand                  bank 
+##                    36                     1                    23 
+##                   bar                 bench       bicycle_parking 
+##                    43                   162                   143 
+##        bicycle_rental            box_office      bureau_de_change 
+##                    32                     1                     3 
+##                  cafe                casino      charging_station 
+##                   141                     3                     2 
+##                cinema                 clock                  club 
+##                     6                     5                     1 
+##               college      community_centre            courthouse 
+##                     2                     1                     1 
+##       coworking_space               dentist               doctors 
+##                     1                     6                     3 
+##        drinking_water               embassy     employment_agency 
+##                     2                     3                     1 
+##             fast_food        ferry_terminal              fountain 
+##                    55                    23                     4 
+##              grit_bin         health_centre             ice_cream 
+##                     4                     1                     2 
+##             juice_bar               library         lost_property 
+##                     1                     1                     1 
+##           marketplace    motorcycle_parking             nightclub 
+##                     1                    46                     6 
+##               parking      parking_entrance              pharmacy 
+##                    14                     1                     7 
+##                 phone           photo_booth      place_of_worship 
+##                     3                     1                     5 
+##              post_box           post_office                   pub 
+##                    56                     3                    56 
+##             recycling            restaurant                school 
+##                    10                   267                     3 
+##               shelter             stripclub                studio 
+##                     1                     1                     1 
+##                  taxi             telephone temporary_toilet_site 
+##                     4                   181                     1 
+##               theatre               toilets              training 
+##                     7                    16                     1 
+##            university       vending_machine          waste_basket 
+##                     2                     5                    51 
+##        waste_disposal           water_point 
+##                     1                     1</code></pre>
+<p>I decided that I wanted to include restaurants, cafés and fast food places. Becasue of the way <code>add_osm_feature</code> works I extract the points one by one, create a data frame and then I combine them afterwards.</p>
+<pre class="r"><code>restaurants &lt;- add_osm_feature(opq = q0, key = &#39;amenity&#39;, value = &quot;restaurant&quot;) %&gt;% 
+  osmdata_sf()
+
+cafe &lt;- add_osm_feature(opq = q0, key = &#39;amenity&#39;, value = &quot;cafe&quot;) %&gt;% 
+  osmdata_sf() 
+
+fast_food &lt;- add_osm_feature(opq = q0, key = &#39;amenity&#39;, value = &quot;fast_food&quot;)  %&gt;% 
+  osmdata_sf() 
+
+# Combine different food place
+food_places &lt;- c(restaurants, cafe, fast_food) 
+food_places &lt;- food_places$osm_points </code></pre>
+<p>I drop the observations without a name because how am I supposed to find a restaurant without a name?</p>
+<pre class="r"><code>food_places_cg &lt;- food_places %&gt;% 
+  filter(!is.na(name)) %&gt;% 
+  mutate(as.character(cuisine))
+
+food_places_cg &lt;- st_transform(food_places_cg, crs = 4326)</code></pre>
+</div>
+<div id="section-how-far-will-i-have-to-walk" class="section level1">
+<h1>How far will I have to walk?</h1>
+<p>I now have all the data I need to plot restaurants near work but I also want to calculate the distance from work to each restaurant. This is where the datacamp course came in handy.</p>
+<p>I calculate the distance using the <code>st_distance</code> function. I also look at the values I get to make sure that they have face validity. It is always important to remember that just because you don’t get an error message it doesn’t mean that your code has done what you wanted to. The first time I tried running this code I all the food places were ~20,000 meters away even though there are multiple cafés just across the road. It turned out I had missed out the “-” in the longitude when entering the coordinates for my work place.</p>
+<pre class="r"><code>work_coor &lt;-data.frame(longitude=-0.12331, latitude=51.514171)
+work_coor &lt;- st_as_sf(work_coor, coords = c(&quot;longitude&quot;, &quot;latitude&quot;), crs = 4326)
+work_coor &lt;- st_transform(work_coor, crs=st_crs(food_places_cg, asText = TRUE))
+distance &lt;- st_distance(work_coor, food_places_cg)
+head(distance) </code></pre>
+<pre><code>## Units: m
+## [1] 329.3377 511.4786 977.0436 516.7534 291.7285 723.4870</code></pre>
+<pre class="r"><code>food_places_cg$distance_from_work &lt;- t(round(distance))</code></pre>
+<p>Add a label.</p>
+<pre class="r"><code>food_places_cg$label &lt;- paste0(&quot;&lt;b&gt;&quot;, food_places_cg$name, &quot;&lt;/b&gt; &lt;br&gt;&quot;, 
+                         &quot;Distance: &quot;, food_places_cg$distance_from_work, &quot;m&quot;)</code></pre>
+</div>
+<div id="section-shiny-app" class="section level1">
+<h1>Shiny app</h1>
+<p>Becasue I want my map to be reactive I have to use shiny. I save the data I have created up until now and save it for the app.</p>
+<pre class="r"><code>saveRDS(food_places_cg,file=here(&quot;/Covent_garden_map/Random_map/cov_gar.rds&quot;))</code></pre>
+<iframe src="https://emmamariavestesson.shinyapps.io/Random_map/?showcase=0" width="672" height="600px">
+</iframe>
+<p>The shiny code is quite basic and I spent longer trying to figure out how to include a shiny app in a blogdown post than actually creating the app but here is the code for the app for good measure. (This is how I embedded the shiny app knitr::include_app(“URL”, height = “600px”).)</p>
+<pre class="r"><code>library(shiny)
+library(leaflet)
+library(tidyverse)
+library(sf)
+
+ui &lt;- fluidPage(
+  leafletOutput(&quot;mymap&quot;),
+  h3(textOutput(&quot;selected_var&quot;)),
+  actionButton(&quot;recalc&quot;, &quot;Generate new lunch option&quot;)
+)
+
+# Define server 
+server &lt;- function(input, output, session) {
+
+  cov_gar &lt;- readRDS(file=&quot;cov_gar.rds&quot;)
+
+  points &lt;- eventReactive(input$recalc, {
+ 
+    sample_n(cov_gar,1)
+  }, ignoreNULL = FALSE)
+  
+
+  # create the interactive map...
+  output$mymap &lt;- renderLeaflet({
+    leaflet(padding = 0, options= leafletOptions( minZoom=10, maxZoom=18) ) %&gt;% 
+      addTiles()  %&gt;%
+      addMarkers( group = &quot;The office&quot;,
+                        lng = -0.12331,
+                        lat = 51.514171, 
+                  popup=&quot;The office&quot;) %&gt;% 
+      addCircleMarkers( group = &quot;All lunch places&quot;,
+                          lng = st_coordinates(cov_gar)[,1],
+                          lat = st_coordinates(cov_gar)[,2],
+                          radius = 8, weight = 0.25,
+                          stroke = TRUE, opacity = 75,
+                          fill = TRUE, fillColor = &quot;deeppink&quot;,
+                          fillOpacity = 100,
+                          popup = cov_gar$label,
+                          color = &quot;white&quot;) %&gt;%
+      addCircleMarkers(data = points(), group=&quot;Random lunch place&quot;, 
+                       radius = 8, weight = 0.25,
+                       stroke = TRUE, opacity = 100,
+                       fill = TRUE, fillColor = &quot;purple&quot;,
+                       fillOpacity = 100,     
+                       popup = points()$label,
+                       color = &quot;white&quot;) %&gt;% 
+
+      addLayersControl(
+        overlayGroups = c(&quot;All lunch places&quot;, &quot;Random lunch place&quot;),
+        options = layersControlOptions(collapsed = FALSE))
+      
+  })
+  
+  output$selected_var &lt;- renderText({ 
+    paste0(&quot;Maybe you should go to &quot;,points()$name, &quot; for lunch? It is &quot;, points()$distance, &quot;m from the office.&quot;) 
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)</code></pre>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/sf/">sf</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/leaflet/">leaflet</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/osmdata/">osmdata</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/shiny/">shiny</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/happy-birthday-to-me/" data-tooltip="Happy Birthday To Me!">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/02/what-should-i-have-for-lunch/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/02/what-should-i-have-for-lunch/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/02/what-should-i-have-for-lunch/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Emma Vestesson. 
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/01/happy-birthday-to-me/" data-tooltip="Happy Birthday To Me!">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/02/what-should-i-have-for-lunch/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/02/what-should-i-have-for-lunch/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/02/what-should-i-have-for-lunch/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F02%2Fwhat-should-i-have-for-lunch%2F">
+          <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F02%2Fwhat-should-i-have-for-lunch%2F">
+          <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F02%2Fwhat-should-i-have-for-lunch%2F">
+          <i class="fa fa-google-plus"></i><span>%!(EXTRA string=Google&#43;)</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+    <h4 id="about-card-name">Emma Vestesson</h4>
+    
+      <div id="about-card-bio">I first started learning R in the autumn of 2012 but stopped after a couple of months as I didn&rsquo;t use it. In January 2017 I rediscovered R again and this time I am sticking with it. After discovering blogdown and realising how many different short snippets of code I have hidden away on my computer I decided to share them on this blog instead.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data analyst
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        London
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/02/what-should-i-have-for-lunch/">
+                <h3 class="media-heading">What should I have for lunch?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Inspiration I was having lunch with some colleagues the other day when they told me about a spreadsheet of restaurants that they used to have to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
+I had also seen a really cool blog post (https://rgeomatic.hypotheses.org/1244) using the osmdata package to look at the number of pubs close to metro stations in Paris.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/happy-birthday-to-me/">
+                <h3 class="media-heading">Happy Birthday To Me!</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Happy Birthday To Me! Today is my birthday. To celebrate I decided to look at what was in the news on January 27 every year since I was born. Mainly I want to see if the news were positive or negative.
+ Getting the data I start buy creating a list of dates. I feel like there is probably a more straightforward way of doing this but I am currently obsessed with map so this is how I did it.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/please-like-me/">
+                <h3 class="media-heading">Please like me</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Sundays When I woke up this morning I wrote a long to do list. Instead of working through the list I somehow ended up spending most of my day playing in R.
+ Scraping the web I have been keen to try web scraping in R for a while so I gave rvest a go. I was a bit too restless to actually read any tutorials so I just started trying different commands.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/fake-data/">
+                <h3 class="media-heading">Regressions using completly fake data!</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Why can’t I just have all of the data? I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the survival package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the simstudy package and decided to give it a go.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/maps/">
+                <h3 class="media-heading">Making a map (or my first blogpost)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Getting the data A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their fingertips website (https://fingertips.phe.org.uk/). I wanted to try it and as I like maps I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         5 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/DSCF5410.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/02\/what-should-i-have-for-lunch\/';
+          
+            this.page.identifier = '\/2018\/02\/what-should-i-have-for-lunch\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'hugo-tranquilpeak-theme';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

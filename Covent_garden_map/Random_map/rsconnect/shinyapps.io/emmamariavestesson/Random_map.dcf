@@ -1,0 +1,13 @@
+name: Random_map
+title: Random_map
+username:
+account: emmamariavestesson
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 271185
+bundleId: 1207319
+url: https://emmamariavestesson.shinyapps.io/Random_map/
+when: 1517785008.53643
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .Rapp.history|.RData
