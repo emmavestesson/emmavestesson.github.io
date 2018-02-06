@@ -26,17 +26,19 @@ library(here)
 ```
 
 # Inspiration
-I was having lunch with some colleagues the other day when they told me about a spreadsheet of restaurants that they used to have to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
+I was having lunch with some colleagues the other day when they told me about a restaurant spreadsheet  that they used to use to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
 
-I had also seen a really cool blog post (https://rgeomatic.hypotheses.org/1244) using the `osmdata` package to look at the number of pubs close to metro stations in Paris. I had been keen to try to replicate some of the things in that post and this seemed like the perfect opportunity. 
+
+
+I had also seen a <a href="https://rgeomatic.hypotheses.org/1244">really cool blog post</a> using the `osmdata` package to look at the number of pubs close to metro stations in Paris. I had been keen to try to replicate some of the things in that post and this seemed like the perfect opportunity. 
 
 # Prepping for this post
 
-A few weeks ago I attempted to do some web scraping in R. I basically did no research before starting and ended up, for lack of a better word, wasting a lot of time. I didn't want to make the same mistake again so I worked through the first three chapters of this datacamp course (https://www.datacamp.com/courses/spatial-analysis-in-r-with-sf-and-raster) at the same time as writing this post.
+A few weeks ago I attempted to do some web scraping in R. I basically did no research before starting and ended up, for lack of a better word, wasting a lot of time. I didn't want to make the same mistake again so I worked through the first three chapters of <a href="https://www.datacamp.com/courses/spatial-analysis-in-r-with-sf-and-raster">this datacamp course</a> at the same time as writing this post.
 
 # Getting the data 
 
-I used data from the `osmdata` package the first step is to create a bounding box. I used [this website] http://boundingbox.klokantech.com/ to get the coordinates but I am sure that there are loads other. The first object can also be a string e.g. "London" but since I only want restaurant close to work I used a bounding box.  
+I used data from the `osmdata` package the first step is to create a bounding box. I used <a href="http://boundingbox.klokantech.com/"> this website</a> to get the coordinates but I am sure that there are loads of other ones. The first object can also be a string e.g. "London" but since I only want restaurant close to work I used a bounding box.  
 
 ```{r}
 q0 <- opq(bbox=c(-0.131461,51.506123,-0.10863,51.520224)) 
@@ -99,13 +101,12 @@ food_places_cg$label <- paste0("<b>", food_places_cg$name, "</b> <br>",
 ```
 
 # Shiny app
-Because I want my map to be reactive I have to use shiny. I save the data I have created up until now and save it for the app. 
+Because I want my map to be reactive I have to use shiny. I save the data I have created up until now and saved it for the app. 
 
 ```{r,eval=TRUE }
-
 saveRDS(food_places_cg,file=here("/Covent_garden_map/Random_map/cov_gar.rds"))
 ```
-
+The restaurant that you should go to is dark purple. If you don't like the restaurant that has been suggested just click the button that says "Generate new lunch option" and you will get a new suggestion. 
 ```{r shiny app, echo=FALSE}
 knitr::include_app("https://emmamariavestesson.shinyapps.io/Random_map/", 
   height = "600px")
