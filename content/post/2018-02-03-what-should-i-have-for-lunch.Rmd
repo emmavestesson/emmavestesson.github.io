@@ -179,3 +179,15 @@ shinyApp(ui = ui, server = server)
 
 ```
 
+# Packages I used
+```{r, eval=FALSE}
+
+library("osmdata")
+library(sf)
+library(units)
+library(leaflet)
+library(shiny)
+library(lwgeom)
+library(tidyverse)
+library(here)
+```

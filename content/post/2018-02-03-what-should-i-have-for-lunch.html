@@ -62,7 +62,7 @@ work_coor &lt;- st_transform(work_coor, crs=st_crs(food_places_cg, asText = TRUE
 distance &lt;- st_distance(work_coor, food_places_cg)
 head(distance) </code></pre>
 <pre><code>## Units: m
-## [1] 329.3377 511.4786 977.0436 516.7534 291.7285 723.4870</code></pre>
+## [1]  511.4786  977.0436  516.7534  291.7285  723.4870 1137.2166</code></pre>
 <pre class="r"><code>food_places_cg$distance_from_work &lt;- t(round(distance))</code></pre>
 <p>Add a label.</p>
 <pre class="r"><code>food_places_cg$label &lt;- paste0(&quot;&lt;b&gt;&quot;, food_places_cg$name, &quot;&lt;/b&gt; &lt;br&gt;&quot;, 
@@ -134,4 +134,15 @@ server &lt;- function(input, output, session) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)</code></pre>
+</div>
+<div id="section-packages-i-used" class="section level1">
+<h1>Packages I used</h1>
+<pre class="r"><code>library(&quot;osmdata&quot;)
+library(sf)
+library(units)
+library(leaflet)
+library(shiny)
+library(lwgeom)
+library(tidyverse)
+library(here)</code></pre>
 </div>
