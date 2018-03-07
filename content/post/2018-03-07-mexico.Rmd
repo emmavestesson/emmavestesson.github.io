@@ -1,0 +1,123 @@
+---
+title: My trip to Mexico in emojis
+author: ~
+date: '2018-03-07'
+slug: mexico
+categories:
+  - R
+tags:
+  - emojifont
+  - ggmap
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(ggmap)
+library(emojifont)
+library(tidyverse)
+library(png)
+library(emo)
+```
+
+```{r , include=FALSE}
+htmltools::tagList(rmarkdown::html_dependency_font_awesome())
+```
+
+# The code that never really worked
+
+This post is the result of hours and hours of me trying to write some code but never getting it quite right. I think that one of the worst things that you can do to yourself is to be scared to admit that you are struggling because you will end up never trying anything new. That is why I am publishing what I have got so far despite not being very happy with it. (I also think maybe someone reading this will be able to tell me what I am doing wrong)
+
+I also want to celebrate the things that I did work. I did figured out how to include a gif and emojis in the text! I picked a gif that illustrates what this jetlagged person probably should have done a long time ago `r ji("smile")`. 
+
+![](https://media.giphy.com/media/x3xccAsYXuslW/giphy.gif)
+
+(OK I picked becasue I love `r ji("dog")`)
+
+# Background
+
+The other day someone asked for some help to make a map and I suggested using R and `ggmap`. I wanted to share some code and decided to turn it into a blog post.
+
+I just got back from a two week holiday in Mexico so I will plot all the places I went to. 
+
+# Getting the data
+I start by getting the background map using get_stamenmap. There are a few different options for the background and I prefer the watercolour option because it makes the map look like a board game.
+
+```{r map, include=TRUE, echo=FALSE, message=FALSE, results="hide", warning=FALSE}
+bbox <- c(-90.7462,20.0262,-86.4195,21.6251)
+# yucatan <- get_stamenmap(bbox, zoom=8)
+yucatan_wc <- get_stamenmap(bbox, zoom=8, maptype="watercolor")
+
+```
+
+
+The next step is to create a list of all the places I went to. I use `geocode` from `ggmap` to get the coordinates.  
+```{r data,include=TRUE, echo=FALSE, message=FALSE, results="hide"}
+places <- list("Cancun", "Tulum", "Akumal", "Coba", "valladolid Mexico", "chichen itza", "Celestun", "Merida", "Cozumel")
+places_coor <- purrr::map(places, ~geocode(.x, source="dsk"))
+names(places_coor) <- places
+places_coor <- dplyr::bind_rows(places_coor, .id="place")
+
+```
+
+It is always worth looking at your data and as you can see from the min and max of the longitudes and latitudes, all places are close to each other. The first time I ran the geocode command it picked Valladolid in Spain instead of Mexico so it didn't actually appear on the map when I plotted it. I fixed this by adding "Mexico" to the search string. Ironically I accidentally booked a hotel in Valladolid in Spain instead of Valladolid in Mexico for my holiday and only realised the day before I was going. 
+
+```{r, warning=FALSE}
+broom::tidy(places_coor)
+```
+
+
+To make the map more fun I decided to use emoji instead of boring old circles. I picked emojis that represent what we did in all the different places (and yes my friends saw a shark!)
+
+
+```{r}
+label1<-data.frame(label=c(emoji("airplane"),emoji("taco"), emoji("turtle"), emoji("bike"), emoji("sandal"), emoji("corn"),
+         emoji("bird"), emoji("avocado"), emoji("shark")))
+
+places_coor <- dplyr::bind_cols(label1, places_coor)
+
+```
+
+# Creating the map
+This is where things got annoying. It took me a while to get the emojis to actually appear on the map. After a bit of googling I learnt that since I use Rstudio and I have a mac then I need to download "quartz" and include quarts to open a different window. When running this code not in an Rmarkdown file it works just fine (I mean it is still pretty ugly) but as soon as I moved it over to Rmarkdown the emojis no longer appear.  The png file that I save has the emojis but I can't figure out how to include it.  
+
+```{r}
+load.emojifont()
+quartz()  
+ggmap(yucatan_wc, base_layer=ggplot(data=places_coor, aes(lon, lat, label=label))) + 
+  geom_text(size = 10, x=places_coor$lon, y=places_coor$lat, 
+             vjust = 0.25, family='EmojiOne') + labs(x=NULL, y=NULL) +
+  ggtitle("My trip to Mexico in emojis") +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),
+        plot.title = element_text(hjust = 0.5),
+        plot.margin=unit(c(0,0,0,0),"mm"))  
+  
+
+ggsave("mexico_map.png")
+
+```
+
+ My attempt to include the .png file. 
+```{r}
+img1_path <- "mexico_map.png"
+img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
+knitr::include_graphics(img1_path)
+
+```
+
+# Packages I used
+```{r, include=TRUE, eval=FALSE}
+
+library(ggmap)
+library(emojifont)
+library(tidyverse)
+library(png)
+library(emo)
+
+```
+

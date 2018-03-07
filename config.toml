@@ -18,6 +18,7 @@ defaultContentLanguage = "en-gb"
 title = "Playing with data"
 theme = "hugo-tranquilpeak-theme"
 disqusShortname = ""
+enableEmoji = true
 googleAnalytics = "UA-112742782-1"
 paginate = 7
 canonifyurls = true
