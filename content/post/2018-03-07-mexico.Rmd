@@ -28,11 +28,11 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 This post is the result of hours and hours of me trying to write some code but never getting it quite right. I think that one of the worst things that you can do to yourself is to be scared to admit that you are struggling because you will end up never trying anything new. That is why I am publishing what I have got so far despite not being very happy with it. (I also think maybe someone reading this will be able to tell me what I am doing wrong)
 
-I also want to celebrate the things that I did work. I did figured out how to include a gif and emojis in the text! I picked a gif that illustrates what this jetlagged person probably should have done a long time ago `r ji("smile")`. 
+I also want to celebrate the things that I did work. I did figure out how to include ~~gifs~~ and emojis in the text! I picked a gif that illustrates what this jetlagged person probably should have done a long time ago `r ji("smile")`. UPDATE: I just pushed this to github and it seems like the gif doesn't show in google chrome unless you right click and open in a new tab. I have no idea why.
 
 ![](https://media.giphy.com/media/x3xccAsYXuslW/giphy.gif)
 
-(OK I picked becasue I love `r ji("dog")`)
+(OK I picked it because I love `r ji("dog")`)
 
 # Background
 
@@ -102,11 +102,14 @@ ggsave("mexico_map.png")
 
 ```
 
- My attempt to include the .png file. 
+ My attempt to include the .png file. I feel like this should be fairly straighforward but despite trying trying a few different ways (I deleted some code) it just doesn't work. 
 ```{r}
+getwd()
 img1_path <- "mexico_map.png"
 img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
 knitr::include_graphics(img1_path)
+
+
 
 ```
 
