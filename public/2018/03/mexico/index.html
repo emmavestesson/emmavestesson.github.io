@@ -244,22 +244,18 @@ ga('send', 'pageview');
 
 <div id="the-code-that-never-really-worked" class="section level1">
 <h1>The code that never really worked</h1>
-<p>This post is the result of hours and hours of me trying to write some code but never getting it quite right. I think that one of the worst things that you can do to yourself is to be scared to admit that you are struggling because you will end up never trying anything new. That is why I am publishing what I have got so far despite not being very happy with it. (I also think maybe someone reading this will be able to tell me what I am doing wrong)</p>
-<p>I also want to celebrate the things that I did work. I did figure out how to include <del>gifs</del> and emojis in the text! I picked a gif that illustrates what this jetlagged person probably should have done a long time ago 😄. UPDATE: I just pushed this to github and it seems like the gif doesn’t show in google chrome unless you right click and open in a new tab. I have no idea why.</p>
-<div class="figure">
-<img src="https://media.giphy.com/media/x3xccAsYXuslW/giphy.gif" />
-
-</div>
+<p>This post is the result of hours and hours of me trying to write some code but never getting it quite right. I think that one of the worst things that you can do to yourself is to be scared to admit that you are struggling because you will end up never trying anything new. That is why I am publishing what I have got so far despite not being very happy with it. (I also think maybe someone reading this will be able to tell me what I am doing wrong). UPDATE: I finally have my emoji map!</p>
+<p>I also want to celebrate the things that I did work. I did figure out how to include gifs and emojis in the text! I picked a gif that illustrates what this jetlagged person probably should have done a long time ago 😄. <img src="https://media.giphy.com/media/x3xccAsYXuslW/giphy.gif" /></p>
 <p>(OK I picked it because I love 🐶)</p>
 </div>
 <div id="background" class="section level1">
 <h1>Background</h1>
 <p>The other day someone asked for some help to make a map and I suggested using R and <code>ggmap</code>. I wanted to share some code and decided to turn it into a blog post.</p>
-<p>I just got back from a two week holiday in Mexico so I will plot all the places I went to.</p>
+<p>I just got back from a two week holiday in Mexico. Everywhere we went was so beautiful and everyone was so nice to us (shout out to the people who helped us get more fuel when we were running dangerously low). To remember my lovely holiday I will plot all the places I went to.</p>
+<p>I start by getting the background map using get_stamenmap. There are a few different options for the background and I prefer the watercolour option because it makes the map look like a board game. # Getting a map</p>
 </div>
 <div id="getting-the-data" class="section level1">
 <h1>Getting the data</h1>
-<p>I start by getting the background map using get_stamenmap. There are a few different options for the background and I prefer the watercolour option because it makes the map look like a board game.</p>
 <p>The next step is to create a list of all the places I went to. I use <code>geocode</code> from <code>ggmap</code> to get the coordinates.</p>
 <p>It is always worth looking at your data and as you can see from the min and max of the longitudes and latitudes, all places are close to each other. The first time I ran the geocode command it picked Valladolid in Spain instead of Mexico so it didn’t actually appear on the map when I plotted it. I fixed this by adding “Mexico” to the search string. Ironically I accidentally booked a hotel in Valladolid in Spain instead of Valladolid in Mexico for my holiday and only realised the day before I was going.</p>
 <pre class="r"><code>broom::tidy(places_coor)</code></pre>
@@ -279,10 +275,10 @@ places_coor &lt;- dplyr::bind_cols(label1, places_coor)</code></pre>
 </div>
 <div id="creating-the-map" class="section level1">
 <h1>Creating the map</h1>
-<p>This is where things got annoying. It took me a while to get the emojis to actually appear on the map. After a bit of googling I learnt that since I use Rstudio and I have a mac then I need to download “quartz” and include quarts to open a different window. When running this code not in an Rmarkdown file it works just fine (I mean it is still pretty ugly) but as soon as I moved it over to Rmarkdown the emojis no longer appear. The png file that I save has the emojis but I can’t figure out how to include it.</p>
+<p>This is where things got annoying. It took me a while to get the emojis to actually appear on the map. After a bit of googling I learnt that since I use Rstudio and I have a mac then I need to download “quartz” and include quarts to open a different window. When running this code not in an Rmarkdown file it works just fine (I mean it is still pretty ugly) but as soon as I move it over to Rmarkdown the emojis no longer appear. The png file that I save has the emojis <del>but I can’t figure out how to include it</del>. UPDATE: I realised that I had to save the map in the public folder (in my case “~/Documents/GitHub/bdown/public/2018/03/mexico”)</p>
 <pre class="r"><code>load.emojifont()
 quartz()  
-ggmap(yucatan_wc, base_layer=ggplot(data=places_coor, aes(lon, lat, label=label))) + 
+map1&lt;-ggmap(yucatan_wc, base_layer=ggplot(data=places_coor, aes(lon, lat, label=label))) + 
   geom_text(size = 10, x=places_coor$lon, y=places_coor$lat, 
              vjust = 0.25, family=&#39;EmojiOne&#39;) + labs(x=NULL, y=NULL) +
   ggtitle(&quot;My trip to Mexico in emojis&quot;) +
@@ -293,20 +289,20 @@ ggmap(yucatan_wc, base_layer=ggplot(data=places_coor, aes(lon, lat, label=label)
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank(),
         plot.title = element_text(hjust = 0.5),
-        plot.margin=unit(c(0,0,0,0),&quot;mm&quot;))  </code></pre>
-<p><img src="/post/2018-03-07-mexico_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<pre class="r"><code>ggsave(&quot;mexico_map.png&quot;)</code></pre>
+        plot.margin=unit(c(0,0,0,0),&quot;mm&quot;))  
+  
+
+ggsave(&quot;~/Documents/GitHub/bdown/public/2018/03/mexico/mexico_map.png&quot;)</code></pre>
 <pre><code>## Saving 7 x 7 in image</code></pre>
-<p>My attempt to include the .png file. I feel like this should be fairly straighforward but despite trying trying a few different ways (I deleted some code) it just doesn’t work.</p>
-<pre class="r"><code>getwd()</code></pre>
-<pre><code>## [1] &quot;/Users/emmavestesson/Documents/GitHub/bdown/content/post&quot;</code></pre>
+<p><del>My attempt to include the .png file. I feel like this should be fairly straighforward but despite trying trying a few different ways (I deleted some code) it just doesn’t work.</del></p>
 <pre class="r"><code>img1_path &lt;- &quot;mexico_map.png&quot;
-img1 &lt;- readPNG(img1_path, native = TRUE, info = TRUE)
+
 knitr::include_graphics(img1_path)</code></pre>
 <p><img src="mexico_map.png" width="1050" /></p>
 </div>
-<div id="packages-i-used" class="section level1">
-<h1>Packages I used</h1>
+<div id="happy-gif-to-go-with-all-of-my-updates" class="section level1">
+<h1>Happy gif to go with all of my updates</h1>
+<p><img src="https://media.giphy.com/media/2AilMg2L8rTAA/giphy.gif" /> # Packages I used</p>
 <pre class="r"><code>library(ggmap)
 library(emojifont)
 library(tidyverse)

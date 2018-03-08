@@ -26,10 +26,9 @@ htmltools::tagList(rmarkdown::html_dependency_font_awesome())
 
 # The code that never really worked
 
-This post is the result of hours and hours of me trying to write some code but never getting it quite right. I think that one of the worst things that you can do to yourself is to be scared to admit that you are struggling because you will end up never trying anything new. That is why I am publishing what I have got so far despite not being very happy with it. (I also think maybe someone reading this will be able to tell me what I am doing wrong)
+This post is the result of hours and hours of me trying to write some code but never getting it quite right. I think that one of the worst things that you can do to yourself is to be scared to admit that you are struggling because you will end up never trying anything new. That is why I am publishing what I have got so far despite not being very happy with it. (I also think maybe someone reading this will be able to tell me what I am doing wrong). UPDATE: I finally have my emoji map! 
 
-I also want to celebrate the things that I did work. I did figure out how to include ~~gifs~~ and emojis in the text! I picked a gif that illustrates what this jetlagged person probably should have done a long time ago `r ji("smile")`. UPDATE: I just pushed this to github and it seems like the gif doesn't show in google chrome unless you right click and open in a new tab. I have no idea why.
-
+I also want to celebrate the things that I did work. I did figure out how to include gifs and emojis in the text! I picked a gif that illustrates what this jetlagged person probably should have done a long time ago `r ji("smile")`. 
 ![](https://media.giphy.com/media/x3xccAsYXuslW/giphy.gif)
 
 (OK I picked it because I love `r ji("dog")`)
@@ -38,11 +37,11 @@ I also want to celebrate the things that I did work. I did figure out how to inc
 
 The other day someone asked for some help to make a map and I suggested using R and `ggmap`. I wanted to share some code and decided to turn it into a blog post.
 
-I just got back from a two week holiday in Mexico so I will plot all the places I went to. 
+I just got back from a two week holiday in Mexico. Everywhere we went was so beautiful and everyone was so nice to us (shout out to the people who helped us get more fuel when we were running dangerously low). To remember my lovely holiday I will plot all the places I went to.
 
-# Getting the data
+
 I start by getting the background map using get_stamenmap. There are a few different options for the background and I prefer the watercolour option because it makes the map look like a board game.
-
+# Getting a map
 ```{r map, include=TRUE, echo=FALSE, message=FALSE, results="hide", warning=FALSE}
 bbox <- c(-90.7462,20.0262,-86.4195,21.6251)
 # yucatan <- get_stamenmap(bbox, zoom=8)
@@ -50,7 +49,7 @@ yucatan_wc <- get_stamenmap(bbox, zoom=8, maptype="watercolor")
 
 ```
 
-
+# Getting the data
 The next step is to create a list of all the places I went to. I use `geocode` from `ggmap` to get the coordinates.  
 ```{r data,include=TRUE, echo=FALSE, message=FALSE, results="hide"}
 places <- list("Cancun", "Tulum", "Akumal", "Coba", "valladolid Mexico", "chichen itza", "Celestun", "Merida", "Cozumel")
@@ -79,12 +78,12 @@ places_coor <- dplyr::bind_cols(label1, places_coor)
 ```
 
 # Creating the map
-This is where things got annoying. It took me a while to get the emojis to actually appear on the map. After a bit of googling I learnt that since I use Rstudio and I have a mac then I need to download "quartz" and include quarts to open a different window. When running this code not in an Rmarkdown file it works just fine (I mean it is still pretty ugly) but as soon as I moved it over to Rmarkdown the emojis no longer appear.  The png file that I save has the emojis but I can't figure out how to include it.  
+This is where things got annoying. It took me a while to get the emojis to actually appear on the map. After a bit of googling I learnt that since I use Rstudio and I have a mac then I need to download "quartz" and include quarts to open a different window. When running this code not in an Rmarkdown file it works just fine (I mean it is still pretty ugly) but as soon as I move it over to Rmarkdown the emojis no longer appear.  The png file that I save has the emojis ~~but I can't figure out how to include it~~.  UPDATE: I realised that I had to save the map in the public folder (in my case "~/Documents/GitHub/bdown/public/2018/03/mexico") 
 
 ```{r}
 load.emojifont()
 quartz()  
-ggmap(yucatan_wc, base_layer=ggplot(data=places_coor, aes(lon, lat, label=label))) + 
+map1<-ggmap(yucatan_wc, base_layer=ggplot(data=places_coor, aes(lon, lat, label=label))) + 
   geom_text(size = 10, x=places_coor$lon, y=places_coor$lat, 
              vjust = 0.25, family='EmojiOne') + labs(x=NULL, y=NULL) +
   ggtitle("My trip to Mexico in emojis") +
@@ -98,21 +97,21 @@ ggmap(yucatan_wc, base_layer=ggplot(data=places_coor, aes(lon, lat, label=label)
         plot.margin=unit(c(0,0,0,0),"mm"))  
   
 
-ggsave("mexico_map.png")
+ggsave("~/Documents/GitHub/bdown/public/2018/03/mexico/mexico_map.png")
 
 ```
 
- My attempt to include the .png file. I feel like this should be fairly straighforward but despite trying trying a few different ways (I deleted some code) it just doesn't work. 
+~~My attempt to include the .png file. I feel like this should be fairly straighforward but despite trying trying a few different ways (I deleted some code) it just doesn't work.~~ 
 ```{r}
-getwd()
 img1_path <- "mexico_map.png"
-img1 <- readPNG(img1_path, native = TRUE, info = TRUE)
+
 knitr::include_graphics(img1_path)
 
-
-
 ```
 
+# Happy gif to go with all of my updates
+
+![](https://media.giphy.com/media/2AilMg2L8rTAA/giphy.gif)
 # Packages I used
 ```{r, include=TRUE, eval=FALSE}
 
