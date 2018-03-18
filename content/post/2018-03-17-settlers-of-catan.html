@@ -14,7 +14,7 @@ tags:
 
 <div id="settlers-of-catan" class="section level2">
 <h2>Settlers of catan</h2>
-<p>In our living room there is an old chest hidding some real treasures. Every now and again we will get Settlers of Catan out. I never grow tired of playing it as the board changes every time. The game has 19 hexagon shaped tiles that are placed at random. Eighten tiles are linked to different resources -wheat, rock, wood, sheep and clay- and the 19th is the desert where the much feared robber lives. Each tile is assigned a number bewteen 1 and 12 at random and when that number is rolled you get to pick up a card linked to the resources of that tile. You can use your resources to build settlement, cities and roads.</p>
+<p>In our living room there is an old chest hiding some real treasures. Every now and again we will get Settlers of Satan out. I never grow tired of playing it as the board changes every time. The game has 19 hexagon shaped tiles that are placed at random. Eighteen tiles are linked to different resources -wheat, rock, wood, sheep and clay- and the 19th is the desert where the much feared robber lives. Each tile is assigned a number bewteen 1 and 12 at random and when that number is rolled you get to pick up a card linked to the resources of that tile. You can use your resources to build settlement, cities and roads.</p>
 <div align="center">
 <div class="vembedr">
 <iframe class="vimeo-embed" src="https://player.vimeo.com/video/260576657" width="500" height="281" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
@@ -23,17 +23,14 @@ tags:
 </div>
 <div id="getting-the-tiles" class="section level2">
 <h2>Getting the tiles</h2>
-<p>As an R user and a massive Settler of Catan fan (I used to play in the morning before going to work) I had been thinking about how to combine the two. I decided that I wanted to create a random board generator. I know that the board is created randomly when you play Catan the regular way but I just think that adding R to it just makes it more fun.</p>
-<p>I tried a few different ways of creating the board. My first attempt was to create the edge points and use <code>geom_polygon</code> from <code>ggplot2</code> to plot them. It turned out that figuring out where those points should be was trickier than I thought and I gave up. After that I tried plotting hexagons using <code>spsample</code> and I played with the <code>hexbin</code> package but I couldn’t get it to work (most likely because I didn’t do enough reading, not becasue it can’t be done).</p>
+<p>As an R user and a massive Settler of Catan fan (I used to play in the morning before going to work) I had been thinking about how to combine the two. I decided that I wanted to create a random board generator. However, just getting a static version of the catan board took me a while so I decided to split this into two blog posts. In the future I will put this into a shiny app so that the board can be generated randomly,</p>
+<p>I know that the board is created randomly when you play Catan the regular way but I just think that adding R to it just makes it more fun.</p>
+<p>I tried a few different ways of creating the board. My first attempt was to create the edge points and use <code>geom_polygon</code> from <code>ggplot2</code> to plot them. It turned out that figuring out where those points should be was trickier than I thought and I gave up. After that I tried plotting hexagons using <code>spsample</code> and I played with the <code>hexbin</code> package but I couldn’t get it to work (most likely because I didn’t do enough reading, not because it can’t be done).</p>
 <p>I finally got it to work after reading <a href="http://www.masalmon.eu/2018/02/22/hexcombine/">Ma Salmon’s</a> blog post about plotting hexagon stickers using <code>magick</code>.</p>
 <div id="first-stickerhexagon" class="section level3">
 <h3>First sticker/hexagon</h3>
-<p>I downloaded the hexagon stickers from the <code>hexbin</code> github repositry and used the one with the fewest colours as a base. This happened to be a sticker called Rangle.</p>
-<div class="figure">
-<img src="/Users/emmavestesson/Documents/GitHub/bdown/public/2018/03/settlers-of-catan/rangle.png" />
-
-</div>
-<p>The rangler sticker only has two colours so it is quite easy to make it only one colour using <code>image_fill</code>.</p>
+<p>I downloaded the hexagon stickers from the <code>hexbin</code> github repository and used the one with the fewest colours as a base. This happened to be a sticker called rangle.</p>
+<p>The rangle sticker only has two colours so it is quite easy to make it only one colour using <code>image_fill</code>.</p>
 <pre class="r"><code>setwd(&quot;/Users/emmavestesson/Documents/GitHub/bdown/&quot;)
 hex_base &lt;- magick::image_read(here::here(&quot;rangle.png&quot;)) %&gt;% 
 image_fill(&quot;white&quot;, point = &quot;+100+100&quot;, fuzz = 20) %&gt;% 
@@ -52,7 +49,7 @@ wheat_img &lt;- image_crop(wheat_img, geometry_area(1088, 1100, 0,0), repage = F
 
 wheat &lt;- image_composite(wheat_tile, wheat_img, offset = &quot;+40+50&quot;) %&gt;% 
   magick::image_write(here(&quot;catan hexes/wheat.png&quot;))</code></pre>
-<p>Not all resources appear the same number of times so I create a vector with links to image and repeat some of them four times and some three times. I then go on to shuffling the tiles to add the random component and then I read the images..</p>
+<p>Not all resources appear the same number of times so I create a vector with links to image and repeat some of them four times and some three times. I then go on to shuffling the tiles to add the random component and then I read the images.</p>
 <pre class="r"><code>setwd(&quot;/Users/emmavestesson/Documents/GitHub/bdown/&quot;)
 tiles &lt;- c(rep(&quot;catan hexes/wood.png&quot;,4), rep(&quot;catan hexes/sheep.png&quot;,4), rep(&quot;catan hexes/wheat.png&quot;,4), rep(&quot;catan hexes/clay.png&quot; ,3), rep(&quot;catan hexes/rock.png&quot;,3), &quot;catan hexes/desert.png&quot; )
 tiles &lt;- sample(tiles) # change the order at random
@@ -62,9 +59,7 @@ read_append &lt;- . %&gt;%
 
 tiles_image &lt;- map(tiles, read_append)
 
-number_tiles &lt;- c(&quot;5&quot;, &quot;2&quot;, &quot;6&quot;, &quot;3&quot;, &quot;8&quot;, &quot;10&quot;, &quot;9&quot;,&quot;12&quot;,&quot;11&quot;,&quot;4&quot;, &quot;8&quot;,&quot;10&quot;,&quot;9&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;3&quot;, &quot;11&quot; )
-length(number_tiles)</code></pre>
-<pre><code>## [1] 18</code></pre>
+number_tiles &lt;- c(&quot;5&quot;, &quot;2&quot;, &quot;6&quot;, &quot;3&quot;, &quot;8&quot;, &quot;10&quot;, &quot;9&quot;,&quot;12&quot;,&quot;11&quot;,&quot;4&quot;, &quot;8&quot;,&quot;10&quot;,&quot;9&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;3&quot;, &quot;11&quot; )</code></pre>
 <p>The vector <code>number_tiles</code> holds the numbers that should go on the tiles. In real life the tiles are shuffled and placed on the table in a certain order, starting from the top and moving around in a circle until you get to the middle. After that you place one number on each tile skipping the desert. This skipping the desert tile created a bit of a problem. The desert tile should not get a tile so I need to find out where the desert tile is and then add a blank space at that point in the <code>number_tiles</code> vector before adding the number to tiles using <code>image_annotate</code>..</p>
 <pre class="r"><code>desert_loc &lt;- grep(&quot;catan hexes/desert.png&quot;, tiles, ignore.case = FALSE, perl = FALSE, value = FALSE,
      fixed = FALSE, useBytes = FALSE, invert = FALSE)

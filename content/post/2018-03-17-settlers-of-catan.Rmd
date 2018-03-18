@@ -44,9 +44,7 @@ I finally got it to work after reading [Ma Salmon's](http://www.masalmon.eu/2018
 
 ### First sticker/hexagon
 
-I downloaded the hexagon stickers from the `hexbin` github repository and used the one with the fewest colours as a base. This happened to be a sticker called Rangle that looks like this. 
-
-![](/Users/emmavestesson/Documents/GitHub/bdown/public/2018/03/settlers-of-catan/rangle.png)
+I downloaded the hexagon stickers from the `hexbin` github repository and used the one with the fewest colours as a base. This happened to be a sticker called rangle.
 
  The rangle sticker only has two colours so it is quite easy to make it only one colour using `image_fill`. 
 ```{r}
@@ -136,7 +134,7 @@ robber <- image_composite(desert_tile, robber_img, offset = "+40+50") %>%
 
 ```
 
-Not all resources appear the same number of times so I create a vector with links to image and repeat some of them four times and some three times. I then go on to shuffling the tiles to add the random component and then I read the images..  
+Not all resources appear the same number of times so I create a vector with links to image and repeat some of them four times and some three times. I then go on to shuffling the tiles to add the random component and then I read the images.  
 
 ```{r}
 setwd("/Users/emmavestesson/Documents/GitHub/bdown/")
@@ -149,7 +147,6 @@ read_append <- . %>%
 tiles_image <- map(tiles, read_append)
 
 number_tiles <- c("5", "2", "6", "3", "8", "10", "9","12","11","4", "8","10","9", "4", "5", "6", "3", "11" )
-length(number_tiles)
 
 ```
 
