@@ -40,7 +40,7 @@ I know that the board is created randomly when you play Catan the regular way bu
 
 I tried a few different ways of creating the board. My first attempt was to create the edge points and use `geom_polygon` from `ggplot2` to plot them. It turned out that figuring out where those points should be was trickier than I thought and I gave up. After that I tried plotting hexagons using `spsample` and I played with the `hexbin` package but I couldn't get it to work (most likely because I didn't do enough reading, not because it can't be done). 
 
-I finally got it to work after reading [Ma Salmon's](http://www.masalmon.eu/2018/02/22/hexcombine/) blog post about plotting hexagon stickers using `magick`. 
+I finally got it to work after reading [Maëlle Salmon's](http://www.masalmon.eu/2018/02/22/hexcombine/) blog post about plotting hexagon stickers using `magick`. 
 
 ### First sticker/hexagon
 
@@ -216,7 +216,7 @@ setwd("~/Documents/GitHub/bdown/public/2018/03/settlers-of-catan/")
 img1_path <- "catan_board.png"
 knitr::include_graphics(img1_path)
 ```
-
+ser
 ## Notes
 
 I used the `vembedr` package to include the short video of my friend. 

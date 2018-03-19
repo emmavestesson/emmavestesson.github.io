@@ -253,7 +253,7 @@ ga('send', 'pageview');
 <p>As an R user and a massive Settler of Catan fan (I used to play in the morning before going to work) I had been thinking about how to combine the two. I decided that I wanted to create a random board generator. However, just getting a static version of the catan board took me a while so I decided to split this into two blog posts. In the future I will put this into a shiny app so that the board can be generated randomly,</p>
 <p>I know that the board is created randomly when you play Catan the regular way but I just think that adding R to it just makes it more fun.</p>
 <p>I tried a few different ways of creating the board. My first attempt was to create the edge points and use <code>geom_polygon</code> from <code>ggplot2</code> to plot them. It turned out that figuring out where those points should be was trickier than I thought and I gave up. After that I tried plotting hexagons using <code>spsample</code> and I played with the <code>hexbin</code> package but I couldn’t get it to work (most likely because I didn’t do enough reading, not because it can’t be done).</p>
-<p>I finally got it to work after reading <a href="http://www.masalmon.eu/2018/02/22/hexcombine/">Ma Salmon’s</a> blog post about plotting hexagon stickers using <code>magick</code>.</p>
+<p>I finally got it to work after reading <a href="http://www.masalmon.eu/2018/02/22/hexcombine/">Maëlle Salmon’s</a> blog post about plotting hexagon stickers using <code>magick</code>.</p>
 <div id="first-stickerhexagon" class="section level3">
 <h3>First sticker/hexagon</h3>
 <p>I downloaded the hexagon stickers from the <code>hexbin</code> github repository and used the one with the fewest colours as a base. This happened to be a sticker called rangle.</p>
@@ -337,14 +337,11 @@ image_write(board18, &quot;~/Documents/GitHub/bdown/public/2018/03/settlers-of-c
 image_write(board_gif, &quot;~/Documents/GitHub/bdown/public/board_gif.gif&quot;)</code></pre>
 <p>Here is a gif showing the order that the tiles are plotted. I uploaded the gif to my blog to include because I couldn’t figure out how to include it from disk without installing additional things.</p>
 <p><img src="https://emmavestesson.netlify.com/board_gif.gif" /> Static image!</p>
-<p><img src="catan_board.png" width="634" /></p>
-</div>
-</div>
-<div id="notes" class="section level2">
-<h2>Notes</h2>
+<p><img src="catan_board.png" /><!-- --> ser ## Notes</p>
 <p>I used the <code>vembedr</code> package to include the short video of my friend.</p>
 <div>
 Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+</div>
 </div>
 </div>
 <div id="packages-i-used" class="section level2">
