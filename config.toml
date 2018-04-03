@@ -12,7 +12,7 @@
 # For developpers, if you modify this theme, put your images in `source/images` folder and
 # use grunt task `build` to synchronize assets
 
-baseURL = "emmavestesson.netlify.com/"
+baseURL = "https://emmavestesson.netlify.com/"
 languageCode = "en-gb"
 defaultContentLanguage = "en-gb"
 title = "Playing with data"
