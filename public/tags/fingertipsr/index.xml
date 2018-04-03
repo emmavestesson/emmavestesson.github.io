@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fingertipsr on Playing with data</title>
-    <link>/tags/fingertipsr/</link>
+    <link>emmavestesson.netlify.com/tags/fingertipsr/</link>
     <description>Recent content in Fingertipsr on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/fingertipsr/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="emmavestesson.netlify.com/tags/fingertipsr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Making a map (or my first blogpost)</title>
-      <link>/2018/01/maps/</link>
+      <link>emmavestesson.netlify.com/2018/01/maps/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/01/maps/</guid>
+      <guid>emmavestesson.netlify.com/2018/01/maps/</guid>
       <description>Getting the data A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their fingertips website (https://fingertips.phe.org.uk/). I wanted to try it and as I like maps I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data.</description>
     </item>
     

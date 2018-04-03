@@ -2,183 +2,183 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Playing with data</title>
-    <link>/tags/</link>
+    <link>emmavestesson.netlify.com/tags/</link>
     <description>Recent content in Tags on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Sat, 27 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="emmavestesson.netlify.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Birthday</title>
-      <link>/tags/birthday/</link>
+      <link>emmavestesson.netlify.com/tags/birthday/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/birthday/</guid>
+      <guid>emmavestesson.netlify.com/tags/birthday/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Catan</title>
-      <link>/tags/catan/</link>
+      <link>emmavestesson.netlify.com/tags/catan/</link>
       <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/catan/</guid>
+      <guid>emmavestesson.netlify.com/tags/catan/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Emojifont</title>
-      <link>/tags/emojifont/</link>
+      <link>emmavestesson.netlify.com/tags/emojifont/</link>
       <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/emojifont/</guid>
+      <guid>emmavestesson.netlify.com/tags/emojifont/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Fingertipsr</title>
-      <link>/tags/fingertipsr/</link>
+      <link>emmavestesson.netlify.com/tags/fingertipsr/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/fingertipsr/</guid>
+      <guid>emmavestesson.netlify.com/tags/fingertipsr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ggmap</title>
-      <link>/tags/ggmap/</link>
+      <link>emmavestesson.netlify.com/tags/ggmap/</link>
       <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ggmap/</guid>
+      <guid>emmavestesson.netlify.com/tags/ggmap/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Guardianr</title>
-      <link>/tags/guardianr/</link>
+      <link>emmavestesson.netlify.com/tags/guardianr/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/guardianr/</guid>
+      <guid>emmavestesson.netlify.com/tags/guardianr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Leaflet</title>
-      <link>/tags/leaflet/</link>
+      <link>emmavestesson.netlify.com/tags/leaflet/</link>
       <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/leaflet/</guid>
+      <guid>emmavestesson.netlify.com/tags/leaflet/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Magick</title>
-      <link>/tags/magick/</link>
+      <link>emmavestesson.netlify.com/tags/magick/</link>
       <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/magick/</guid>
+      <guid>emmavestesson.netlify.com/tags/magick/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Osmdata</title>
-      <link>/tags/osmdata/</link>
+      <link>emmavestesson.netlify.com/tags/osmdata/</link>
       <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/osmdata/</guid>
+      <guid>emmavestesson.netlify.com/tags/osmdata/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Phe</title>
-      <link>/tags/phe/</link>
+      <link>emmavestesson.netlify.com/tags/phe/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/phe/</guid>
+      <guid>emmavestesson.netlify.com/tags/phe/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Purrr</title>
-      <link>/tags/purrr/</link>
+      <link>emmavestesson.netlify.com/tags/purrr/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/purrr/</guid>
+      <guid>emmavestesson.netlify.com/tags/purrr/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Rvest</title>
-      <link>/tags/rvest/</link>
+      <link>emmavestesson.netlify.com/tags/rvest/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/rvest/</guid>
+      <guid>emmavestesson.netlify.com/tags/rvest/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Sf</title>
-      <link>/tags/sf/</link>
+      <link>emmavestesson.netlify.com/tags/sf/</link>
       <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/sf/</guid>
+      <guid>emmavestesson.netlify.com/tags/sf/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Shiny</title>
-      <link>/tags/shiny/</link>
+      <link>emmavestesson.netlify.com/tags/shiny/</link>
       <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/shiny/</guid>
+      <guid>emmavestesson.netlify.com/tags/shiny/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Simstudy</title>
-      <link>/tags/simstudy/</link>
+      <link>emmavestesson.netlify.com/tags/simstudy/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/simstudy/</guid>
+      <guid>emmavestesson.netlify.com/tags/simstudy/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tableone</title>
-      <link>/tags/tableone/</link>
+      <link>emmavestesson.netlify.com/tags/tableone/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/tableone/</guid>
+      <guid>emmavestesson.netlify.com/tags/tableone/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Texreg</title>
-      <link>/tags/texreg/</link>
+      <link>emmavestesson.netlify.com/tags/texreg/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/texreg/</guid>
+      <guid>emmavestesson.netlify.com/tags/texreg/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tidytext</title>
-      <link>/tags/tidytext/</link>
+      <link>emmavestesson.netlify.com/tags/tidytext/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/tidytext/</guid>
+      <guid>emmavestesson.netlify.com/tags/tidytext/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Wordcloud</title>
-      <link>/tags/wordcloud/</link>
+      <link>emmavestesson.netlify.com/tags/wordcloud/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/wordcloud/</guid>
+      <guid>emmavestesson.netlify.com/tags/wordcloud/</guid>
       <description></description>
     </item>
     

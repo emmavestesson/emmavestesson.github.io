@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Osmdata on Playing with data</title>
-    <link>/tags/osmdata/</link>
+    <link>emmavestesson.netlify.com/tags/osmdata/</link>
     <description>Recent content in Osmdata on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Sat, 03 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/osmdata/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="emmavestesson.netlify.com/tags/osmdata/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>What should I have for lunch?</title>
-      <link>/2018/02/what-should-i-have-for-lunch/</link>
+      <link>emmavestesson.netlify.com/2018/02/what-should-i-have-for-lunch/</link>
       <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
       
-      <guid>/2018/02/what-should-i-have-for-lunch/</guid>
+      <guid>emmavestesson.netlify.com/2018/02/what-should-i-have-for-lunch/</guid>
       <description>Inspiration I was having lunch with some colleagues the other day when they told me about a restaurant spreadsheet that they used to use to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
 I had also seen a really cool blog post using the osmdata package to look at the number of pubs close to metro stations in Paris.</description>
     </item>
