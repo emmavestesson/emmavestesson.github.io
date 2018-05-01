@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Simstudy on Playing with data</title>
-    <link>https://emmavestesson.netlify.com/tags/simstudy/</link>
+    <link>/tags/simstudy/</link>
     <description>Recent content in Simstudy on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Sat, 13 Jan 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://emmavestesson.netlify.com/tags/simstudy/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/simstudy/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Regressions using completly fake data!</title>
-      <link>https://emmavestesson.netlify.com/2018/01/fake-data/</link>
+      <link>/2018/01/fake-data/</link>
       <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://emmavestesson.netlify.com/2018/01/fake-data/</guid>
+      <guid>/2018/01/fake-data/</guid>
       <description>Why can’t I just have all of the data? I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the survival package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the simstudy package and decided to give it a go.</description>
     </item>
     

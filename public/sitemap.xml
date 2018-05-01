@@ -3,189 +3,212 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2018/03/settlers-of-catan/</loc>
+    <loc>/2018/05/my-first-tidy-tuesday/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/03/settlers-of-catan/</loc>
     <lastmod>2018-03-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2018/03/mexico/</loc>
+    <loc>/2018/03/mexico/</loc>
     <lastmod>2018-03-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2018/02/what-should-i-have-for-lunch/</loc>
+    <loc>/2018/02/what-should-i-have-for-lunch/</loc>
     <lastmod>2018-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2018/01/happy-birthday-to-me/</loc>
+    <loc>/2018/01/happy-birthday-to-me/</loc>
     <lastmod>2018-01-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2018/01/please-like-me/</loc>
+    <loc>/2018/01/please-like-me/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2018/01/fake-data/</loc>
+    <loc>/2018/01/fake-data/</loc>
     <lastmod>2018-01-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/2018/01/maps/</loc>
+    <loc>/2018/01/maps/</loc>
     <lastmod>2018-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/archives/</loc>
+    <loc>/archives/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/birthday/</loc>
+    <loc>/tags/birthday/</loc>
     <lastmod>2018-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/catan/</loc>
+    <loc>/tags/catan/</loc>
     <lastmod>2018-03-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/categories/</loc>
+    <loc>/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/emojifont/</loc>
+    <loc>/tags/emojifont/</loc>
     <lastmod>2018-03-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/fingertipsr/</loc>
+    <loc>/tags/fingertipsr/</loc>
     <lastmod>2018-01-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/ggmap/</loc>
+    <loc>/tags/gganimate/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/ggmap/</loc>
     <lastmod>2018-03-07T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/guardianr/</loc>
+    <loc>/tags/guardianr/</loc>
     <lastmod>2018-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/leaflet/</loc>
+    <loc>/tags/leaflet/</loc>
     <lastmod>2018-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/magick/</loc>
+    <loc>/tags/magick/</loc>
     <lastmod>2018-03-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/osmdata/</loc>
+    <loc>/tags/osmdata/</loc>
     <lastmod>2018-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/phe/</loc>
+    <loc>/tags/phe/</loc>
     <lastmod>2018-01-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/</loc>
-    <lastmod>2018-03-17T00:00:00+00:00</lastmod>
+    <loc>/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/post/</loc>
-    <lastmod>2018-03-17T00:00:00+00:00</lastmod>
+    <loc>/post/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/purrr/</loc>
+    <loc>/tags/purrr/</loc>
     <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/categories/r/</loc>
-    <lastmod>2018-03-17T00:00:00+00:00</lastmod>
+    <loc>/categories/r/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/rvest/</loc>
+    <loc>/tags/rvest/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/sf/</loc>
+    <loc>/tags/sf/</loc>
     <lastmod>2018-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/shiny/</loc>
+    <loc>/tags/shiny/</loc>
     <lastmod>2018-02-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/simstudy/</loc>
+    <loc>/tags/simstudy/</loc>
     <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/tableone/</loc>
+    <loc>/tags/tableone/</loc>
     <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/</loc>
+    <loc>/tags/</loc>
     <lastmod>2018-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/texreg/</loc>
+    <loc>/tags/texreg/</loc>
     <lastmod>2018-01-13T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/tidytext/</loc>
+    <loc>/tags/tidytext/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://emmavestesson.netlify.com/tags/wordcloud/</loc>
+    <loc>/tags/tidytuesday/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/tweenr/</loc>
+    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/wordcloud/</loc>
     <lastmod>2018-01-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>

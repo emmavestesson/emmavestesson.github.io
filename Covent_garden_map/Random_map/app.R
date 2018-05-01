@@ -10,6 +10,7 @@ library(ggmap)
 ui <- fluidPage(
   leafletOutput("mymap"),
   h3(textOutput("selected_var")),
+  # actionButton("remove", "Remove chains"),
   actionButton("recalc", "Generate new lunch option"),
   textInput("caption", "Caption",  "90 long acre"), 
   h3(textOutput("start1"))

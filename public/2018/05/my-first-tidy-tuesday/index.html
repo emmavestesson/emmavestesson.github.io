@@ -1,0 +1,761 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en-gb">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.31.1 with theme Tranquilpeak 0.4.3-BETA">
+    <title>My first tidy Tuesday</title>
+    <meta name="author" content="Emma Vestesson">
+    <meta name="keywords" content="">
+
+    <link rel="icon" href="/favicon.png">
+    
+
+    
+    <meta name="description" content="Tidy Tuesday I have seen some cool graphs on twitter created for Tidy Tuesday. I wanted to join in on the fun so I downloaded the data from week 3. The data are from our world in data and I downloaded the data file from github.
+mortality &lt;- readxl::read_excel(here::here(&quot;global_mortality.xlsx&quot;)) glimpse(mortality) ## Observations: 6,156 ## Variables: 35 ## $ country &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afg... ## $ country_code &lt;chr&gt; &quot;AFG&quot;, &quot;AFG&quot;, &quot;AFG&quot;... ## $ year &lt;dbl&gt; 1990, 1991, 1992, 1.">
+    <meta property="og:description" content="Tidy Tuesday I have seen some cool graphs on twitter created for Tidy Tuesday. I wanted to join in on the fun so I downloaded the data from week 3. The data are from our world in data and I downloaded the data file from github.
+mortality &lt;- readxl::read_excel(here::here(&quot;global_mortality.xlsx&quot;)) glimpse(mortality) ## Observations: 6,156 ## Variables: 35 ## $ country &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afg... ## $ country_code &lt;chr&gt; &quot;AFG&quot;, &quot;AFG&quot;, &quot;AFG&quot;... ## $ year &lt;dbl&gt; 1990, 1991, 1992, 1.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="My first tidy Tuesday">
+    <meta property="og:url" content="/2018/05/my-first-tidy-tuesday/">
+    <meta property="og:site_name" content="Playing with data">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Playing with data">
+    <meta name="twitter:description" content="Tidy Tuesday I have seen some cool graphs on twitter created for Tidy Tuesday. I wanted to join in on the fun so I downloaded the data from week 3. The data are from our world in data and I downloaded the data file from github.
+mortality &lt;- readxl::read_excel(here::here(&quot;global_mortality.xlsx&quot;)) glimpse(mortality) ## Observations: 6,156 ## Variables: 35 ## $ country &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afg... ## $ country_code &lt;chr&gt; &quot;AFG&quot;, &quot;AFG&quot;, &quot;AFG&quot;... ## $ year &lt;dbl&gt; 1990, 1991, 1992, 1.">
+    
+      <meta name="twitter:creator" content="@gummifot">
+    
+    
+
+    
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    
+    
+
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-112742782-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">Playing with data</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/emmavestesson">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/emmavestesson/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      My first tidy Tuesday
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-05-01T00:00:00Z">
+        
+  
+  
+  
+  
+    1  2018
+  
+
+      </time>
+    
+    
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="/categories/r">R</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div id="tidy-tuesday" class="section level1">
+<h1>Tidy Tuesday</h1>
+<p>I have seen some cool graphs on twitter created for <a href="https://github.com/rfordatascience/tidytuesday/blob/master/README.md">Tidy Tuesday</a>. I wanted to join in on the fun so I downloaded the data from week 3. The data are from <a href="https://ourworldindata.org/what-does-the-world-die-from">our world in data</a> and I downloaded the data file from <a href="https://github.com/rfordatascience/tidytuesday/tree/master/data">github</a>.</p>
+<pre class="r"><code>mortality &lt;- readxl::read_excel(here::here(&quot;global_mortality.xlsx&quot;))
+glimpse(mortality)</code></pre>
+<pre><code>## Observations: 6,156
+## Variables: 35
+## $ country                                    &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afg...
+## $ country_code                               &lt;chr&gt; &quot;AFG&quot;, &quot;AFG&quot;, &quot;AFG&quot;...
+## $ year                                       &lt;dbl&gt; 1990, 1991, 1992, 1...
+## $ `Cardiovascular diseases (%)`              &lt;dbl&gt; 17.61040, 17.80181,...
+## $ `Cancers (%)`                              &lt;dbl&gt; 4.025975, 4.054145,...
+## $ `Respiratory diseases (%)`                 &lt;dbl&gt; 2.106626, 2.134176,...
+## $ `Diabetes (%)`                             &lt;dbl&gt; 3.832555, 3.822228,...
+## $ `Dementia (%)`                             &lt;dbl&gt; 0.5314287, 0.532497...
+## $ `Lower respiratory infections (%)`         &lt;dbl&gt; 10.886362, 10.35696...
+## $ `Neonatal deaths (%)`                      &lt;dbl&gt; 9.184653, 8.938897,...
+## $ `Diarrheal diseases (%)`                   &lt;dbl&gt; 2.497141, 2.572228,...
+## $ `Road accidents (%)`                       &lt;dbl&gt; 3.715944, 3.729142,...
+## $ `Liver disease (%)`                        &lt;dbl&gt; 0.8369093, 0.845515...
+## $ `Tuberculosis (%)`                         &lt;dbl&gt; 5.877075, 5.891704,...
+## $ `Kidney disease (%)`                       &lt;dbl&gt; 1.680611, 1.671115,...
+## $ `Digestive diseases (%)`                   &lt;dbl&gt; 1.058771, 1.049322,...
+## $ `HIV/AIDS (%)`                             &lt;dbl&gt; 0.01301948, 0.01451...
+## $ `Suicide (%)`                              &lt;dbl&gt; 0.4366105, 0.442280...
+## $ `Malaria (%)`                              &lt;dbl&gt; 0.4488863, 0.455019...
+## $ `Homicide (%)`                             &lt;dbl&gt; 1.287020, 1.290991,...
+## $ `Nutritional deficiencies (%)`             &lt;dbl&gt; 0.3505045, 0.343212...
+## $ `Meningitis (%)`                           &lt;dbl&gt; 3.037603, 2.903202,...
+## $ `Protein-energy malnutrition (%)`          &lt;dbl&gt; 0.3297599, 0.322171...
+## $ `Drowning (%)`                             &lt;dbl&gt; 0.9838624, 0.954586...
+## $ `Maternal deaths (%)`                      &lt;dbl&gt; 1.769213, 1.749264,...
+## $ `Parkinson disease (%)`                    &lt;dbl&gt; 0.02515859, 0.02545...
+## $ `Alcohol disorders (%)`                    &lt;dbl&gt; 0.02899828, 0.02917...
+## $ `Intestinal infectious diseases (%)`       &lt;dbl&gt; 0.1833303, 0.178107...
+## $ `Drug disorders (%)`                       &lt;dbl&gt; 0.04120540, 0.04203...
+## $ `Hepatitis (%)`                            &lt;dbl&gt; 0.1387378, 0.135008...
+## $ `Fire (%)`                                 &lt;dbl&gt; 0.1741567, 0.170671...
+## $ `Heat-related (hot and cold exposure) (%)` &lt;dbl&gt; 0.1378229, 0.134826...
+## $ `Natural disasters (%)`                    &lt;dbl&gt; 0.00000000, 0.79760...
+## $ `Conflict (%)`                             &lt;dbl&gt; 0.932, 2.044, 2.408...
+## $ `Terrorism (%)`                            &lt;dbl&gt; 0.007, 0.040, 0.027...</code></pre>
+<p>The variable names had some special characters so I started by doing some name tidying.</p>
+<pre class="r"><code>names(mortality)&lt;- mortality %&gt;% 
+  names() %&gt;% 
+  to_snake_case() %&gt;% 
+  str_remove(pattern=&quot;\\(%\\)&quot;) %&gt;% 
+  str_replace_all(pattern=&quot;-&quot;, &quot;_&quot;) %&gt;% 
+  str_replace_all(pattern=&quot;/&quot;, &quot;_&quot;)  %&gt;% 
+  str_replace_all(pattern=&quot;\\(&quot;, &quot;_&quot;) %&gt;% 
+  str_remove(pattern=&quot;\\)&quot;) </code></pre>
+<p>Next it was time to reshape the data.</p>
+<pre class="r"><code>world &lt;- mortality %&gt;% 
+  filter(country==&quot;World&quot;) %&gt;% 
+  select(-country_code) %&gt;% 
+  gather(key=disease, value =&quot;percent&quot;, -(country:year))</code></pre>
+<p>There is a lot of data so I decided to plot a time series for the five diseases that killed the most people in 2016.</p>
+<pre class="r"><code>top5_world &lt;- world %&gt;% 
+  filter(year==2016) %&gt;% 
+  arrange(desc(percent)) %&gt;% 
+  top_n(5) </code></pre>
+<pre><code>## Selecting by percent</code></pre>
+<p>I have been trying to get a different project to work in <code>tweenr</code> for a while so I thought that this was a good time to try my luck on a different data set. This data set is very similar to the gapminder data that is used in a <code>tweenr</code> tutorial so I relied heavily on that <a href="http://blog.revolutionanalytics.com/2017/05/tweenr.html">code</a>.</p>
+<pre class="r"><code>mortality_edit &lt;- world %&gt;% 
+  filter(disease %in% top5_world$disease) %&gt;% 
+  select(-country) %&gt;% 
+  rename(x=year,y=percent,time=year) %&gt;%
+  mutate(ease=&quot;linear&quot;) 
+
+mortality_tween &lt;- tween_elements(mortality_edit, time=&quot;time&quot;, group=&quot;disease&quot;, ease=&quot;ease&quot;, nframes=150) %&gt;% 
+  mutate(year = round(time), disease = .group) %&gt;%
+  left_join(world, by=c(&quot;disease&quot;,&quot;year&quot;)) %&gt;% 
+  mutate(disease=Hmisc::capitalize(str_replace(disease, pattern=&quot;_&quot;, &quot; &quot;)))</code></pre>
+<pre><code>## Warning: Column `disease` joining factor and character vector, coercing
+## into character vector</code></pre>
+<p>It worked! Now I just need to apply my new skills to my old project.</p>
+<pre class="r"><code>p2 &lt;- ggplot(mortality_tween,
+             aes(x=year, y=percent, group=disease, frame = .frame, cumulative = TRUE)) +
+  geom_line(aes(color=disease), size=1) + theme_minimal() + ggtitle(&quot;Top 5 causes of death in the world&quot;) +
+  xlab(&quot;Year&quot;) + scale_colour_discrete(name  =&quot;Disease&quot;)
+
+gganimate(p2, title_frame = FALSE,interval = 0.05, filename =&quot;world_mortality_2016.gif&quot;)</code></pre>
+<p><img src="https://emmavestesson.netlify.com/world_mortality_2016.gif" /> ## Packages I used</p>
+<pre class="r"><code>library(tidyverse)
+library(snakecase)
+library(gganimate)
+library(readxl)</code></pre>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/tidytuesday/">TidyTuesday</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/gganimate/">gganimate</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/tweenr/">tweenr</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/settlers-of-catan/" data-tooltip="Settlers of Catan">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/05/my-first-tidy-tuesday/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/05/my-first-tidy-tuesday/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/05/my-first-tidy-tuesday/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Emma Vestesson. 
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/settlers-of-catan/" data-tooltip="Settlers of Catan">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/05/my-first-tidy-tuesday/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/05/my-first-tidy-tuesday/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/05/my-first-tidy-tuesday/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F05%2Fmy-first-tidy-tuesday%2F">
+          <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F05%2Fmy-first-tidy-tuesday%2F">
+          <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F05%2Fmy-first-tidy-tuesday%2F">
+          <i class="fa fa-google-plus"></i><span>%!(EXTRA string=Google&#43;)</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+    <h4 id="about-card-name">Emma Vestesson</h4>
+    
+      <div id="about-card-bio">I first started learning R in the autumn of 2012 but stopped after a couple of months as I didn&rsquo;t use it. In January 2017 I rediscovered R again and this time I am sticking with it. After discovering blogdown and realising how many different short snippets of code I have hidden away on my computer I decided to share them on this blog instead.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data analyst
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        London
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/05/my-first-tidy-tuesday/">
+                <h3 class="media-heading">My first tidy Tuesday</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Tidy Tuesday I have seen some cool graphs on twitter created for Tidy Tuesday. I wanted to join in on the fun so I downloaded the data from week 3. The data are from our world in data and I downloaded the data file from github.
+mortality &lt;- readxl::read_excel(here::here(&quot;global_mortality.xlsx&quot;)) glimpse(mortality) ## Observations: 6,156 ## Variables: 35 ## $ country &lt;chr&gt; &quot;Afghanistan&quot;, &quot;Afg... ## $ country_code &lt;chr&gt; &quot;AFG&quot;, &quot;AFG&quot;, &quot;AFG&quot;... ## $ year &lt;dbl&gt; 1990, 1991, 1992, 1.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/settlers-of-catan/">
+                <h3 class="media-heading">Settlers of Catan</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Settlers of catan In our living room there is an old chest hiding some real treasures. Every now and again we will get Settlers of Catan out. I never grow tired of playing it as the board changes every time. The game has 19 hexagon shaped tiles that are placed at random. Eighteen tiles are linked to different resources -wheat, rock, wood, sheep and clay- and the 19th is the desert where the much feared robber lives.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/mexico/">
+                <h3 class="media-heading">My trip to Mexico in emojis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">The code that never really worked This post is the result of hours and hours of me trying to write some code but never getting it quite right. I think that one of the worst things that you can do to yourself is to be scared to admit that you are struggling because you will end up never trying anything new. That is why I am publishing what I have got so far despite not being very happy with it.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/02/what-should-i-have-for-lunch/">
+                <h3 class="media-heading">What should I have for lunch?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Inspiration I was having lunch with some colleagues the other day when they told me about a restaurant spreadsheet that they used to use to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
+I had also seen a really cool blog post using the osmdata package to look at the number of pubs close to metro stations in Paris.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/happy-birthday-to-me/">
+                <h3 class="media-heading">Happy Birthday To Me!</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Happy Birthday To Me! Today is my birthday. To celebrate I decided to look at what was in the news on January 27 every year since I was born. Mainly I want to see if the news were positive or negative.
+ Getting the data I start buy creating a list of dates. I feel like there is probably a more straightforward way of doing this but I am currently obsessed with map so this is how I did it.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/please-like-me/">
+                <h3 class="media-heading">Please like me</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Sundays When I woke up this morning I wrote a long to do list. Instead of working through the list I somehow ended up spending most of my day playing in R.
+ Scraping the web I have been keen to try web scraping in R for a while so I gave rvest a go. I was a bit too restless to actually read any tutorials so I just started trying different commands.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/fake-data/">
+                <h3 class="media-heading">Regressions using completly fake data!</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Why can’t I just have all of the data? I have been updating some code that uses data that I don’t have access to. I used one of the data sets from the survival package but it annoyed me that the variable names were not what I wanted them to be and I couldn’t be bothered changing them. I was killing time on a train the other day and discovered the simstudy package and decided to give it a go.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/01/maps/">
+                <h3 class="media-heading">Making a map (or my first blogpost)</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jan 1, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Getting the data A couple of months ago I discovered a package developed by Public Health England that makes it easier to extract the data behind their fingertips website (https://fingertips.phe.org.uk/). I wanted to try it and as I like maps I decided to download some data at CCG level and make an interactive choropleth map using the leaflet package. I use select_indicators to browse the indicators and pick one at random that seems to have CCG level data.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         8 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('/images/DSCF5410.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+    
+  </body>
+</html>
+
