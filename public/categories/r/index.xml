@@ -17,8 +17,8 @@
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/05/my-first-tidy-tuesday/</guid>
-      <description>Tidy Tuesday I have seen some cool graphs on twitter created for Tidy Tuesday. I wanted to join in on the fun so I downloaded the data from week 3. The data are from our world in data and I downloaded the data file from github.
-mortality &amp;lt;- readxl::read_excel(here::here(&amp;quot;global_mortality.xlsx&amp;quot;)) glimpse(mortality) ## Observations: 6,156 ## Variables: 35 ## $ country &amp;lt;chr&amp;gt; &amp;quot;Afghanistan&amp;quot;, &amp;quot;Afg... ## $ country_code &amp;lt;chr&amp;gt; &amp;quot;AFG&amp;quot;, &amp;quot;AFG&amp;quot;, &amp;quot;AFG&amp;quot;... ## $ year &amp;lt;dbl&amp;gt; 1990, 1991, 1992, 1.</description>
+      <description>Tidy Tuesday I have seen some cool graphs on twitter created for Tidy Tuesday. I wanted to join in on the fun so I downloaded the data from week 3 and started playinh. The data are from our world in data and I downloaded the data file from github.
+mortality &amp;lt;- readxl::read_excel(here::here(&amp;quot;global_mortality.xlsx&amp;quot;)) glimpse(mortality) ## Observations: 6,156 ## Variables: 35 ## $ country &amp;lt;chr&amp;gt; &amp;quot;Afghanistan&amp;quot;, &amp;quot;Afg... ## $ country_code &amp;lt;chr&amp;gt; &amp;quot;AFG&amp;quot;, &amp;quot;AFG&amp;quot;, &amp;quot;AFG&amp;quot;.</description>
     </item>
     
     <item>
