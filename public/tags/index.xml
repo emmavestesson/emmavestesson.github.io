@@ -66,6 +66,15 @@
     </item>
     
     <item>
+      <title>Gpghack</title>
+      <link>/tags/gpghack/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gpghack/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Guardianr</title>
       <link>/tags/guardianr/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
@@ -77,7 +86,7 @@
     <item>
       <title>Leaflet</title>
       <link>/tags/leaflet/</link>
-      <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/leaflet/</guid>
       <description></description>
@@ -140,9 +149,18 @@
     <item>
       <title>Shiny</title>
       <link>/tags/shiny/</link>
-      <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shinydashbard</title>
+      <link>/tags/shinydashbard/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shinydashbard/</guid>
       <description></description>
     </item>
     

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/06/my-first-hackathon/</loc>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/05/my-first-tidy-tuesday/</loc>
     <lastmod>2018-05-01T00:00:00+00:00</lastmod>
   </url>
@@ -94,6 +99,12 @@
   </url>
   
   <url>
+    <loc>/tags/gpghack/</loc>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/guardianr/</loc>
     <lastmod>2018-01-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -101,7 +112,7 @@
   
   <url>
     <loc>/tags/leaflet/</loc>
-    <lastmod>2018-02-03T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -125,13 +136,13 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -143,7 +154,7 @@
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2018-05-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -161,7 +172,13 @@
   
   <url>
     <loc>/tags/shiny/</loc>
-    <lastmod>2018-02-03T00:00:00+00:00</lastmod>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/shinydashbard/</loc>
+    <lastmod>2018-06-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

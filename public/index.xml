@@ -6,10 +6,20 @@
     <description>Recent content on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 01 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 26 Jun 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>My first hackathon (part 1)</title>
+      <link>/2018/06/my-first-hackathon/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/06/my-first-hackathon/</guid>
+      <description>Gender pay gap hackathon Last weekend I went to my first hackathon. It was organised by the AI club for gender minorities, codebar and ellpha. We used data on the gender pay gap available here. I had a great time so I wanted to blog about it. This is the first part.
+ The deep dive team There were different tables with different themes and I picked deep dive.</description>
+    </item>
     
     <item>
       <title>My first tidy Tuesday</title>
