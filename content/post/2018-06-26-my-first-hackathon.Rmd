@@ -7,8 +7,8 @@ categories:
   - R
 tags:
   - leaflet
-  - shiny
-  - shinydashbard
+  - PostcodesioR
+  - ggmap
   - GPGhack
 ---
 
@@ -23,16 +23,16 @@ library(leaflet)
 
 ## Gender pay gap hackathon
 
-Last weekend I went to [my first hackathon](https://codebar.io/events/gender-pay-gap-hack). It was organised by the [AI club for gender minorities](https://www.meetup.com/ai-club/), [codebar](https://codebar.io/) and [ellpha](https://www.ellpha.com/). We used data on the gender pay gap [available here](https://gender-pay-gap.service.gov.uk/). I had a great time so I wanted to blog about it. This is the first part. 
+Last weekend I went to [my first hackathon](https://codebar.io/events/gender-pay-gap-hack). It was organised by the [AI club for gender minorities](https://www.meetup.com/ai-club/), [codebar](https://codebar.io/) and [ellpha](https://www.ellpha.com/). We used data on the gender pay gap [available here](https://gender-pay-gap.service.gov.uk/). I had a great time so I wanted to share my experience. This is the first part of my first hackathon. 
 
 ## The deep dive team
-There were different tables with different themes and I picked deep dive. This was unrelated to deep learning but it was for anyone who wanted to focus on one specific thing. We decided to look at charities so we spent some time linking trying to link data from the chariry commission with the gender pay gap data only to realise that it had already been [done]  ](https://www.civilsociety.co.uk/voices/david-kane-an-analysis-of-the-gender-pay-gap-in-charities.html) by someone called David Kane. (Writing this blog I have had the chance to check out David Kane's [blog](https://drkane.co.uk/blog/). It has some cool blog posts on charity data and I would recommend a visit). 
+There were different tables with different themes and I picked deep dive. This was unrelated to deep learning but it was for anyone who wanted to focus on one specific thing. We decided to look at charities so we spent some time linking trying to link data from the charity commission with the gender pay gap data only to realise that it had already been [done]  (https://www.civilsociety.co.uk/voices/david-kane-an-analysis-of-the-gender-pay-gap-in-charities.html) by someone called David Kane. (Writing this blog I have had the chance to check out David Kane's [blog](https://drkane.co.uk/blog/). It has some cool blog posts on charity data and I would recommend a visit). 
 
 ### My first encounter with python
-Before we found the linked data I ran my first python code! I can't actually find the code I ran but I felt like it was a moment that needed to commemorate. I have continued learning python since and I kind of like it. Thanks to [Victoria](https://twitter.com/victoriambutt) for helping me get started with python.
+Before we found the linked data I ran my first python code! I can't actually find the code I ran but I felt like it was a moment that needed to be commemorated. I have continued learning python since and I kind of like it. Thank you [Victoria](https://twitter.com/victoriambutt) for helping me get started with python.
 
 ## A map
-Once we had the data I quickly focused on the address with postcodes. I am a sucker for maps so I decided to make one. 
+Once we had the data I quickly noticed on the address with postcodes. I am a sucker for maps so I decided to make one. 
 
 
 ```{r, include=FALSE}
@@ -44,7 +44,7 @@ gpg <-read_csv(here("data","gender-pay-gap-with-charity-no.csv") )
 gpg <-read_csv(here("data","gender-pay-gap-with-charity-no.csv") )
 ```
 
-The postcode appeared at the end of the address a part from a few adress where United Kingdom was at the end so I removed that string. A quick google shows UK postcodes are between six and eight characters long. I therefore I started by extracting eight characters from the right. (Maybe I didn't google it at first but instead only extracted six characters which created loads of issues with invalid postcodes when trying to get the coordinates). Extracting eight characters meant that you sometimes got extra characters such as a comma or a blank space for the shorter postcodes so I removed them.
+The postcode appeared at the end of the address a part from a few address where United Kingdom was at the end so I removed that string. A quick google shows UK postcodes are between six and eight characters long. I therefore I started by extracting eight characters from the right. (Maybe I didn't google it at first but instead only extracted six characters which created loads of issues with invalid postcodes when trying to get the coordinates). Extracting eight characters meant that you sometimes got extra characters such as a comma or a blank space for the shorter postcodes so I removed them.
 
 
 ```{r}
@@ -55,7 +55,7 @@ gpg <- gpg %>%
   drop_na(postcode)
 ```
 
-To get the coordinates I first tried `geocode` from `ggmap`. The output from `geocode` has two columns so I got an error (I have included it below for one postcode). I am sure that there is an easy was around this but `geocode` is limited to 2000 calls per day and I had already used up 1800 calls so I had to find a different way. (I realised writing this that you can use `mutate_geocode`).  
+To get the coordinates I first tried `geocode` from `ggmap`. The output from `geocode` has two columns so I got an error (I have included it below for one postcode). I am sure that there is an easy was around this but `geocode` is limited to 2500 calls per day and I had already used up 1800 calls so I had to find a different way. (I realised writing this that you can use `mutate_geocode` from `ggmap`).  
 ```{r, error=TRUE}
 # Do not run! This code will cause an error and you will use up all of your calls to google
 gpg %>%
@@ -64,7 +64,7 @@ gpg %>%
   mutate(coordinates=ggmap::geocode(postcode))
 ```
 
-The beauty of a hackathon is that you are surronded by people who can help you. I got some code from [Alessia](https://twitter.com/_alesssia) that worked beautifully. Notice the use of `unique`, some postcodes are in the data set mup=ltiple times and you only need to look them up once. 
+The beauty of a hackathon is that you are surrounded by people who can help you. I got some code from [Alessia](https://twitter.com/_alesssia) that worked beautifully, in addition to coordinates it also gives you some administrative data such as constituency. Notice the use of `unique`, some postcodes are in the data set multiple times and you only need to look them up once. 
 
 
 
@@ -156,10 +156,10 @@ company <- gpg_map_comb %>%
 saveRDS(gpg_map_comb, here("data", "gpg_map_comb.RDS"))
 ```
 
-We were now half way through the hack and I was ready to make a map. I used `leaflet` and created the different layers by using three `addCircles` commands and the addLayersCointrol.
+We were now half way through the hack and I was ready to make a map (after going out for a delicious coffee). I used `leaflet` and created the different layers by using three `addCircles` commands and the addLayersControl.
 
 ```{r}
-leaflet(gpg_map_comb,options= leafletOptions( minZoom=4, maxZoom=12) ) %>% 
+leaflet(gpg_map_comb,options= leafletOptions( minZoom=4, maxZoom=14) ) %>% 
   setView(lng=0.1375581, lat=52.23519, zoom=5) %>% 
     addTiles(group = "OSM (default)") %>%
     addProviderTiles(providers$Stamen.Toner, group = "Toner") %>%
@@ -177,9 +177,22 @@ leaflet(gpg_map_comb,options= leafletOptions( minZoom=4, maxZoom=12) ) %>%
       baseGroups = c("Toner Lite","OSM (default)", "Toner"),
       overlayGroups = c("Charity", "Public sector", "Company"),
       options = layersControlOptions(collapsed = FALSE)
-    )
+    ) %>%
+  addLegend(colors=c("green", "deeppink"), labels = c("Men", "Women"), title= "Who is paid more?")
+  
 ```
 
 ## Summary
-After creating the map I started to think about how to share it. I have made a lot of `laflet` maps in the past and in the spirit of trying new things I decided to make a shiny dashboard as I have never made on before and to be honest I struggle with shiny. I'll share my dashboard in my next post.   
+After creating the map I started to think about how to share it. I have made a lot of `leaflet` maps in the past and this one was not wastly different. In the spirit of trying new things I decided to make a shiny dashboard as I have never made one before and to be honest I struggle with shiny. I'll share my dashboard in my next post.   
+
+## Packages I used
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(here)
+library(PostcodesioR)
+library(ggmap)
+library(leaflet)
+```
+
 
