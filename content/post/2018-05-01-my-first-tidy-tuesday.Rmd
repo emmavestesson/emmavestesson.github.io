@@ -93,7 +93,6 @@ gganimate(p2, title_frame = FALSE,interval = 0.05, filename ="world_mortality_20
 
 
 ![](https://emmavestesson.netlify.com/world_mortality_2016.gif)
-
 ## Packages I used
 
 ```{r, eval=FALSE}
