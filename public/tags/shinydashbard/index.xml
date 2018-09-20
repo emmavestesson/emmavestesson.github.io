@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shinydashbard on Playing with data</title>
+    <link>/tags/shinydashbard/</link>
+    <description>Recent content in Shinydashbard on Playing with data</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Thu, 05 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/shinydashbard/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>My first hackathon (part 2)</title>
+      <link>/2018/07/my-first-hackathon-part-2/</link>
+      <pubDate>Thu, 05 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/07/my-first-hackathon-part-2/</guid>
+      <description>Gender pay gap hackathon (part 2) This is part 2 of my blog about the gender pay gap hack that I went to. You can read part 1 here.
+ Reflections It has taken me a long time to write the second part of my experience of the hackathon. I think this is partly because I was unsure how/whether to show the dashboard. This was my first attempt at a shiny dashboard and I did not focus on picking the best metrics for the graphs so I don’t feel like I am showing anything useful and I don’t like the thought of sharing graphs that I am not sure are displaying the data in an appropriate way.</description>
+    </item>
+    
+  </channel>
+</rss>

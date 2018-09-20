@@ -1,0 +1,120 @@
+---
+title: My first hackathon (part 2)
+author: ~
+date: '2018-07-05'
+slug: my-first-hackathon-part-2
+categories:
+  - R
+tags:
+  - leaflet
+  - shiny
+  - shinydashbard
+---
+
+
+
+<div id="gender-pay-gap-hackathon-part-2" class="section level2">
+<h2>Gender pay gap hackathon (part 2)</h2>
+<p>This is part 2 of my blog about the gender pay gap hack that I went to. You can read part 1 <a href="https://emmavestesson.netlify.com/2018/06/my-first-hackathon/">here</a>.</p>
+</div>
+<div id="reflections" class="section level2">
+<h2>Reflections</h2>
+<p>It has taken me a long time to write the second part of my experience of the hackathon. I think this is partly because I was unsure how/whether to show the dashboard. This was my first attempt at a shiny dashboard and I did not focus on picking the best metrics for the graphs so I don’t feel like I am showing anything useful and I don’t like the thought of sharing graphs that I am not sure are displaying the data in an appropriate way. I have decided to share the code but not actually the dashboard. Maybe I will change my mind and add it later but for now this feel right. I hope that the code can still be useful. The good news is that I have developed my shiny skills substantially since the hackathons so hopefully I can write a post about that soon.</p>
+</div>
+<div id="shiny-dashboard" class="section level2">
+<h2>Shiny dashboard</h2>
+<p>Much like a shiny app, a shiny dashboard has a server and a user interface function. My dashboard is based on a basic example I found online (I think that I got it from <a href="https://rstudio.github.io/shinydashboard/examples.html">Rstudio</a> but I am not sure) and I was more focused on getting the dashboard to work than to make cool graphs.</p>
+<div id="the-server-function" class="section level3">
+<h3>The server function</h3>
+<p>This is the server function. This is where I put all the code that actually generates an output for example a graph or a map. I start by loading the data I created in my previous post and I create smaller data sets. I created two graphs in addition to the map that I created in my previous post. One is a bar chart showing the proportion of companies where mean are paid more and one is a scatter plot showing the relationship between the percentage of the workforce that is female and the mean percentage difference in hourly pay. Both have different filters which was the biggest challenge but once I figured out how to do it I have started using it a lot. The graphs are included using <code>renderPlot</code> and the map using <code>renderLeaflet</code>. Anything that you want to actually show needs to be named in the server so that you can refer to in in the UI function. The output name should be <code>output$XXXXXX</code> and be right before the render function (the render function you use will depend on the output type).</p>
+<pre class="r"><code>library(shinydashboard)
+library(shiny)
+library(tidyverse)
+library(ggplot2)
+library(leaflet)
+library(here)
+
+# Define server logic required to draw a histogram
+server &lt;- function(input, output) {
+# load data and create smaller data sets
+  gpg_charity &lt;- readRDS( here(&quot;dashboard&quot;,&quot;data&quot;, &quot;gpg_charity.RDS&quot;)) 
+  charity &lt;- gpg_charity %&gt;% 
+    filter(OrgType==&quot;Charity&quot;)
+  pub_sec &lt;- gpg_charity %&gt;% 
+    filter(OrgType==&quot;Public Sector&quot;)
+  company &lt;- gpg_charity %&gt;% 
+    filter(OrgType==&quot;Company&quot;)
+# Create map  
+  output$my_map &lt;-renderLeaflet({leaflet(gpg_charity, options= leafletOptions( minZoom=6, maxZoom=12) ) %&gt;% 
+    addTiles(group = ) %&gt;%
+    addProviderTiles(providers$Stamen.Toner, group = &quot;Toner&quot;) %&gt;%
+    addProviderTiles(providers$Stamen.TonerLite, group = &quot;Toner Lite&quot;) %&gt;% 
+    addCircles(~longitude, ~latitude, group = &quot;charity&quot;, data=charity,
+               radius = 100, weight = 0.50, stroke = TRUE, opacity = 100,
+               fill = TRUE, color = charity$colour,  popup =charity$label_map ) %&gt;% 
+    addCircles(~longitude, ~latitude,  group = &quot;pub_sector&quot;, 
+               radius = 100, weight = 0.50, stroke = TRUE, color = pub_sec$colour, 
+               popup =charity$label_map ,opacity = 75,data=pub_sec) %&gt;% 
+      addCircles(~longitude, ~latitude,  group = &quot;company&quot;, 
+                 radius = 100, weight = 0.50, stroke = TRUE, color = company$colour, 
+                 popup =charity$label_map ,opacity = 75,data=company) %&gt;% 
+    addLayersControl(
+      baseGroups = c(&quot;Toner Lite&quot;,&quot;OSM (default)&quot;, &quot;Toner&quot;),
+      overlayGroups = c(&quot;charity&quot;, &quot;pub_sector&quot;, &quot;company&quot;),
+      options = layersControlOptions(collapsed = FALSE)
+    )
+  })
+  
+# Create  bar chart
+  output$pie &lt;- renderPlot({
+  mytable &lt;- gpg_charity %&gt;%
+    filter(EmployerSize == input$EmployerSize) %&gt;% # EmplyerSize is the inputId specified in the server function
+    group_by(PaidMore,OrgType) %&gt;%
+    count()
+
+  return( ggplot(mytable, aes(y=n,x=OrgType, fill=PaidMore))+
+            geom_col(width = 1, position = &quot;fill&quot;)  +
+            theme_minimal() )
+
+  })  
+  
+# Create  scatter plot
+  output$DiffMeanHourlyPercent &lt;- renderPlot({
+    data1 &lt;- filter(gpg_charity, OrgType == input$org_type) 
+
+    return(ggplot(data1, aes(x=FemaleWorkforce, y=DiffMeanHourlyPercent)) + geom_point() + 
+             theme_minimal() +ggtitle(&quot;Relationship between % of female workforce and pay gap&quot;))
+  })
+  
+
+ 
+}</code></pre>
+</div>
+<div id="the-user-interface-function" class="section level3">
+<h3>The user interface function</h3>
+<p>This is the user interface. This is where I specified the inputs for the different filters using the <code>selectInput</code> function. You need to give each the filter a name <code>inputId</code> that you can refer to in the server function.</p>
+<pre class="r"><code>library(shinydashboard)
+library(shiny)
+library(leaflet)
+# Define UI for application that draws a histogram
+ui &lt;- dashboardPage(
+  dashboardHeader(title = &quot;Gender pay gap&quot;),
+  dashboardSidebar(),
+  dashboardBody(
+# Create selection box for bar chart
+    fluidRow(
+      box(selectInput(inputId = &quot;org_type&quot;, label = &quot;Choose organisation type&quot;,
+                           choices = list(&quot;Charity&quot;, &quot;Company&quot;, &quot;Public Sector&quot;))
+      ),
+# Create selection box for scatter plot
+      box(plotOutput(&quot;DiffMeanHourlyPercent&quot;)),
+      box(selectInput(inputId = &quot;EmployerSize&quot;, label = &quot;Choose organisation size&quot;,
+                           choices = list(&quot;Less than 250&quot;, &quot;250 to 499&quot;, &quot;500 to 999&quot;, &quot;1000 to 4999&quot;, &quot;20,000 or more&quot;, &quot;Not Provided&quot;))
+          ),
+      box(plotOutput(&quot;pie&quot;)),
+      box(leafletOutput(&quot;my_map&quot;))
+    )
+  )
+)</code></pre>
+</div>
+</div>

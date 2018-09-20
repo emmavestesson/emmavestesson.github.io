@@ -1,0 +1,198 @@
+---
+title: My first hackathon (part 1)
+author: ~
+date: '2018-06-26'
+slug: my-first-hackathon
+categories:
+  - R
+tags:
+  - leaflet
+  - PostcodesioR
+  - ggmap
+  - GPGhack
+---
+
+
+```{r, include=FALSE}
+library(tidyverse)
+library(here)
+library(PostcodesioR)
+library(ggmap)
+library(leaflet)
+```
+
+## Gender pay gap hackathon
+
+Last weekend I went to [my first hackathon](https://codebar.io/events/gender-pay-gap-hack). It was organised by the [AI club for gender minorities](https://www.meetup.com/ai-club/), [codebar](https://codebar.io/) and [ellpha](https://www.ellpha.com/). We used data on the gender pay gap [available here](https://gender-pay-gap.service.gov.uk/). I had a great time so I wanted to share my experience. This is the first part of my first hackathon. 
+
+## The deep dive team
+There were different tables with different themes and I picked deep dive. This was unrelated to deep learning but it was for anyone who wanted to focus on one specific thing. We decided to look at charities so we spent some time linking trying to link data from the charity commission with the gender pay gap data only to realise that it had already been [done]  (https://www.civilsociety.co.uk/voices/david-kane-an-analysis-of-the-gender-pay-gap-in-charities.html) by someone called David Kane. (Writing this blog I have had the chance to check out David Kane's [blog](https://drkane.co.uk/blog/). It has some cool blog posts on charity data and I would recommend a visit). 
+
+### My first encounter with python
+Before we found the linked data I ran my first python code! I can't actually find the code I ran but I felt like it was a moment that needed to be commemorated. I have continued learning python since and I kind of like it. Thank you [Victoria](https://twitter.com/victoriambutt) for helping me get started with python.
+
+## A map
+Once we had the data I quickly noticed on the address with postcodes. I am a sucker for maps so I decided to make one. 
+
+
+```{r, include=FALSE}
+gpg <-read_csv(here("data","gender-pay-gap-with-charity-no.csv") )
+```
+
+
+```{r, eval=FALSE}
+gpg <-read_csv(here("data","gender-pay-gap-with-charity-no.csv") )
+```
+
+The postcode appeared at the end of the address a part from a few address where United Kingdom was at the end so I removed that string. A quick google shows UK postcodes are between six and eight characters long. I therefore I started by extracting eight characters from the right. (Maybe I didn't google it at first but instead only extracted six characters which created loads of issues with invalid postcodes when trying to get the coordinates). Extracting eight characters meant that you sometimes got extra characters such as a comma or a blank space for the shorter postcodes so I removed them.
+
+
+```{r}
+gpg <- gpg %>% 
+  mutate(address_new=str_remove(Address,"United Kingdom,")) %>% 
+  mutate(postcode=str_sub(address_new, -8,-1) ) %>% # extract all the postcodes
+  mutate(postcode=str_remove(postcode, ","), postcode=trimws(postcode) )  %>% 
+  drop_na(postcode)
+```
+
+To get the coordinates I first tried `geocode` from `ggmap`. The output from `geocode` has two columns so I got an error (I have included it below for one postcode). I am sure that there is an easy was around this but `geocode` is limited to 2500 calls per day and I had already used up 1800 calls so I had to find a different way. (I realised writing this that you can use `mutate_geocode` from `ggmap`).  
+```{r, error=TRUE}
+# Do not run! This code will cause an error and you will use up all of your calls to google
+gpg %>%
+  distinct(postcode) %>%
+  slice(1) %>% 
+  mutate(coordinates=ggmap::geocode(postcode))
+```
+
+The beauty of a hackathon is that you are surrounded by people who can help you. I got some code from [Alessia](https://twitter.com/_alesssia) that worked beautifully, in addition to coordinates it also gives you some administrative data such as constituency. Notice the use of `unique`, some postcodes are in the data set multiple times and you only need to look them up once. 
+
+
+
+```{r, eval=FALSE}
+if(!require("devtools")) {
+  install.packages("devtools")
+}
+devtools::install_github("erzk/PostcodesioR")
+
+postcodes <- lapply(unique(gpg$postcode), function(postcode) 
+{
+  tryCatch({
+    PostcodesioR::postcode_lookup(postcode)
+  }, warning = function(w) {
+    postcode_lookup(postcode)
+  },
+  error = function(e) {
+    NA
+  })
+})
+
+postcodes <- do.call(rbind, postcodes)
+saveRDS(postcodes,here("data","postcodes.RDS"))
+
+```
+
+Time to add the coordinates to the main data set. 
+```{r}
+
+postcodes<- readRDS(here("data","postcodes.RDS"))
+gpg_map<- left_join(gpg, postcodes, by="postcode") 
+
+postcodes_missing <- gpg_map %>% 
+  filter(is.na(longitude), !is.na(postcode) ) %>% 
+  select(Address, postcode)
+
+```
+
+There were `r n_distinct(postcodes_missing$postcode)` unique postcodes that were not matched. I didn't do it at the hack but today I decided to try `mutate_geocode` on the address for postcodes that I couldn't match and then on any remaining postcodes. 
+
+```{r, eval=FALSE}
+geocode_address<- mutate_geocode(postcodes_missing, Address)
+geocode_postcodes<- geocode_address %>% 
+  filter(is.na(lon)) %>% 
+  select(-lon, -lat) %>% 
+  mutate_geocode(postcode) %>% 
+  filter(!is.na(lon)) 
+
+geocode_address_nona <- geocode_address %>% 
+  filter(!is.na(lon)) 
+
+geocode_matches <- bind_rows(geocode_address_nona, geocode_postcodes)
+
+saveRDS(geocode_matches,here("data","geocode_matches.RDS"))
+```
+
+```{r, include=FALSE }
+
+geocode_matches<-readRDS(here("data","geocode_matches.RDS"))
+
+```
+
+I got a few more matches using `geocode`. I could probably get a few more by manually looking at the addresses but I am quite happy with the number of matches I found. 
+
+```{r}
+gpg_map_comb<- left_join(gpg_map, geocode_matches, by="postcode") %>% 
+  mutate(longitude=if_else(is.na(longitude), lon, longitude), latitude=if_else(is.na(latitude), lat, latitude)) %>% 
+  select(-lon, -lat) %>% 
+  filter(!is.na(longitude)) 
+
+```
+
+Once I had the coordinates I was almost ready to make a map. The data has a variable that shows if men or women are paid more  so I wanted to plot green points for organisations that pay men more and pink organisations for places that pay women more.I created a label variable with the name of the organisation, the sector and the percentage difference in mean and median pay. When we started the hack we wanted to focus on charities but I decided to keep all types of organisations and instead add layers so that user can pick what types of organisations to show.
+```{r}
+gpg_map_comb<- gpg_map_comb %>% 
+  mutate(label_map=paste0(EmployerName,"</b> <br>", "Sector: ", OrgType,
+                          "</b> <br>", "Difference in median hourly pay: ", DiffMedianHourlyPercent, "%",
+         "</b> <br>", "Difference in mean hourly pay: ", DiffMeanHourlyPercent, "%"),
+colour=if_else(PaidMore=="Men", "green", "deeppink"))
+
+charity <- gpg_map_comb %>% 
+  filter(OrgType=="Charity")
+pub_sec <- gpg_map_comb %>% 
+  filter(OrgType=="Public Sector")
+
+company <- gpg_map_comb %>% 
+  filter(OrgType=="Company")
+
+saveRDS(gpg_map_comb, here("data", "gpg_map_comb.RDS"))
+```
+
+We were now half way through the hack and I was ready to make a map (after going out for a delicious coffee). I used `leaflet` and created the different layers by using three `addCircles` commands and the addLayersControl.
+
+```{r}
+leaflet(gpg_map_comb,options= leafletOptions( minZoom=4, maxZoom=14) ) %>% 
+  setView(lng=0.1375581, lat=52.23519, zoom=5) %>% 
+    addTiles(group = "OSM (default)") %>%
+    addProviderTiles(providers$Stamen.Toner, group = "Toner") %>%
+    addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>% 
+    addCircles(~longitude, ~latitude, group = "Charity", data=charity,
+               radius = 100, weight = 0.50, stroke = TRUE, opacity = 100,
+               fill = TRUE, color = charity$colour,  popup =charity$label_map ) %>% 
+    addCircles(~longitude, ~latitude,  group = "Public sector", 
+               radius = 100, weight = 0.50, stroke = TRUE, color = pub_sec$colour, 
+               popup =charity$label_map ,opacity = 75,data=pub_sec) %>% 
+      addCircles(~longitude, ~latitude,  group = "Company", 
+                 radius = 100, weight = 0.50, stroke = TRUE, color = company$colour, 
+                 popup =charity$label_map ,opacity = 75,data=company) %>% 
+    addLayersControl(
+      baseGroups = c("Toner Lite","OSM (default)", "Toner"),
+      overlayGroups = c("Charity", "Public sector", "Company"),
+      options = layersControlOptions(collapsed = FALSE)
+    ) %>%
+  addLegend(colors=c("green", "deeppink"), labels = c("Men", "Women"), title= "Who is paid more?")
+  
+```
+
+## Summary
+After creating the map I started to think about how to share it. I have made a lot of `leaflet` maps in the past and this one was not wastly different. In the spirit of trying new things I decided to make a shiny dashboard as I have never made one before and to be honest I struggle with shiny. I'll share my dashboard in my next post.   
+
+## Packages I used
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(here)
+library(PostcodesioR)
+library(ggmap)
+library(leaflet)
+```
+
+
