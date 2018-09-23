@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Magick on Playing with data</title>
-    <link>/tags/magick/</link>
-    <description>Recent content in Magick on Playing with data</description>
+    <title>Shinythemes on Playing with data</title>
+    <link>/tags/shinythemes/</link>
+    <description>Recent content in Shinythemes on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
     <lastBuildDate>Sat, 22 Sep 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/magick/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/shinythemes/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>/2018/09/settlers-of-catan-the-random-generator/</guid>
       <description>Background Back in March I wrote a blog post about my favourite board game Settlers of Catan. The code generates a random catan board but there is no interactivity for when you want to create a different random board. You can read it in its entirety here and somewhere in that post I promised to actually create an app so you can create your own board. I tried when I wrote the original blog post but I struggled with Shiny.</description>
-    </item>
-    
-    <item>
-      <title>Settlers of Catan</title>
-      <link>/2018/03/settlers-of-catan/</link>
-      <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/03/settlers-of-catan/</guid>
-      <description>Settlers of catan In our living room there is an old chest hiding some real treasures. Every now and again we will get Settlers of Catan out. I never grow tired of playing it as the board changes every time. The game has 19 hexagon shaped tiles that are placed at random. Eighteen tiles are linked to different resources -wheat, rock, wood, sheep and clay- and the 19th is the desert where the much feared robber lives.</description>
     </item>
     
   </channel>

@@ -6,10 +6,19 @@
     <description>Recent content in R on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Thu, 05 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 22 Sep 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Settlers of Catan - the random generator</title>
+      <link>/2018/09/settlers-of-catan-the-random-generator/</link>
+      <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/09/settlers-of-catan-the-random-generator/</guid>
+      <description>Background Back in March I wrote a blog post about my favourite board game Settlers of Catan. The code generates a random catan board but there is no interactivity for when you want to create a different random board. You can read it in its entirety here and somewhere in that post I promised to actually create an app so you can create your own board. I tried when I wrote the original blog post but I struggled with Shiny.</description>
+    </item>
     
     <item>
       <title>My first hackathon (part 2)</title>

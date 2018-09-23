@@ -18,7 +18,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.31.1 with theme Tranquilpeak 0.4.3-BETA">
-    <title>Settlers of Catan</title>
+    <title>Settlers of Catan - the random generator</title>
     <meta name="author" content="Emma Vestesson">
     <meta name="keywords" content="">
 
@@ -26,15 +26,15 @@
     
 
     
-    <meta name="description" content="Settlers of catan In our living room there is an old chest hiding some real treasures. Every now and again we will get Settlers of Catan out. I never grow tired of playing it as the board changes every time. The game has 19 hexagon shaped tiles that are placed at random. Eighteen tiles are linked to different resources -wheat, rock, wood, sheep and clay- and the 19th is the desert where the much feared robber lives.">
-    <meta property="og:description" content="Settlers of catan In our living room there is an old chest hiding some real treasures. Every now and again we will get Settlers of Catan out. I never grow tired of playing it as the board changes every time. The game has 19 hexagon shaped tiles that are placed at random. Eighteen tiles are linked to different resources -wheat, rock, wood, sheep and clay- and the 19th is the desert where the much feared robber lives.">
+    <meta name="description" content="Background Back in March I wrote a blog post about my favourite board game Settlers of Catan. The code generates a random catan board but there is no interactivity for when you want to create a different random board. You can read it in its entirety here and somewhere in that post I promised to actually create an app so you can create your own board. I tried when I wrote the original blog post but I struggled with Shiny.">
+    <meta property="og:description" content="Background Back in March I wrote a blog post about my favourite board game Settlers of Catan. The code generates a random catan board but there is no interactivity for when you want to create a different random board. You can read it in its entirety here and somewhere in that post I promised to actually create an app so you can create your own board. I tried when I wrote the original blog post but I struggled with Shiny.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Settlers of Catan">
-    <meta property="og:url" content="/2018/03/settlers-of-catan/">
+    <meta property="og:title" content="Settlers of Catan - the random generator">
+    <meta property="og:url" content="/2018/09/settlers-of-catan-the-random-generator/">
     <meta property="og:site_name" content="Playing with data">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Playing with data">
-    <meta name="twitter:description" content="Settlers of catan In our living room there is an old chest hiding some real treasures. Every now and again we will get Settlers of Catan out. I never grow tired of playing it as the board changes every time. The game has 19 hexagon shaped tiles that are placed at random. Eighteen tiles are linked to different resources -wheat, rock, wood, sheep and clay- and the 19th is the desert where the much feared robber lives.">
+    <meta name="twitter:description" content="Background Back in March I wrote a blog post about my favourite board game Settlers of Catan. The code generates a random catan board but there is no interactivity for when you want to create a different random board. You can read it in its entirety here and somewhere in that post I promised to actually create an app so you can create your own board. I tried when I wrote the original blog post but I struggled with Shiny.">
     
       <meta name="twitter:creator" content="@gummifot">
     
@@ -207,19 +207,19 @@ ga('send', 'pageview');
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Settlers of Catan
+      Settlers of Catan - the random generator
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-17T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-09-22T00:00:00Z">
         
   
   
   
   
-    17  2018
+    22  2018
   
 
       </time>
@@ -239,120 +239,110 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <div id="settlers-of-catan" class="section level2">
-<h2>Settlers of catan</h2>
-<p>In our living room there is an old chest hiding some real treasures. Every now and again we will get Settlers of Catan out. I never grow tired of playing it as the board changes every time. The game has 19 hexagon shaped tiles that are placed at random. Eighteen tiles are linked to different resources -wheat, rock, wood, sheep and clay- and the 19th is the desert where the much feared robber lives. Each tile is assigned a number bewteen 1 and 12 at random and when that number is rolled you get to pick up a card linked to the resources of that tile. You can use your resources to build settlement, cities and roads.</p>
-<div align="center">
-<div class="vembedr">
-<iframe class="vimeo-embed" src="https://player.vimeo.com/video/260576657" width="500" height="281" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
-</div>
-</div>
-</div>
-<div id="getting-the-tiles" class="section level2">
-<h2>Getting the tiles</h2>
-<p>As an R user and a massive Settler of Catan fan (I used to play in the morning before going to work) I had been thinking about how to combine the two. I decided that I wanted to create a random board generator. However, just getting a static version of the catan board took me a while so I decided to split this into two blog posts. In the future I will put this into a shiny app so that the board can be generated randomly,</p>
-<p>I know that the board is created randomly when you play Catan the regular way but I just think that adding R to it just makes it more fun.</p>
-<p>I tried a few different ways of creating the board. My first attempt was to create the edge points and use <code>geom_polygon</code> from <code>ggplot2</code> to plot them. It turned out that figuring out where those points should be was trickier than I thought and I gave up. After that I tried plotting hexagons using <code>spsample</code> and I played with the <code>hexbin</code> package but I couldn’t get it to work (most likely because I didn’t do enough reading, not because it can’t be done).</p>
-<p>I finally got it to work after reading <a href="http://www.masalmon.eu/2018/02/22/hexcombine/">Maëlle Salmon’s</a> blog post about plotting hexagon stickers using <code>magick</code>.</p>
-<div id="first-stickerhexagon" class="section level3">
-<h3>First sticker/hexagon</h3>
-<p>I downloaded the hexagon stickers from the <code>hexbin</code> github repository and used the one with the fewest colours as a base. This happened to be a sticker called rangle.</p>
-<p>The rangle sticker only has two colours so it is quite easy to make it only one colour using <code>image_fill</code>.</p>
-<pre class="r"><code>setwd(&quot;/Users/emmavestesson/Documents/GitHub/bdown/&quot;)
-hex_base &lt;- magick::image_read(here::here(&quot;rangle.png&quot;)) %&gt;% 
-image_fill(&quot;white&quot;, point = &quot;+100+100&quot;, fuzz = 20) %&gt;% 
-image_fill(&quot;white&quot;, point = &quot;+100+200&quot;, fuzz = 20)  
-image_write(hex_base, here(&quot;catan hexes/hex_base.png&quot;))</code></pre>
-<p>I now have my template hexagon. I downloaded some icons to illustrate the different resources. The icons were quite large so I started by trimming the image and the rescaling it. Once the icon is small enough I combine the tile and the icon. The code is the same for all the tile so I have only included the code for the wheat tile.</p>
-<pre class="r"><code>setwd(&quot;/Users/emmavestesson/Documents/GitHub/bdown/&quot;)
-# wheat
-wheat_tile &lt;- hex_base %&gt;% 
-  image_fill(&quot;orange&quot;, point = &quot;+100+100&quot;, fuzz = 20) 
+              <div id="background" class="section level2">
+<h2>Background</h2>
+<p>Back in March I wrote a blog post about my favourite board game Settlers of Catan. The code generates a random catan board but there is no interactivity for when you want to create a different random board. You can read it in its entirety <a href="https://emmavestesson.netlify.com/2018/03/settlers-of-catan/">here</a> and somewhere in that post I promised to actually create an app so you can create your own board. I tried when I wrote the original blog post but I struggled with Shiny. There is literally no point in having a random Catan board generator as the process is already random but it has been raining all weekend and I didn’t want to leave the house.</p>
+<div class="figure">
+<img src="https://media.giphy.com/media/kmNpx8z6ld8Ry/giphy.gif" />
 
-wheat_img &lt;- image_read(&quot;~/Documents/R folder/Icons_catan/wheat.png&quot;) 
-wheat_img &lt;- image_trim(wheat_img)
-wheat_img &lt;- image_crop(wheat_img, geometry_area(1088, 1100, 0,0), repage = FALSE) %&gt;% 
-  image_scale(100)
+</div>
+</div>
+<div id="some-reflections-on-learning-shiny" class="section level2">
+<h2>Some reflections on learning Shiny</h2>
+<p>I started writing the code for the server function with great confidence. Since March I have written a few shiny apps/dashboards, been to two shiny workshops, listened to some great talks at EARL London, and I have completed a <a href="https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny">course on datacamp</a>. Despite this, it actually took me longer to write this app than I expected. I am starting to realise that building a shiny app is a different skill to cleaning data or building a statistical model. Building a very basic app is straightforward but once you move past that there are just so many things to think about; which values do I want the user to be able to change? Where should the data manipulations be done? What should be recalculated and when? In a weird way I really enjoy struggling because it makes me feel like I am really learning a whole new skill. Also, the more I explore Shiny the more I realise how versatile a tool it is. I am slowly getting my head around <code>observeEvent</code>/<code>eventReactive</code> and all the other nifty features.</p>
+</div>
+<div id="user-interface-function" class="section level2">
+<h2>User interface function</h2>
+<p>The user interface function is very basic. There is a title specified in <code>titlePanel</code> with the option <code>windowTitle</code> which is the name that you see in the tab when you open the shiny app. The main panel only has two elements; an action button that creates the button to press to create a new board and <code>plotOutput</code> which is for the image that will be created in the server function (I have given it the <code>inputId</code> “image1” which is not very informative).</p>
+<pre class="r"><code>library(shiny)
+library(shinythemes)
+# Define UI for application that draws a histogram
+shinyUI(fluidPage(theme = shinytheme(&quot;superhero&quot;),
+  # Application title
+  titlePanel(&quot;Settlers of Catan - the random board generator&quot;, windowTitle = &quot;Catan&quot;),
+    mainPanel(
+      actionButton(&quot;go&quot;, &quot;Generate new board&quot;),
+      plotOutput(inputId=&#39;image1&#39;)
+    )
+  )
+)</code></pre>
+<div id="shinythemes" class="section level3">
+<h3>Shinythemes</h3>
+<p>You will notice that I picked the theme “superhero”. I found it using the <code>themeSelector</code> (as described <a href="https://rstudio.github.io/shinythemes/">here</a> ) and it is such a neat way of seeing what your app will look like using different themes. All you need to do is to add <code>shinythemes::themeSelector()</code> somewhere in UI function and then when you run the app there will be a drop-down menu with the different themes.</p>
+</div>
+</div>
+<div id="server-function" class="section level2">
+<h2>Server function</h2>
+<p>I didn’t bother changing much of the code from the static version of the code. Because I am not creating a gif this time the code could have been shortened but I am not a fan of changing working code unless it results in massive efficiency gain or readability. There are some calculations happening outside of the server function because they don’t need to be recalculated when a new board is generated. Most of the code is part of an <code>eventReactive</code> statement that is assigned to an object called <code>image_board</code>. The <code>imageRender</code> wants an expression that is a list with the path to the image named <code>src</code>. I think that this is the bit that I struggled with the most. Because the image generated is a <code>magick-image</code> (in the environment it says “external pointer of class ‘magick-image’”) it doesn’t automatically show in the plot window so I can’t use renderPlot. I tried using <code>renderPlot</code> by generating the object I wanted and printing it but I couldn’t get it to work.</p>
+<p>My favourite part of the code is <code>ignoreNULL=FALSE</code> which is an option in <code>eventReactive</code>. It controls what should be done before the user has used the action button. The default is <code>ignoreNULL=TRUE</code> and with that setting there was no pretty catan board when you loaded the app.</p>
+<pre class="r"><code>library(shiny)
+library(magick)
+library(png)
 
-wheat &lt;- image_composite(wheat_tile, wheat_img, offset = &quot;+40+50&quot;) %&gt;% 
-  magick::image_write(here(&quot;catan hexes/wheat.png&quot;))</code></pre>
-<p>Not all resources appear the same number of times so I create a vector with links to image and repeat some of them four times and some three times. I then go on to shuffling the tiles to add the random component and then I read the images.</p>
-<pre class="r"><code>setwd(&quot;/Users/emmavestesson/Documents/GitHub/bdown/&quot;)
 tiles &lt;- c(rep(&quot;catan hexes/wood.png&quot;,4), rep(&quot;catan hexes/sheep.png&quot;,4), rep(&quot;catan hexes/wheat.png&quot;,4), rep(&quot;catan hexes/clay.png&quot; ,3), rep(&quot;catan hexes/rock.png&quot;,3), &quot;catan hexes/desert.png&quot; )
-tiles &lt;- sample(tiles) # change the order at random
+number_tiles &lt;- c(&quot;5&quot;, &quot;2&quot;, &quot;6&quot;, &quot;3&quot;, &quot;8&quot;, &quot;10&quot;, &quot;9&quot;,&quot;12&quot;,&quot;11&quot;,&quot;4&quot;, &quot;8&quot;,&quot;10&quot;,&quot;9&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;3&quot;, &quot;11&quot; )
 read_append &lt;- . %&gt;%
   magick::image_read() %&gt;%
   magick::image_append()
 
-tiles_image &lt;- map(tiles, read_append)
+shinyServer(function(input, output) {
 
-number_tiles &lt;- c(&quot;5&quot;, &quot;2&quot;, &quot;6&quot;, &quot;3&quot;, &quot;8&quot;, &quot;10&quot;, &quot;9&quot;,&quot;12&quot;,&quot;11&quot;,&quot;4&quot;, &quot;8&quot;,&quot;10&quot;,&quot;9&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;3&quot;, &quot;11&quot; )</code></pre>
-<p>The vector <code>number_tiles</code> holds the numbers that should go on the tiles. In real life the tiles are shuffled and placed on the table in a certain order, starting from the top and moving around in a circle until you get to the middle. After that you place one number on each tile skipping the desert. This skipping the desert tile created a bit of a problem. The desert tile should not get a tile so I need to find out where the desert tile is and then add a blank space at that point in the <code>number_tiles</code> vector before adding the number to tiles using <code>image_annotate</code>..</p>
-<pre class="r"><code>desert_loc &lt;- grep(&quot;catan hexes/desert.png&quot;, tiles, ignore.case = FALSE, perl = FALSE, value = FALSE,
-     fixed = FALSE, useBytes = FALSE, invert = FALSE)
-
-number_tiles &lt;- append(number_tiles, &quot; &quot;, after = desert_loc-1)
-
-tiles_with_prob &lt;- map2(tiles_image, number_tiles, ~image_annotate(.x,paste(.y), gravity = &quot;south&quot;, location = &quot;+0+20&quot;,
-               degrees = 0, size = 19)) </code></pre>
-<p>Time to combine all the tiles! This code is very long and repetitive because I need to put down the tiles in a certain order. In my first attempt using hex stickers I created five rows of hexagons and then combined them but then the numbers were wrong as you need to skip a number when the desert tile is plotted.</p>
-<pre class="r"><code>info &lt;- tiles_with_prob[[1]] %&gt;%
-  magick::image_info()
-height &lt;- info$height
-width &lt;- info$width
-
-board &lt;- magick::image_blank(width = width * 6,
-                                 height = width * 5 ,
-                                 col = &quot;dodgerblue1&quot;)
-info_board &lt;- image_info(board)
-y_adj &lt;- height/5
-x_adj &lt;- -width/2
-
-board0 &lt;- image_composite(board,tiles_with_prob[[1]], offset=paste0(&quot;+&quot;, 2*width + x_adj, &quot;+&quot;, 0 + y_adj) )
-board1 &lt;- image_composite(board0,tiles_with_prob[[2]], offset=paste0(&quot;+&quot;, 3*width + x_adj,  &quot;+&quot;, 0 + y_adj)) 
-board2 &lt;- image_composite(board1,tiles_with_prob[[3]], offset=paste0(&quot;+&quot;, 4*width + x_adj,  &quot;+&quot;, 0 + y_adj)) 
-board3 &lt;- image_composite(board2,tiles_with_prob[[4]], offset=paste0(&quot;+&quot;, 4.5*width + x_adj, &quot;+&quot;, height*0.75 + y_adj)) 
-board4 &lt;- image_composite(board3,tiles_with_prob[[5]], offset=paste0(&quot;+&quot;, 5*width + x_adj, &quot;+&quot;, 2*height*0.75 + y_adj)) 
-board5 &lt;- image_composite(board4,tiles_with_prob[[6]], offset=paste0(&quot;+&quot;, 4.5*width + x_adj, &quot;+&quot;, 3*height*0.75 + y_adj)) 
-board6 &lt;- image_composite(board5,tiles_with_prob[[7]], offset=paste0(&quot;+&quot;, 4*width + x_adj, &quot;+&quot;, 4*height*0.75 + y_adj)) 
-board7 &lt;- image_composite(board6,tiles_with_prob[[8]], offset=paste0(&quot;+&quot;, 3*width + x_adj, &quot;+&quot;, 4*height*0.75 + y_adj)) 
-board8 &lt;- image_composite(board7,tiles_with_prob[[9]], offset=paste0(&quot;+&quot;, 2*width + x_adj, &quot;+&quot;, 4*height*0.75 + y_adj)) 
-board9 &lt;- image_composite(board8,tiles_with_prob[[10]], offset=paste0(&quot;+&quot;, 1.5*width + x_adj, &quot;+&quot;, 3*height*0.75 + y_adj)) 
-board10 &lt;- image_composite(board9,tiles_with_prob[[11]], offset=paste0(&quot;+&quot;, 1*width + x_adj, &quot;+&quot;, 2*height*0.75 + y_adj)) 
-board11 &lt;- image_composite(board10,tiles_with_prob[[12]], offset=paste0(&quot;+&quot;, 1.5*width + x_adj, &quot;+&quot;, 1*height*0.75 + y_adj)) 
-board12 &lt;- image_composite(board11,tiles_with_prob[[13]], offset=paste0(&quot;+&quot;, 2.5*width + x_adj, &quot;+&quot;, 1*height*0.75 + y_adj)) 
-board13 &lt;- image_composite(board12,tiles_with_prob[[14]], offset=paste0(&quot;+&quot;, 3.5*width + x_adj, &quot;+&quot;, 1*height*0.75 + y_adj)) 
-board14 &lt;- image_composite(board13,tiles_with_prob[[15]], offset=paste0(&quot;+&quot;, 4*width + x_adj, &quot;+&quot;, 2*height*0.75 + y_adj)) 
-board15 &lt;- image_composite(board14,tiles_with_prob[[15]], offset=paste0(&quot;+&quot;, 3.5*width + x_adj, &quot;+&quot;, 3*height*0.75 + y_adj)) 
-board16 &lt;- image_composite(board15,tiles_with_prob[[17]], offset=paste0(&quot;+&quot;, 2.5*width + x_adj, &quot;+&quot;, 3*height*0.75 + y_adj))
-board17 &lt;- image_composite(board16,tiles_with_prob[[18]], offset=paste0(&quot;+&quot;, 2*width + x_adj, &quot;+&quot;, 2*height*0.75 + y_adj))
-board18 &lt;- image_composite(board17,tiles_with_prob[[19]], offset=paste0(&quot;+&quot;, 3*width + x_adj,  &quot;+&quot;, 2*height*0.75 + y_adj))
-
-board_gif&lt;- image_animate(c(board0, board1, board2, board3, board4, board5, board6, board7, board8, 
-                board9, board10,board11, board12, board13, board14, board15, board16, board17, board18), fps=1)
-
-
-image_write(board18, &quot;~/Documents/GitHub/bdown/public/2018/03/settlers-of-catan/catan_board.png&quot;)
-
-image_write(board_gif, &quot;~/Documents/GitHub/bdown/public/board_gif.gif&quot;)</code></pre>
-<p>Here is a gif showing the order that the tiles are plotted. I uploaded the gif to my blog to include because I couldn’t figure out how to include it from disk without installing additional things.</p>
-<p><img src="https://emmavestesson.netlify.com/board_gif.gif" /> Static image!</p>
-<p><img src="catan_board.png" /><!-- --> ser ## Notes</p>
-<p>I used the <code>vembedr</code> package to include the short video of my friend.</p>
-<div>
-Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-</div>
-</div>
+image_board &lt;-eventReactive(input$go, {
+  tiles &lt;- sample(tiles) # This is the one line of code that actually shuffles the order of the tiles.
+  tiles_image &lt;- map(tiles, read_append)
+  desert_loc &lt;- grep(&quot;catan hexes/desert.png&quot;, tiles, ignore.case = FALSE, perl = FALSE, value = FALSE,
+                     fixed = FALSE, useBytes = FALSE, invert = FALSE)
+  number_tiles &lt;- append(number_tiles, &quot; &quot;, after = desert_loc-1)
+  tiles_with_prob &lt;- map2(tiles_image, number_tiles, ~image_annotate(.x,paste(.y), gravity = &quot;south&quot;, location = &quot;+0+20&quot;,
+                                                                     degrees = 0, size = 19)) 
+  info &lt;- tiles_with_prob[[1]] %&gt;%
+    magick::image_info()
+  height &lt;- info$height
+  width &lt;- info$width
+  board &lt;- magick::image_blank(width = width * 6,
+                               height = width * 5 ,
+                               col = &quot;dodgerblue1&quot;)
+  y_adj &lt;- height/5
+  x_adj &lt;- -width/2
+  
+  board0 &lt;- image_composite(board,tiles_with_prob[[1]], offset=paste0(&quot;+&quot;, 2*width + x_adj, &quot;+&quot;, 0 + y_adj) )
+  board1 &lt;- image_composite(board0,tiles_with_prob[[2]], offset=paste0(&quot;+&quot;, 3*width + x_adj,  &quot;+&quot;, 0 + y_adj)) 
+  board2 &lt;- image_composite(board1,tiles_with_prob[[3]], offset=paste0(&quot;+&quot;, 4*width + x_adj,  &quot;+&quot;, 0 + y_adj)) 
+  board3 &lt;- image_composite(board2,tiles_with_prob[[4]], offset=paste0(&quot;+&quot;, 4.5*width + x_adj, &quot;+&quot;, height*0.75 + y_adj)) 
+  board4 &lt;- image_composite(board3,tiles_with_prob[[5]], offset=paste0(&quot;+&quot;, 5*width + x_adj, &quot;+&quot;, 2*height*0.75 + y_adj)) 
+  board5 &lt;- image_composite(board4,tiles_with_prob[[6]], offset=paste0(&quot;+&quot;, 4.5*width + x_adj, &quot;+&quot;, 3*height*0.75 + y_adj)) 
+  board6 &lt;- image_composite(board5,tiles_with_prob[[7]], offset=paste0(&quot;+&quot;, 4*width + x_adj, &quot;+&quot;, 4*height*0.75 + y_adj)) 
+  board7 &lt;- image_composite(board6,tiles_with_prob[[8]], offset=paste0(&quot;+&quot;, 3*width + x_adj, &quot;+&quot;, 4*height*0.75 + y_adj)) 
+  board8 &lt;- image_composite(board7,tiles_with_prob[[9]], offset=paste0(&quot;+&quot;, 2*width + x_adj, &quot;+&quot;, 4*height*0.75 + y_adj)) 
+  board9 &lt;- image_composite(board8,tiles_with_prob[[10]], offset=paste0(&quot;+&quot;, 1.5*width + x_adj, &quot;+&quot;, 3*height*0.75 + y_adj)) 
+  board10 &lt;- image_composite(board9,tiles_with_prob[[11]], offset=paste0(&quot;+&quot;, 1*width + x_adj, &quot;+&quot;, 2*height*0.75 + y_adj)) 
+  board11 &lt;- image_composite(board10,tiles_with_prob[[12]], offset=paste0(&quot;+&quot;, 1.5*width + x_adj, &quot;+&quot;, 1*height*0.75 + y_adj)) 
+  board12 &lt;- image_composite(board11,tiles_with_prob[[13]], offset=paste0(&quot;+&quot;, 2.5*width + x_adj, &quot;+&quot;, 1*height*0.75 + y_adj)) 
+  board13 &lt;- image_composite(board12,tiles_with_prob[[14]], offset=paste0(&quot;+&quot;, 3.5*width + x_adj, &quot;+&quot;, 1*height*0.75 + y_adj)) 
+  board14 &lt;- image_composite(board13,tiles_with_prob[[15]], offset=paste0(&quot;+&quot;, 4*width + x_adj, &quot;+&quot;, 2*height*0.75 + y_adj)) 
+  board15 &lt;- image_composite(board14,tiles_with_prob[[15]], offset=paste0(&quot;+&quot;, 3.5*width + x_adj, &quot;+&quot;, 3*height*0.75 + y_adj)) 
+  board16 &lt;- image_composite(board15,tiles_with_prob[[17]], offset=paste0(&quot;+&quot;, 2.5*width + x_adj, &quot;+&quot;, 3*height*0.75 + y_adj))
+  board17 &lt;- image_composite(board16,tiles_with_prob[[18]], offset=paste0(&quot;+&quot;, 2*width + x_adj, &quot;+&quot;, 2*height*0.75 + y_adj))
+  board18 &lt;- image_composite(board17,tiles_with_prob[[19]], offset=paste0(&quot;+&quot;, 3*width + x_adj,  &quot;+&quot;, 2*height*0.75 + y_adj))
+  board18 &lt;- image_composite(board17,tiles_with_prob[[19]], offset=paste0(&quot;+&quot;, 3*width + x_adj,  &quot;+&quot;, 2*height*0.75 + y_adj))
+  
+  image_write(board18, path =  here::here(&quot;catan_function/www/catan_board.png&quot;))
+  list(src = here::here(&quot;catan_function/www/catan_board.png&quot;))}, 
+  ignoreNULL=FALSE ) # Setting ignoreNULL to FALSE means that the code is run once when the app is first loaded  
+# Start of code that actually renders the image
+output$image1 &lt;- renderImage( {   
+  image_board()
+} 
+)
+ })</code></pre>
+<p>I have embedded the shiny app below and here is the link <a href="https://emmamariavestesson.shinyapps.io/catan_function" class="uri">https://emmamariavestesson.shinyapps.io/catan_function</a> <iframe src="https://emmamariavestesson.shinyapps.io/catan_function?showcase=0" width="672" height="600px"></iframe></p>
 </div>
 <div id="packages-i-used" class="section level2">
 <h2>Packages I used</h2>
-<pre class="r"><code>library(&quot;magrittr&quot;)
-library(&quot;purrr&quot;)
-library(&quot;fs&quot;)
-library(&quot;magick&quot;)
-library(&quot;here&quot;)
-library(&quot;htmltools&quot;)
-library(&quot;vembedr&quot;)</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(shiny)
+library(shinythemes)
+library(magick)</code></pre>
 </div>
 
               
@@ -368,7 +358,9 @@ library(&quot;vembedr&quot;)</code></pre>
                     
   <a class="tag tag--primary tag--small" href="/tags/magick/">magick</a>
 
-  <a class="tag tag--primary tag--small" href="/tags/catan/">catan</a>
+  <a class="tag tag--primary tag--small" href="/tags/shiny/">Shiny</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/shinythemes/">Shinythemes</a>
 
                   </div>
                 
@@ -381,7 +373,7 @@ library(&quot;vembedr&quot;)</code></pre>
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/my-first-tidy-tuesday/" data-tooltip="My first tidy Tuesday">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -389,7 +381,7 @@ library(&quot;vembedr&quot;)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/mexico/" data-tooltip="My trip to Mexico in emojis">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/my-first-hackathon-part-2/" data-tooltip="My first hackathon (part 2)">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -407,19 +399,19 @@ library(&quot;vembedr&quot;)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/settlers-of-catan/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/09/settlers-of-catan-the-random-generator/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/settlers-of-catan/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/09/settlers-of-catan-the-random-generator/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/settlers-of-catan/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/09/settlers-of-catan-the-random-generator/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -457,7 +449,7 @@ library(&quot;vembedr&quot;)</code></pre>
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/05/my-first-tidy-tuesday/" data-tooltip="My first tidy Tuesday">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -465,7 +457,7 @@ library(&quot;vembedr&quot;)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/mexico/" data-tooltip="My trip to Mexico in emojis">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/my-first-hackathon-part-2/" data-tooltip="My first hackathon (part 2)">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -483,19 +475,19 @@ library(&quot;vembedr&quot;)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/settlers-of-catan/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/09/settlers-of-catan-the-random-generator/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/settlers-of-catan/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/09/settlers-of-catan-the-random-generator/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/settlers-of-catan/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/09/settlers-of-catan-the-random-generator/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -519,19 +511,19 @@ library(&quot;vembedr&quot;)</code></pre>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2Fsettlers-of-catan%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F09%2Fsettlers-of-catan-the-random-generator%2F">
           <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fsettlers-of-catan%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F09%2Fsettlers-of-catan-the-random-generator%2F">
           <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fsettlers-of-catan%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F09%2Fsettlers-of-catan-the-random-generator%2F">
           <i class="fa fa-google-plus"></i><span>%!(EXTRA string=Google&#43;)</span>
         </a>
       </li>
