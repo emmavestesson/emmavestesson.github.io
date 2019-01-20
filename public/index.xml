@@ -6,10 +6,20 @@
     <description>Recent content on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 22 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Frequently Used Code</title>
+      <link>/2019/01/frequently-used-code/</link>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/01/frequently-used-code/</guid>
+      <description>Motivation There are some things that I always forget how to do in R. I have decided to add some of those code snippets to this blog so I that I can look them up when I need them.
+Droping variables using a vector of names I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use one_of around the vector with variable names.</description>
+    </item>
     
     <item>
       <title>Settlers of Catan - the random generator</title>

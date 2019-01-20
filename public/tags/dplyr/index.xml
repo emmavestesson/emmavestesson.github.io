@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Dplyr on Playing with data</title>
+    <link>/tags/dplyr/</link>
+    <description>Recent content in Dplyr on Playing with data</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/dplyr/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Frequently Used Code</title>
+      <link>/2019/01/frequently-used-code/</link>
+      <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/01/frequently-used-code/</guid>
+      <description>Motivation There are some things that I always forget how to do in R. I have decided to add some of those code snippets to this blog so I that I can look them up when I need them.
+Droping variables using a vector of names I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use one_of around the vector with variable names.</description>
+    </item>
+    
+  </channel>
+</rss>

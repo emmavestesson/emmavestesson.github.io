@@ -1,0 +1,27 @@
+---
+title: Frequently Used Code
+author: ~
+date: '2019-01-13'
+slug: frequently-used-code
+categories:
+  - R
+tags:
+  - dplyr
+---
+
+## Motivation
+
+There are some things that I always forget how to do in R. I have decided to add some of those code snippets to this blog so I that I can look them up when I need them.
+
+### Droping variables using a vector of names
+
+I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use `one_of` around the vector with variable names. The other day I spent 10 minutes trying things like `any_of` but it should be `one_of`. Now I will never forget (or if I forget then I can read my own blog)
+
+```{r}
+library(tidyverse)
+vars_to_drop <- c('Wind', 'Temp')
+airquality <- airquality %>% 
+  select(-one_of(vars_to_drop))
+
+```
+
