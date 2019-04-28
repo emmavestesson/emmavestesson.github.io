@@ -17,7 +17,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1 with theme Tranquilpeak 0.4.3-BETA">
+    <meta name="generator" content="Hugo 0.55.4 with theme Tranquilpeak 0.4.3-BETA">
     <title>Making a map (or my first blogpost)</title>
     <meta name="author" content="Emma Vestesson">
     <meta name="keywords" content="">
@@ -63,14 +63,17 @@
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-112742782-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-112742782-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -239,7 +242,8 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+              
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
 <script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
 <link href="/rmarkdown-libs/leaflet/leaflet.css" rel="stylesheet" />
 <script src="/rmarkdown-libs/leaflet/leaflet.js"></script>
@@ -631,7 +635,7 @@ library(rgeos)</code></pre>
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather">Motivation There are some things that I always forget how to do in R. I have decided to add some of those code snippets to this blog so I that I can look them up when I need them.
-Droping variables using a vector of names I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use one_of around the vector with variable names.</div>
+ Droping variables using a vector of names I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use one_of around the vector with variable names.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>

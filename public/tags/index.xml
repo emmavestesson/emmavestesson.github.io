@@ -6,161 +6,17 @@
     <description>Recent content in Tags on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 27 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Birthday</title>
-      <link>/tags/birthday/</link>
-      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/birthday/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Catan</title>
-      <link>/tags/catan/</link>
-      <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/catan/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dplyr</title>
+      <title>dplyr</title>
       <link>/tags/dplyr/</link>
       <pubDate>Sun, 13 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/dplyr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Emojifont</title>
-      <link>/tags/emojifont/</link>
-      <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/emojifont/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Fingertipsr</title>
-      <link>/tags/fingertipsr/</link>
-      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/fingertipsr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gganimate</title>
-      <link>/tags/gganimate/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/gganimate/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ggmap</title>
-      <link>/tags/ggmap/</link>
-      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/ggmap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gpghack</title>
-      <link>/tags/gpghack/</link>
-      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/gpghack/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Guardianr</title>
-      <link>/tags/guardianr/</link>
-      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/guardianr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Leaflet</title>
-      <link>/tags/leaflet/</link>
-      <pubDate>Thu, 05 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/leaflet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Magick</title>
-      <link>/tags/magick/</link>
-      <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/magick/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Osmdata</title>
-      <link>/tags/osmdata/</link>
-      <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/osmdata/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Phe</title>
-      <link>/tags/phe/</link>
-      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/phe/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Postcodesior</title>
-      <link>/tags/postcodesior/</link>
-      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/postcodesior/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Purrr</title>
-      <link>/tags/purrr/</link>
-      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/purrr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rvest</title>
-      <link>/tags/rvest/</link>
-      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/rvest/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Sf</title>
-      <link>/tags/sf/</link>
-      <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/sf/</guid>
       <description></description>
     </item>
     
@@ -174,15 +30,6 @@
     </item>
     
     <item>
-      <title>Shinydashbard</title>
-      <link>/tags/shinydashbard/</link>
-      <pubDate>Thu, 05 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/shinydashbard/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Shinythemes</title>
       <link>/tags/shinythemes/</link>
       <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
@@ -192,43 +39,61 @@
     </item>
     
     <item>
-      <title>Simstudy</title>
-      <link>/tags/simstudy/</link>
-      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      <title>magick</title>
+      <link>/tags/magick/</link>
+      <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/simstudy/</guid>
+      <guid>/tags/magick/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Tableone</title>
-      <link>/tags/tableone/</link>
-      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      <title>leaflet</title>
+      <link>/tags/leaflet/</link>
+      <pubDate>Thu, 05 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/tableone/</guid>
+      <guid>/tags/leaflet/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Texreg</title>
-      <link>/tags/texreg/</link>
-      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      <title>shinydashbard</title>
+      <link>/tags/shinydashbard/</link>
+      <pubDate>Thu, 05 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/texreg/</guid>
+      <guid>/tags/shinydashbard/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Tidytext</title>
-      <link>/tags/tidytext/</link>
-      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      <title>GPGhack</title>
+      <link>/tags/gpghack/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/tidytext/</guid>
+      <guid>/tags/gpghack/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Tidytuesday</title>
+      <title>PostcodesioR</title>
+      <link>/tags/postcodesior/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/postcodesior/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ggmap</title>
+      <link>/tags/ggmap/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ggmap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TidyTuesday</title>
       <link>/tags/tidytuesday/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
       
@@ -237,7 +102,16 @@
     </item>
     
     <item>
-      <title>Tweenr</title>
+      <title>gganimate</title>
+      <link>/tags/gganimate/</link>
+      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/gganimate/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tweenr</title>
       <link>/tags/tweenr/</link>
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
       
@@ -246,11 +120,137 @@
     </item>
     
     <item>
-      <title>Wordcloud</title>
+      <title>catan</title>
+      <link>/tags/catan/</link>
+      <pubDate>Sat, 17 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/catan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>emojifont</title>
+      <link>/tags/emojifont/</link>
+      <pubDate>Wed, 07 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/emojifont/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>osmdata</title>
+      <link>/tags/osmdata/</link>
+      <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/osmdata/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>sf</title>
+      <link>/tags/sf/</link>
+      <pubDate>Sat, 03 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/sf/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Birthday</title>
+      <link>/tags/birthday/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/birthday/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>guardianR</title>
+      <link>/tags/guardianr/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/guardianr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>rvest</title>
+      <link>/tags/rvest/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rvest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidytext</title>
+      <link>/tags/tidytext/</link>
+      <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tidytext/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wordcloud</title>
       <link>/tags/wordcloud/</link>
       <pubDate>Sun, 21 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/wordcloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>purrr</title>
+      <link>/tags/purrr/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/purrr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>simstudy</title>
+      <link>/tags/simstudy/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/simstudy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tableone</title>
+      <link>/tags/tableone/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tableone/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>texreg</title>
+      <link>/tags/texreg/</link>
+      <pubDate>Sat, 13 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/texreg/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PHE</title>
+      <link>/tags/phe/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/phe/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fingertipsR</title>
+      <link>/tags/fingertipsr/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/fingertipsr/</guid>
       <description></description>
     </item>
     

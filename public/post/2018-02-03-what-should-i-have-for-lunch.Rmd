@@ -1,0 +1,193 @@
+---
+title: What should I have for lunch?
+author: ~
+date: '2018-02-03'
+slug: what-should-i-have-for-lunch
+runtime: shiny
+categories:
+  - R
+tags:
+  - sf
+  - leaflet
+  - osmdata
+  - shiny
+---
+
+
+```{r, include=FALSE}
+library("osmdata")
+library(sf)
+library(units)
+library(leaflet)
+library(shiny)
+library(lwgeom)
+library(tidyverse)
+library(here)
+```
+
+# Inspiration
+I was having lunch with some colleagues the other day when they told me about a restaurant spreadsheet  that they used to use to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.
+
+
+
+I had also seen a <a href="https://rgeomatic.hypotheses.org/1244">really cool blog post</a> using the `osmdata` package to look at the number of pubs close to metro stations in Paris. I had been keen to try to replicate some of the things in that post and this seemed like the perfect opportunity. 
+
+# Prepping for this post
+
+A few weeks ago I attempted to do some web scraping in R. I basically did no research before starting and ended up, for lack of a better word, wasting a lot of time. I didn't want to make the same mistake again so I worked through the first three chapters of <a href="https://www.datacamp.com/courses/spatial-analysis-in-r-with-sf-and-raster">this datacamp course</a> at the same time as writing this post.
+
+# Getting the data 
+
+I used data from the `osmdata` package the first step is to create a bounding box. I used <a href="http://boundingbox.klokantech.com/"> this website</a> to get the coordinates but I am sure that there are loads of other ones. The first object can also be a string e.g. "London" but since I only want restaurant close to work I used a bounding box.  
+
+```{r}
+q0 <- opq(bbox=c(-0.131461,51.506123,-0.10863,51.520224)) 
+res0 <- osmdata_sf(q0) # create dataframe
+
+```
+
+The information that I am after is stored in `osm_point` and within `osm_point` the type of point is stored in `amenity`. I had a closer look at `amenity` to identify which amenities I am interested in. 
+```{r, eval= FALSE}
+amenity<- res0[["osm_points"]][["amenity"]]
+table(amenity)
+```
+
+I decided that I wanted to include restaurants, cafés and fast food places. Because of the way `add_osm_feature` works I extract the points one by one, create a data frame and then I combine them afterwards.
+```{r}
+restaurants <- add_osm_feature(opq = q0, key = 'amenity', value = "restaurant") %>% 
+  osmdata_sf()
+
+cafe <- add_osm_feature(opq = q0, key = 'amenity', value = "cafe") %>% 
+  osmdata_sf() 
+
+fast_food <- add_osm_feature(opq = q0, key = 'amenity', value = "fast_food")  %>% 
+  osmdata_sf() 
+
+# Combine different food place
+food_places <- c(restaurants, cafe, fast_food) 
+food_places <- food_places$osm_points 
+```
+
+I drop the observations without a name because how am I supposed to find a restaurant without a name?
+
+```{r}
+
+food_places_cg <- food_places %>% 
+  filter(!is.na(name)) %>% 
+  mutate(as.character(cuisine))
+
+food_places_cg <- st_transform(food_places_cg, crs = 4326)
+
+```
+
+# How far will I have to walk?
+I now have all the data I need to plot restaurants near work but I also want to calculate the distance from work to each restaurant. This is where the datacamp course came in handy. 
+
+I calculate the distance using the `st_distance` function. I also look at the values I get to make sure that they have face validity.  It is always important to remember that just because you don't get an error message it doesn't mean that your code has done what you wanted to. The first time I tried running this code I all the food places were ~20,000 meters away even though there are multiple cafés just across the road. It turned out I had missed out the "-" in the longitude when entering the coordinates for my work place.  
+```{r}
+work_coor <-data.frame(longitude=-0.12331, latitude=51.514171)
+work_coor <- st_as_sf(work_coor, coords = c("longitude", "latitude"), crs = 4326)
+work_coor <- st_transform(work_coor, crs=st_crs(food_places_cg, asText = TRUE))
+distance <- st_distance(work_coor, food_places_cg)
+head(distance) 
+food_places_cg$distance_from_work <- t(round(distance))
+```
+
+Add a label. 
+```{r}
+food_places_cg$label <- paste0("<b>", food_places_cg$name, "</b> <br>", 
+                         "Distance: ", food_places_cg$distance_from_work, "m")
+
+```
+
+# Shiny app
+Because I want my map to be reactive I have to use shiny. I save the data I have created up until now and saved it for the app. 
+
+```{r,eval=TRUE }
+saveRDS(food_places_cg,file=here("/Covent_garden_map/Random_map/cov_gar.rds"))
+```
+The restaurant that you should go to is dark purple. If you don't like the restaurant that has been suggested just click the button that says "Generate new lunch option" and you will get a new suggestion. 
+```{r shiny app, echo=FALSE}
+knitr::include_app("https://emmamariavestesson.shinyapps.io/Random_map/", 
+  height = "600px")
+```
+
+The shiny code is quite basic and I spent longer trying to figure out how to include a shiny app in a blogdown post than actually creating the app but here is the code for the app for good measure. (This is how I embedded the shiny app knitr::include_app("URL", height = "600px").) 
+
+```{r, eval=FALSE}
+library(shiny)
+library(leaflet)
+library(tidyverse)
+library(sf)
+
+ui <- fluidPage(
+  leafletOutput("mymap"),
+  h3(textOutput("selected_var")),
+  actionButton("recalc", "Generate new lunch option")
+)
+
+# Define server 
+server <- function(input, output, session) {
+
+  cov_gar <- readRDS(file="cov_gar.rds")
+
+  points <- eventReactive(input$recalc, {
+ 
+    sample_n(cov_gar,1)
+  }, ignoreNULL = FALSE)
+  
+
+  # create the interactive map...
+  output$mymap <- renderLeaflet({
+    leaflet(padding = 0, options= leafletOptions( minZoom=10, maxZoom=18) ) %>% 
+      addTiles()  %>%
+      addMarkers( group = "The office",
+                        lng = -0.12331,
+                        lat = 51.514171, 
+                  popup="The office") %>% 
+      addCircleMarkers( group = "All lunch places",
+                          lng = st_coordinates(cov_gar)[,1],
+                          lat = st_coordinates(cov_gar)[,2],
+                          radius = 8, weight = 0.25,
+                          stroke = TRUE, opacity = 75,
+                          fill = TRUE, fillColor = "deeppink",
+                          fillOpacity = 100,
+                          popup = cov_gar$label,
+                          color = "white") %>%
+      addCircleMarkers(data = points(), group="Random lunch place", 
+                       radius = 8, weight = 0.25,
+                       stroke = TRUE, opacity = 100,
+                       fill = TRUE, fillColor = "purple",
+                       fillOpacity = 100,     
+                       popup = points()$label,
+                       color = "white") %>% 
+
+      addLayersControl(
+        overlayGroups = c("All lunch places", "Random lunch place"),
+        options = layersControlOptions(collapsed = FALSE))
+      
+  })
+  
+  output$selected_var <- renderText({ 
+    paste0("Maybe you should go to ",points()$name, " for lunch? It is ", points()$distance, "m from the office.") 
+  })
+}
+
+# Run the application 
+shinyApp(ui = ui, server = server)
+
+
+```
+
+# Packages I used
+```{r, eval=FALSE}
+
+library("osmdata")
+library(sf)
+library(units)
+library(leaflet)
+library(shiny)
+library(lwgeom)
+library(tidyverse)
+library(here)
+```

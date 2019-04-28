@@ -1,0 +1,132 @@
+---
+title: Settlers of Catan - the random generator
+author: ~
+date: '2018-09-22'
+slug: settlers-of-catan-the-random-generator
+categories:
+  - R
+tags:
+  - magick
+  - Shiny
+  - Shinythemes
+---
+
+## Background
+Back in March I wrote a blog post about my favourite board game Settlers of Catan. The code generates a random catan board but there is no interactivity for when you want to create a different random board. You can read it in its entirety [here](https://emmavestesson.netlify.com/2018/03/settlers-of-catan/) and somewhere in that post I promised to actually create an app so you can create your own board. I tried when I wrote the original blog post but I struggled with Shiny. There is literally no point in having a random Catan board generator as the process is already random but it has been raining all weekend and I didn't want to leave the house.
+
+![](https://media.giphy.com/media/kmNpx8z6ld8Ry/giphy.gif)
+
+## Some reflections on learning Shiny
+I started writing the code for the server function with great confidence. Since March I have written a few shiny apps/dashboards, been to two shiny workshops, listened to some great talks at EARL London, and I have completed a [course on datacamp](https://www.datacamp.com/courses/building-web-applications-in-r-with-shiny). Despite this, it actually took me longer to write this app than I expected. I am starting to realise that building a shiny app is a different skill to cleaning data or building a statistical model. Building a very basic app is straightforward but once you move past that there are just so many things to think about; which values do I want the user to be able to change? Where should the data manipulations be done? What should be recalculated and when? In a weird way I really enjoy struggling because it makes me feel like I am really learning a whole new skill. Also, the more I explore Shiny the more I realise how versatile a tool it is. I am slowly getting my head around `observeEvent`/`eventReactive` and all the other nifty features. 
+
+## User interface function
+
+The user interface function is very basic. There is a title specified in `titlePanel` with the option `windowTitle` which is the name that you see in the tab when you open the shiny app. The main panel only has two elements; an action button that creates the button to press to create a new board and `plotOutput` which is for the image that will be created in the server function (I have given it the `inputId` "image1" which is not very informative).
+
+```{r ui,eval=FALSE}
+library(shiny)
+library(shinythemes)
+# Define UI for application that draws a histogram
+shinyUI(fluidPage(theme = shinytheme("superhero"),
+  # Application title
+  titlePanel("Settlers of Catan - the random board generator", windowTitle = "Catan"),
+    mainPanel(
+      actionButton("go", "Generate new board"),
+      plotOutput(inputId='image1')
+    )
+  )
+)
+
+```
+
+### Shinythemes
+
+You will notice that I picked the theme "superhero". I found it using the `themeSelector` (as described [here](https://rstudio.github.io/shinythemes/) )  and it is such a neat way of seeing what your app will look like using different themes. All you need to do is to add `shinythemes::themeSelector()` somewhere in UI function and then when you run the app there will be a drop-down menu with the different themes. 
+
+## Server function
+I didn't bother changing much of the code from the static version of the code. Because I am not creating a gif this time the code could have been shortened but I am not a fan of changing working code unless it results in massive efficiency gain or readability. There are some calculations happening outside of the server function because they don't need to be recalculated when a new board is generated. Most of the code is part of an `eventReactive` statement that is assigned to an object called `image_board`. The `imageRender` wants an expression that is a list with the path to the image named `src`. I think that this is the bit that I struggled with the most. Because the image generated is a `magick-image` (in the environment it says "external pointer of class 'magick-image'") it doesn't automatically show in the plot window so I can't use renderPlot. I tried using `renderPlot` by generating the object I wanted and printing it but I couldn't get it to work. 
+
+My favourite part of the code is `ignoreNULL=FALSE` which is an option in `eventReactive`. It controls what should be done before the user has used the action button. The default is `ignoreNULL=TRUE` and with that setting there was no pretty catan board when you loaded the app. 
+
+```{r server, eval=FALSE}
+library(shiny)
+library(magick)
+library(png)
+
+tiles <- c(rep("catan hexes/wood.png",4), rep("catan hexes/sheep.png",4), rep("catan hexes/wheat.png",4), rep("catan hexes/clay.png" ,3), rep("catan hexes/rock.png",3), "catan hexes/desert.png" )
+number_tiles <- c("5", "2", "6", "3", "8", "10", "9","12","11","4", "8","10","9", "4", "5", "6", "3", "11" )
+read_append <- . %>%
+  magick::image_read() %>%
+  magick::image_append()
+
+shinyServer(function(input, output) {
+
+image_board <-eventReactive(input$go, {
+  tiles <- sample(tiles) # This is the one line of code that actually shuffles the order of the tiles.
+  tiles_image <- map(tiles, read_append)
+  desert_loc <- grep("catan hexes/desert.png", tiles, ignore.case = FALSE, perl = FALSE, value = FALSE,
+                     fixed = FALSE, useBytes = FALSE, invert = FALSE)
+  number_tiles <- append(number_tiles, " ", after = desert_loc-1)
+  tiles_with_prob <- map2(tiles_image, number_tiles, ~image_annotate(.x,paste(.y), gravity = "south", location = "+0+20",
+                                                                     degrees = 0, size = 19)) 
+  info <- tiles_with_prob[[1]] %>%
+    magick::image_info()
+  height <- info$height
+  width <- info$width
+  board <- magick::image_blank(width = width * 6,
+                               height = width * 5 ,
+                               col = "dodgerblue1")
+  y_adj <- height/5
+  x_adj <- -width/2
+  
+  board0 <- image_composite(board,tiles_with_prob[[1]], offset=paste0("+", 2*width + x_adj, "+", 0 + y_adj) )
+  board1 <- image_composite(board0,tiles_with_prob[[2]], offset=paste0("+", 3*width + x_adj,  "+", 0 + y_adj)) 
+  board2 <- image_composite(board1,tiles_with_prob[[3]], offset=paste0("+", 4*width + x_adj,  "+", 0 + y_adj)) 
+  board3 <- image_composite(board2,tiles_with_prob[[4]], offset=paste0("+", 4.5*width + x_adj, "+", height*0.75 + y_adj)) 
+  board4 <- image_composite(board3,tiles_with_prob[[5]], offset=paste0("+", 5*width + x_adj, "+", 2*height*0.75 + y_adj)) 
+  board5 <- image_composite(board4,tiles_with_prob[[6]], offset=paste0("+", 4.5*width + x_adj, "+", 3*height*0.75 + y_adj)) 
+  board6 <- image_composite(board5,tiles_with_prob[[7]], offset=paste0("+", 4*width + x_adj, "+", 4*height*0.75 + y_adj)) 
+  board7 <- image_composite(board6,tiles_with_prob[[8]], offset=paste0("+", 3*width + x_adj, "+", 4*height*0.75 + y_adj)) 
+  board8 <- image_composite(board7,tiles_with_prob[[9]], offset=paste0("+", 2*width + x_adj, "+", 4*height*0.75 + y_adj)) 
+  board9 <- image_composite(board8,tiles_with_prob[[10]], offset=paste0("+", 1.5*width + x_adj, "+", 3*height*0.75 + y_adj)) 
+  board10 <- image_composite(board9,tiles_with_prob[[11]], offset=paste0("+", 1*width + x_adj, "+", 2*height*0.75 + y_adj)) 
+  board11 <- image_composite(board10,tiles_with_prob[[12]], offset=paste0("+", 1.5*width + x_adj, "+", 1*height*0.75 + y_adj)) 
+  board12 <- image_composite(board11,tiles_with_prob[[13]], offset=paste0("+", 2.5*width + x_adj, "+", 1*height*0.75 + y_adj)) 
+  board13 <- image_composite(board12,tiles_with_prob[[14]], offset=paste0("+", 3.5*width + x_adj, "+", 1*height*0.75 + y_adj)) 
+  board14 <- image_composite(board13,tiles_with_prob[[15]], offset=paste0("+", 4*width + x_adj, "+", 2*height*0.75 + y_adj)) 
+  board15 <- image_composite(board14,tiles_with_prob[[15]], offset=paste0("+", 3.5*width + x_adj, "+", 3*height*0.75 + y_adj)) 
+  board16 <- image_composite(board15,tiles_with_prob[[17]], offset=paste0("+", 2.5*width + x_adj, "+", 3*height*0.75 + y_adj))
+  board17 <- image_composite(board16,tiles_with_prob[[18]], offset=paste0("+", 2*width + x_adj, "+", 2*height*0.75 + y_adj))
+  board18 <- image_composite(board17,tiles_with_prob[[19]], offset=paste0("+", 3*width + x_adj,  "+", 2*height*0.75 + y_adj))
+  board18 <- image_composite(board17,tiles_with_prob[[19]], offset=paste0("+", 3*width + x_adj,  "+", 2*height*0.75 + y_adj))
+  
+  image_write(board18, path =  here::here("catan_function/www/catan_board.png"))
+  list(src = here::here("catan_function/www/catan_board.png"))}, 
+  ignoreNULL=FALSE ) # Setting ignoreNULL to FALSE means that the code is run once when the app is first loaded  
+# Start of code that actually renders the image
+output$image1 <- renderImage( {   
+  image_board()
+} 
+)
+ })
+```
+
+I have embedded the shiny app below and here is the link [https://emmamariavestesson.shinyapps.io/catan_function](https://emmamariavestesson.shinyapps.io/catan_function)
+```{r, echo=FALSE}
+knitr::include_app("https://emmamariavestesson.shinyapps.io/catan_function", height = "600px")
+```
+
+## Packages I used
+```{r, include=TRUE, eval=FALSE}
+
+library(tidyverse)
+library(shiny)
+library(shinythemes)
+library(magick)
+
+
+```
+
+
+
+

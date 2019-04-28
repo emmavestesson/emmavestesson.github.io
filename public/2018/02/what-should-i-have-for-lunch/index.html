@@ -17,7 +17,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.31.1 with theme Tranquilpeak 0.4.3-BETA">
+    <meta name="generator" content="Hugo 0.55.4 with theme Tranquilpeak 0.4.3-BETA">
     <title>What should I have for lunch?</title>
     <meta name="author" content="Emma Vestesson">
     <meta name="keywords" content="">
@@ -66,14 +66,17 @@ I had also seen a really cool blog post using the osmdata package to look at the
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-112742782-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-112742782-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -242,7 +245,10 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <div id="section-inspiration" class="section level1">
+              
+
+
+<div id="section-inspiration" class="section level1">
 <h1>Inspiration</h1>
 <p>I was having lunch with some colleagues the other day when they told me about a restaurant spreadsheet that they used to use to randomly pick a place to get lunch from. I of course felt the need to see if I could create something similar in R.</p>
 <p>I had also seen a <a href="https://rgeomatic.hypotheses.org/1244">really cool blog post</a> using the <code>osmdata</code> package to look at the number of pubs close to metro stations in Paris. I had been keen to try to replicate some of the things in that post and this seemed like the perfect opportunity.</p>
@@ -622,7 +628,7 @@ library(here)</code></pre>
                 </span>
               </span>
               <div class="media-content hide-xs font-merryweather">Motivation There are some things that I always forget how to do in R. I have decided to add some of those code snippets to this blog so I that I can look them up when I need them.
-Droping variables using a vector of names I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use one_of around the vector with variable names.</div>
+ Droping variables using a vector of names I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use one_of around the vector with variable names.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>

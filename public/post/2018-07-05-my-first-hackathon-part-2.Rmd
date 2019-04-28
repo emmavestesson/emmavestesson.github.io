@@ -1,0 +1,131 @@
+---
+title: My first hackathon (part 2)
+author: ~
+date: '2018-07-05'
+slug: my-first-hackathon-part-2
+categories:
+  - R
+tags:
+  - leaflet
+  - shiny
+  - shinydashbard
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+library(here)
+library(PostcodesioR)
+library(ggmap)
+library(leaflet)
+```
+
+## Gender pay gap hackathon (part 2)
+
+This is part 2 of my blog about the gender pay gap hack that I went to. You can read part 1 [here](https://emmavestesson.netlify.com/2018/06/my-first-hackathon/).
+
+## Reflections
+It has taken me a long time to write the second part of my experience of the hackathon. I think this is partly because I was unsure how/whether to show the dashboard. This was my first attempt at a shiny dashboard and I did not focus on picking the best metrics for the graphs so I don't feel like I am showing anything useful and I don't like the thought of sharing graphs that I am not sure are displaying the data in an appropriate way. I have decided to share the code but not actually the dashboard. Maybe I will change my mind and add it later but for now this feel right. I hope that the code can still be useful. The good news is that I have developed my shiny skills substantially since the hackathons so hopefully I can write a post about that soon. 
+
+## Shiny dashboard
+
+Much like a shiny app, a shiny dashboard has a server and a user interface function. My dashboard is based on a basic example I found online (I think that I got it from [Rstudio](https://rstudio.github.io/shinydashboard/examples.html) but I am not sure) and I was more focused on getting the dashboard to work than to make cool graphs.  
+
+### The server function
+This is the server function. This is where I put all the code that actually generates an output for example a graph or a map. I start by loading the data I created in my previous post and I create smaller data sets. I created two graphs in addition to the map that I created in my previous post. One is a bar chart showing the proportion of companies where mean are paid more and one is a scatter plot showing the relationship between the percentage of the workforce that is female and the mean percentage difference in hourly pay. Both have different filters which was the biggest challenge but once I figured out how to do it I have started using it a lot. The graphs are included using `renderPlot` and the map using `renderLeaflet`. Anything that you want to actually show needs to be named in the server so that you can refer to in in the UI function. The output name should be `output$XXXXXX` and be right before the render function (the render function you use will depend on the output type).
+
+```{r, eval=FALSE}
+library(shinydashboard)
+library(shiny)
+library(tidyverse)
+library(ggplot2)
+library(leaflet)
+library(here)
+
+# Define server logic required to draw a histogram
+server <- function(input, output) {
+# load data and create smaller data sets
+  gpg_charity <- readRDS( here("dashboard","data", "gpg_charity.RDS")) 
+  charity <- gpg_charity %>% 
+    filter(OrgType=="Charity")
+  pub_sec <- gpg_charity %>% 
+    filter(OrgType=="Public Sector")
+  company <- gpg_charity %>% 
+    filter(OrgType=="Company")
+# Create map  
+  output$my_map <-renderLeaflet({leaflet(gpg_charity, options= leafletOptions( minZoom=6, maxZoom=12) ) %>% 
+    addTiles(group = ) %>%
+    addProviderTiles(providers$Stamen.Toner, group = "Toner") %>%
+    addProviderTiles(providers$Stamen.TonerLite, group = "Toner Lite") %>% 
+    addCircles(~longitude, ~latitude, group = "charity", data=charity,
+               radius = 100, weight = 0.50, stroke = TRUE, opacity = 100,
+               fill = TRUE, color = charity$colour,  popup =charity$label_map ) %>% 
+    addCircles(~longitude, ~latitude,  group = "pub_sector", 
+               radius = 100, weight = 0.50, stroke = TRUE, color = pub_sec$colour, 
+               popup =charity$label_map ,opacity = 75,data=pub_sec) %>% 
+      addCircles(~longitude, ~latitude,  group = "company", 
+                 radius = 100, weight = 0.50, stroke = TRUE, color = company$colour, 
+                 popup =charity$label_map ,opacity = 75,data=company) %>% 
+    addLayersControl(
+      baseGroups = c("Toner Lite","OSM (default)", "Toner"),
+      overlayGroups = c("charity", "pub_sector", "company"),
+      options = layersControlOptions(collapsed = FALSE)
+    )
+  })
+  
+# Create  bar chart
+  output$pie <- renderPlot({
+  mytable <- gpg_charity %>%
+    filter(EmployerSize == input$EmployerSize) %>% # EmplyerSize is the inputId specified in the server function
+    group_by(PaidMore,OrgType) %>%
+    count()
+
+  return( ggplot(mytable, aes(y=n,x=OrgType, fill=PaidMore))+
+            geom_col(width = 1, position = "fill")  +
+            theme_minimal() )
+
+  })  
+  
+# Create  scatter plot
+  output$DiffMeanHourlyPercent <- renderPlot({
+    data1 <- filter(gpg_charity, OrgType == input$org_type) 
+
+    return(ggplot(data1, aes(x=FemaleWorkforce, y=DiffMeanHourlyPercent)) + geom_point() + 
+             theme_minimal() +ggtitle("Relationship between % of female workforce and pay gap"))
+  })
+  
+
+ 
+}
+
+```
+
+### The user interface function
+This is the user interface.  This is where I specified the inputs for the different filters using the `selectInput` function. You need to give each the filter a name `inputId` that you can refer to in the server function. 
+```{r, eval=FALSE}
+library(shinydashboard)
+library(shiny)
+library(leaflet)
+# Define UI for application that draws a histogram
+ui <- dashboardPage(
+  dashboardHeader(title = "Gender pay gap"),
+  dashboardSidebar(),
+  dashboardBody(
+# Create selection box for bar chart
+    fluidRow(
+      box(selectInput(inputId = "org_type", label = "Choose organisation type",
+                           choices = list("Charity", "Company", "Public Sector"))
+      ),
+# Create selection box for scatter plot
+      box(plotOutput("DiffMeanHourlyPercent")),
+      box(selectInput(inputId = "EmployerSize", label = "Choose organisation size",
+                           choices = list("Less than 250", "250 to 499", "500 to 999", "1000 to 4999", "20,000 or more", "Not Provided"))
+          ),
+      box(plotOutput("pie")),
+      box(leafletOutput("my_map"))
+    )
+  )
+)
+
+```
+
+
