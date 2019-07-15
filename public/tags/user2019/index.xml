@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>user2019 on Playing with data</title>
+    <link>/tags/user2019/</link>
+    <description>Recent content in user2019 on Playing with data</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/user2019/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Emma goes to useR!2019</title>
+      <link>/2019/07/user2019/</link>
+      <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/07/user2019/</guid>
+      <description>It is Friday evening and my train from Toulouse is delayed [update: train ended up being 2h30 min late, please take this into account when judging this post on its length and coherence.]. My bag is heavy from all the stickers I have aquired and it is too hot for me to stroll around Toulouse. What better than to write up my thoughts on useR!2019?
+Overall impression I have had such a good time and I am leaving full of inspiration to try new packages and ways of working.</description>
+    </item>
+    
+  </channel>
+</rss>

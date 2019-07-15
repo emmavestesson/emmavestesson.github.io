@@ -1,0 +1,63 @@
+---
+title: Reaching for the stars
+author: ~
+date: '2019-06-11'
+slug: reaching-for-the-stars
+categories: []
+tags: []
+keywords:
+  - tech
+---
+
+```{r, include=FALSE}
+library(tidyverse)
+library(RCurl)
+library(naniar)
+```
+
+## Get the data from github
+
+I couldn't be bothered downloading the data and saving it on my laptop (it fills up so quickly!). Also, I have been using github more lately and I figured I should learn how to download the data directly from github. I first tried to read in the file using the link that you get when you click on the .csv file.
+```{r}
+wrong_df <- read_csv('https://github.com/rfordatascience/tidytuesday/blob/master/data/2019/2019-06-11/meteorites.csv')
+head(wrong_df)
+```
+
+That was not what I wanted! It turns out you need to click on 'view raw' and use that link. It will have `raw.githubusercontent` in the url.
+```{r}
+df <- read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-06-11/meteorites.csv")
+head(df)
+```
+Now we are talking!
+
+## Now look at the data
+
+I wanted to try some new packages and decided to explore the `naniar` package.
+
+
+
+```{r}
+world<-data("World")
+
+tm_shape(World) +
+    tm_polygons("HPI")
+```
+
+
+```{r}
+(bb_world = st_bbox(world)) # the world's bounds
+
+
+df_no_na <- df %>% 
+  filter(!is.na(lat))
+random_points <- df_no_na %>% 
+  st_as_sf(coords = c("long", "lat")) %>% # set coordinates
+  st_set_crs(4326) # set geographic CRS
+
+
+world_random = world[random_points, ]
+nrow(world_random)
+#> [1] 4
+random_joined = st_intersects(random_points, world["name_long"])
+```
+
