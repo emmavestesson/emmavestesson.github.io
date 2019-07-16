@@ -25,6 +25,13 @@ I was lucky enough to be around for the tutorials on the Tuesday. As one of my n
 
 [Github](https://github.com/jennybc/pkg-dev-tutorial)
 
+## Keynotes
+
+The keynote speakers were really good and [Julia Stewart Lowndes](https://twitter.com/juliesquid) was my favourite ([Julien Cornebise was a close second] (https://twitter.com/JCornebise). Julia spoke passionately about open science and the power of communities and her slides had beautiful illustrations by [Allison Horst](https://twitter.com/allison_horst. Watch it!
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Z8PqwFPqn6Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 
 ## Packages I had never heard of that I am excited to try
 
