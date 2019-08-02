@@ -18,14 +18,9 @@ tags:
 <div id="droping-variables-using-a-vector-of-names" class="section level2">
 <h2>Droping variables using a vector of names</h2>
 <p>I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use <code>one_of</code> around the vector with variable names. The other day I spent 10 minutes trying things like <code>any_of</code> but it should be <code>one_of</code>. Now I will never forget (or if I forget then I can read my own blog)</p>
-<pre><code>## ── Attaching packages ────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✔ tibble  2.0.1       ✔ purrr   0.3.2  
-## ✔ tidyr   0.8.3       ✔ dplyr   0.8.0.1
-## ✔ readr   1.3.1       ✔ stringr 1.4.0  
-## ✔ tibble  2.0.1       ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ───────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>vars_to_drop &lt;- c(&#39;Wind&#39;, &#39;Temp&#39;)
+airquality &lt;- airquality %&gt;% 
+  select(-one_of(vars_to_drop))</code></pre>
 </div>
 <div id="messing-with-the-ggplot-legend" class="section level2">
 <h2>Messing with the ggplot legend</h2>

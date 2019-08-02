@@ -11,6 +11,7 @@ tags:
 
 ```{r, include=FALSE}
 library(ggplot2)
+library(tidyverse)
 ```
 
 
@@ -22,8 +23,8 @@ There are some things that I always forget how to do in R. I have decided to add
 
 I often have a pre-specified vector of variables names that I use frequently and sometimes I want to drop those variables. The trick is to use `one_of` around the vector with variable names. The other day I spent 10 minutes trying things like `any_of` but it should be `one_of`. Now I will never forget (or if I forget then I can read my own blog)
 
-```{r, echo=FALSE}
-library(tidyverse)
+```{r}
+
 vars_to_drop <- c('Wind', 'Temp')
 airquality <- airquality %>% 
   select(-one_of(vars_to_drop))
