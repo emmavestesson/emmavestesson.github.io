@@ -275,7 +275,7 @@ if (!doNotTrack) {
 <div id="package-updates-that-i-am-excited-about" class="section level2">
 <h2>Package updates that I am excited about</h2>
 <p>Most people who use R for statistics have probably used the <code>survival</code> package at some point. The creator Terry Therneau showed us some of the new features that will be in the next big release, including better support for competing risk models and functions to check that the structure of the data is correct. Some of this is on <a href="https://github.com/therneau/survival/">github</a> and should be on CRAN soonish. Survival analysis is one of those statistical areas that I find fascinating but I sometimes get confused because the structure of the data is very particular (at least to me). This future update looked promising. My favourite part of this talk was the anecdote shared that Terry Therneau had presented this package at a S conference in Toulouse 30 years ago and was now back in Toulouse for the first time to present an update.</p>
-<p>Going from wide to long data or the other way is basically impossible without spending at least ten minutes getting it wrong, randomly changing the arguments and getting a coffee before either succeeding or giving up. This has been the case for me both in my old life as a Stata user and my current life as an R person. The presentation on the updated <code>tidyr</code> package gave me some very much needed hope. The new functions <code>pivot_long</code> and <code>pivot_wide</code> seem to have function arguments that actually describe what they are eg <code>names_to</code> or <code>names_from</code> and you no longer need to quote variables that actually exist. I have high hopes that I will be able to use the new functions without banging my head against the wall. Some types of data wrangling that previously required multiple steps now seem to be able to be done in one step and I already have specific chunks of code that I want to try this one because I hate how clunky the current version is. Not all features are on CRAN so here are the details of the talk.</p>
+<p>Going from wide to long data or the other way is basically impossible without spending at least ten minutes getting it wrong, randomly changing the arguments and getting a coffee before either succeeding or giving up. This has been the case for me both in my old life as a Stata user and my current life as an R person. The presentation on the updated <code>tidyr</code> package gave me some very much needed hope. The new functions <code>pivot_long</code> and <code>pivot_wide</code> seem to have function arguments that actually describe what they are eg <code>names_to</code> or <code>names_from</code> and you no longer need to quote variables that actually exist. I have high hopes that I will be able to use the new functions without banging my head against the wall. Some types of data wrangling that previously required multiple steps now seem to be able to be done in one step and I already have specific chunks of code that I want to try this on because I hate how clunky the current version is. Not all features are on CRAN so here are the details of the talk.</p>
 <blockquote class="twitter-tweet" data-lang="en">
 <p lang="en" dir="ltr">
 Code from my tidyr talk at <a href="https://twitter.com/hashtag/user2019?src=hash&amp;ref_src=twsrc%5Etfw">#user2019</a>: <a href="https://t.co/GGaOGOLt8X">https://t.co/GGaOGOLt8X</a>. RStudio cloud instance if you want to try it out without installing dev packages locally: <a href="https://t.co/HzDhZum8C4">https://t.co/HzDhZum8C4</a> <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a>
@@ -328,7 +328,7 @@ Hello from <a href="https://twitter.com/hashtag/RLadies?src=hash&amp;ref_src=tws
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/09/function-of-the-week-uncount/" data-tooltip="Function of the week: uncount">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -404,7 +404,7 @@ Hello from <a href="https://twitter.com/hashtag/RLadies?src=hash&amp;ref_src=tws
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/09/function-of-the-week-uncount/" data-tooltip="Function of the week: uncount">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -533,6 +533,25 @@ Hello from <a href="https://twitter.com/hashtag/RLadies?src=hash&amp;ref_src=tws
       <div class="no-result text-color-light text-center"></div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/09/function-of-the-week-uncount/">
+                <h3 class="media-heading">Function of the week: uncount</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"> Background I like the idea of short posts focussing on one function because there are so many great functions out there. I had been thinking about doing a function a week for a while and even pitched it to the data science podcast.
+ Uncount You often get summarised/ cross-tabbed data
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -693,24 +712,6 @@ I had also seen a really cool blog post using the osmdata package to look at the
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/happy-birthday-to-me/">
-                <h3 class="media-heading">Happy Birthday To Me!</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Happy Birthday To Me! Today is my birthday. To celebrate I decided to look at what was in the news on January 27 every year since I was born. Mainly I want to see if the news were positive or negative.
- Getting the data I start buy creating a list of dates. I feel like there is probably a more straightforward way of doing this but I am currently obsessed with map so this is how I did it.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -718,7 +719,7 @@ I had also seen a really cool blog post using the osmdata package to look at the
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         13 posts found
+         14 posts found
       </p>
     </div>
   </div>
