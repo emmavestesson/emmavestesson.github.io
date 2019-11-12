@@ -1,0 +1,68 @@
+---
+title: 'Function of the week: uncount'
+author: ~
+date: '2019-09-17'
+slug: function-of-the-week-uncount
+categories: []
+tags:
+  - tidyr
+  - uncount
+keywords:
+  - tech
+draft: true
+---
+
+
+```{r, include=FALSE}
+library(gt)
+library(tidyr)
+library(ggplot2)
+
+animal_scores <- data.frame(
+       score = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16),
+         dog = c(23, 61, 102, 194, 246, 290, 251, 253, 200, 202, 180, 198,
+                 140, 157, 143, 131)
+)
+
+
+animal_scores <- data.frame(
+       score = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+                 18, 19, 20),
+         dog = c(8, 23, 61, 107, 194, 246, 290, 251, 253, 200, 202, 180, 198,
+                 140, 157, 143, 131, 153, 142, 144, 121),
+         cat = c(16, 32, 110, 172, 292, 362, 377, 289, 257, 250, 224, 198, 173,
+                 190, 164, 143, 142, 157, 150, 124, 120)
+)
+
+animal_scores <- pivot_longer(animal_scores, -score, names_to = 'animal', values_to = 'count')
+
+```
+
+## Background
+
+I like the idea of short posts focussing on one function because there are so many great functions out there. I had been thinking about doing a function a week for a while. A post a week is way too ambitious but a month sounds better than most other time periods so I am sticking with it. 
+
+## Uncount
+A function that I think is really under appreciated is `uncount`. Sometimes get summarised/cross-tabbed data that you want in a non-summarised format. 
+
+I remember being in this situation a few years ago and it spent ages writing a loop in stata do create a dataset in the right format. I had designed the data collection myself so I have noone else to blame but now I know that there is a better way. `uncount` to the rescue! 
+
+We will use some fake data that has the same format as the data I had to work with back when I was young and innocent but I have changed the values and labels. 
+Below is a table with some of the data.
+
+```{r}
+gt(animal_scores[1:10,])
+```
+
+To make it 'unsummarised' you just specify the dataset and the weights which is your variable with the counts.
+
+```{r}
+animals_uncounted <- uncount(data=animal_scores, weights=count)
+```
+
+In my orginal case, I wanted to change the format of my data to make density plots. And voila!
+
+```{r}
+ggplot(animals_uncounted, aes(x=score, group=animal, colour=animal)) + geom_density() + theme_minimal()
+```
+
