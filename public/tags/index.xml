@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Playing with data</title>
@@ -6,10 +6,55 @@
     <description>Recent content in Tags on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 17 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>magick</title>
+      <link>/tags/magick/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/magick/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shiny</title>
+      <link>/tags/shiny/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>shinyfeedback</title>
+      <link>/tags/shinyfeedback/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/shinyfeedback/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PhD</title>
+      <link>/tags/phd/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/phd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rmarkdown</title>
+      <link>/tags/rmarkdown/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/rmarkdown/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>tidyr</title>
@@ -57,24 +102,6 @@
     </item>
     
     <item>
-      <title>magick</title>
-      <link>/tags/magick/</link>
-      <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/magick/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>shiny</title>
-      <link>/tags/shiny/</link>
-      <pubDate>Sat, 22 Sep 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/shiny/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>leaflet</title>
       <link>/tags/leaflet/</link>
       <pubDate>Thu, 05 Jul 2018 00:00:00 +0000</pubDate>
@@ -89,6 +116,15 @@
       <pubDate>Thu, 05 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/shinydashbard/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ggmap</title>
+      <link>/tags/ggmap/</link>
+      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ggmap/</guid>
       <description></description>
     </item>
     
@@ -111,11 +147,11 @@
     </item>
     
     <item>
-      <title>ggmap</title>
-      <link>/tags/ggmap/</link>
-      <pubDate>Tue, 26 Jun 2018 00:00:00 +0000</pubDate>
+      <title>gganimate</title>
+      <link>/tags/gganimate/</link>
+      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/ggmap/</guid>
+      <guid>/tags/gganimate/</guid>
       <description></description>
     </item>
     
@@ -125,15 +161,6 @@
       <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/tidytuesday/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>gganimate</title>
-      <link>/tags/gganimate/</link>
-      <pubDate>Tue, 01 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/gganimate/</guid>
       <description></description>
     </item>
     
@@ -264,20 +291,20 @@
     </item>
     
     <item>
-      <title>PHE</title>
-      <link>/tags/phe/</link>
-      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/phe/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>fingertipsR</title>
       <link>/tags/fingertipsr/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/fingertipsr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PHE</title>
+      <link>/tags/phe/</link>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/phe/</guid>
       <description></description>
     </item>
     
