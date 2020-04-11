@@ -1,0 +1,56 @@
+---
+title: Happy EasteR
+author: ~
+date: '2020-04-11'
+slug: happy-easter
+categories: []
+tags:
+  - magick
+keywords:
+  - tech
+---
+
+
+
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>I decided to send personalised Easter cards this year. The plan was to dig out photos of friend and make them more eastery. I found a lovely frame to add to the photos only to realise that I had no idea how to combine them. A quick internet search left me annoyed, so I decided to do what I always do. I turned to R!</p>
+</div>
+<div id="getting-to-work" class="section level2">
+<h2>Getting to work</h2>
+<p>I used the <code>magick</code> package. Reading in images is easy, and if you want to look at them just print them in the console. I am using a photo of my dog for this blog post and the frame I used is from <a href="https://photoshop-kopona.com/63048-happy-easter-photo-frame-for-photoshop.html" class="uri">https://photoshop-kopona.com/63048-happy-easter-photo-frame-for-photoshop.html</a>. It says that is fine to use for personal use but make sure to check the copyright of whatever image you use.</p>
+<pre class="r"><code>frame &lt;- image_read(here::here(&#39;photo_frame.png&#39;))
+background &lt;- image_read(here::here(&#39;IMG_8386.png&#39;))</code></pre>
+<p>Here are the images!</p>
+<p><img src="/post/2020-04-11-happy-easter_files/photo_frame.png" align="left" style="width:40.0%;height:40.0%" /></p>
+<img src="/post/2020-04-11-happy-easter_files/IMG_8386.png" align="right" style="width:40.0%;height:40.0%" />
+<div style="clear: both;">
+
+</div>
+<p>I want to add the frame to the photo of dog. To add the frame right in the middle I change the <code>gravity</code> option of the <code>image_composite()</code> function to ‘center’.</p>
+<pre class="r"><code>card &lt;- image_composite(background, frame, gravity=&#39;center&#39;)</code></pre>
+<p>The problem is that the two images are not the same size.</p>
+<pre class="r"><code>card</code></pre>
+<p><img src="/post/2020-04-11-happy-easter_files/figure-html/unnamed-chunk-4-1.png" width="1512" /></p>
+<p>I need to crop it. I use <code>image_info()</code> to get the dimensions of the two images. Since the frame is added in the centre of the background photo, I need to remove half of the difference between the background and the frame for both width and height.</p>
+<pre class="r"><code>frame_dim &lt;- image_info(frame)
+background_dim &lt;- image_info(background)
+diff_width &lt;- (background_dim$width-frame_dim$width)/2
+diff_height &lt;- (background_dim$height-frame_dim$height)/2
+card_cropped &lt;- image_crop(card, paste0(frame_dim$width, &#39;x&#39;, frame_dim$height, &#39;+&#39;, diff_width, &#39;+&#39;,  diff_height))</code></pre>
+<p>Look how great it looks! To save the image you use <code>image_write()</code>. I sent paper copies to my friend using an online postcard service but I can guess you can email them to people as well.</p>
+<pre class="r"><code>image_write(card_cropped, here::here(&#39;card.png&#39;))</code></pre>
+</div>
+<div id="packages-used" class="section level2">
+<h2>Packages used</h2>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.0     ✓ purrr   0.3.3
+## ✓ tibble  3.0.0     ✓ dplyr   0.8.5
+## ✓ tidyr   1.0.2     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
+<pre><code>## ── Conflicts ───────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(magick)</code></pre>
+</div>

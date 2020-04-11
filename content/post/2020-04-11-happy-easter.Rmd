@@ -1,0 +1,74 @@
+---
+title: Happy EasteR
+author: ~
+date: '2020-04-11'
+slug: happy-easter
+categories: []
+tags:
+  - magick
+keywords:
+  - tech
+---
+
+```{r, include=FALSE}
+library(magick)
+```
+
+## Background
+
+I decided to send personalised Easter cards this year. The plan was to dig out photos of friend and make them more eastery. I found a lovely frame to add to the photos only to realise that I had no idea how to combine them. A quick internet search left me annoyed, so I decided to do what I always do. I turned to R!
+
+## Getting to work
+
+I used the `magick` package. Reading in images is easy, and if you want to look at them just print them in the console. I am using a photo of my dog for this blog post and the frame I used is from https://photoshop-kopona.com/63048-happy-easter-photo-frame-for-photoshop.html. It says that is fine to use for personal use but make sure to check the copyright of whatever image you use. 
+```{r}
+frame <- image_read(here::here('photo_frame.png'))
+background <- image_read(here::here('IMG_8386.png'))
+```
+
+Here are the images!
+
+![](/post/2020-04-11-happy-easter_files/photo_frame.png){align=left width=40% height=40%}
+
+![](/post/2020-04-11-happy-easter_files/IMG_8386.png){align=right width=40% height=40%}
+<div style="clear: both;"></div>
+I want to add the frame to the photo of dog. To add the frame right in the middle I change the `gravity` option of the `image_composite()` function to 'center'.
+
+```{r}
+card <- image_composite(background, frame, gravity='center')
+```
+
+The problem is that the two images are not the same size. 
+
+```{r}
+card
+```
+
+I need to crop it. I use `image_info()` to get the dimensions of the two images. Since the frame is added in the centre of the background photo, I need to remove half of the difference between the background and the frame for both width and height. 
+```{r}
+frame_dim <- image_info(frame)
+background_dim <- image_info(background)
+diff_width <- (background_dim$width-frame_dim$width)/2
+diff_height <- (background_dim$height-frame_dim$height)/2
+card_cropped <- image_crop(card, paste0(frame_dim$width, 'x', frame_dim$height, '+', diff_width, '+',  diff_height))
+
+```
+
+Look how great it looks! To save the image you use `image_write()`. I sent paper copies to my friend using an online postcard service but I can guess you can email them to people as well.
+
+```{r}
+image_write(card_cropped, here::here('card.png'))
+```
+
+```{r, include=FALSE}
+card_cropped
+```
+
+## Packages used
+
+```{r}
+library(tidyverse)
+library(magick)
+```
+
+
