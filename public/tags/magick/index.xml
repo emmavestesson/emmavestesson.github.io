@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>magick on Playing with data</title>
@@ -6,10 +6,20 @@
     <description>Recent content in magick on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 22 Sep 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/magick/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Happy EasteR</title>
+      <link>/2020/04/happy-easter/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/happy-easter/</guid>
+      <description>Background I decided to send personalised Easter cards this year. The plan was to dig out photos of friend and make them more eastery. I found a lovely frame to add to the photos only to realise that I had no idea how to combine them. A quick internet search left me annoyed, so I decided to do what I always do. I turned to R!
+ Getting to work I used the magick package.</description>
+    </item>
     
     <item>
       <title>Settlers of Catan - the random generator</title>

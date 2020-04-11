@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PhD on Playing with data</title>
+    <link>/categories/phd/</link>
+    <description>Recent content in PhD on Playing with data</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-gb</language>
+    <lastBuildDate>Sat, 29 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/phd/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Writing an abstract in Rmarkdown</title>
+      <link>/2020/02/writing-an-abstract-in-rmarkdown/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/02/writing-an-abstract-in-rmarkdown/</guid>
+      <description>Background I’ve started a PhD! This has given me yet another reason to up my markdown game and this week I submitted my first abstract written in Rmarkdown. I’m planning on spending my PhD wasting way to much time obessing about my workflow. So why not get started? A few things worked well and some aspects still need some work.
+Word count When I started writing I kept knitting my document to check the word count but that very quickly got annoying.</description>
+    </item>
+    
+  </channel>
+</rss>
