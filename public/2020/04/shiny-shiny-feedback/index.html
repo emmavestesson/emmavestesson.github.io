@@ -7,29 +7,39 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.59.1 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="Emma Vestesson">
-<meta name="keywords" content="">
-<meta name="description" content="This is a &ldquo;hello world&rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.">
+<meta name="keywords" content="tech">
+<meta name="description" content="Introduction Sometimes you want to send a message to the user of your shiny app ,
+feedback &lt;- function(input, id, value_lower, value_upper, value_model_lower, value_model_upper, units) { if(input&lt;value_lower | input&gt;value_upper) { hideFeedback(id) showFeedbackDanger( inputId = id, text = glue(&#39;The value entered, {input}, is outside of the range of accepted values&#39;) ) } else if (input&lt;value_model_lower | input&gt;value_model_upper) { hideFeedback(id) showFeedbackWarning( inputId = id, text = glue(&quot;This model has been developed for values between {value_model_lower} and {value_model_upper} {units}.">
 
 
-<meta property="og:description" content="This is a &ldquo;hello world&rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.">
+<meta property="og:description" content="Introduction Sometimes you want to send a message to the user of your shiny app ,
+feedback &lt;- function(input, id, value_lower, value_upper, value_model_lower, value_model_upper, units) { if(input&lt;value_lower | input&gt;value_upper) { hideFeedback(id) showFeedbackDanger( inputId = id, text = glue(&#39;The value entered, {input}, is outside of the range of accepted values&#39;) ) } else if (input&lt;value_model_lower | input&gt;value_model_upper) { hideFeedback(id) showFeedbackWarning( inputId = id, text = glue(&quot;This model has been developed for values between {value_model_lower} and {value_model_upper} {units}.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="About">
-<meta name="twitter:title" content="About">
-<meta property="og:url" content="/about/">
-<meta property="twitter:url" content="/about/">
+<meta property="og:title" content="Shiny, shiny feedback">
+<meta name="twitter:title" content="Shiny, shiny feedback">
+<meta property="og:url" content="/2020/04/shiny-shiny-feedback/">
+<meta property="twitter:url" content="/2020/04/shiny-shiny-feedback/">
 <meta property="og:site_name" content="Playing with data">
-<meta property="og:description" content="This is a &ldquo;hello world&rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.">
-<meta name="twitter:description" content="This is a &ldquo;hello world&rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.">
+<meta property="og:description" content="Introduction Sometimes you want to send a message to the user of your shiny app ,
+feedback &lt;- function(input, id, value_lower, value_upper, value_model_lower, value_model_upper, units) { if(input&lt;value_lower | input&gt;value_upper) { hideFeedback(id) showFeedbackDanger( inputId = id, text = glue(&#39;The value entered, {input}, is outside of the range of accepted values&#39;) ) } else if (input&lt;value_model_lower | input&gt;value_model_upper) { hideFeedback(id) showFeedbackWarning( inputId = id, text = glue(&quot;This model has been developed for values between {value_model_lower} and {value_model_upper} {units}.">
+<meta name="twitter:description" content="Introduction Sometimes you want to send a message to the user of your shiny app ,
+feedback &lt;- function(input, id, value_lower, value_upper, value_model_lower, value_model_upper, units) { if(input&lt;value_lower | input&gt;value_upper) { hideFeedback(id) showFeedbackDanger( inputId = id, text = glue(&#39;The value entered, {input}, is outside of the range of accepted values&#39;) ) } else if (input&lt;value_model_lower | input&gt;value_model_upper) { hideFeedback(id) showFeedbackWarning( inputId = id, text = glue(&quot;This model has been developed for values between {value_model_lower} and {value_model_upper} {units}.">
 <meta property="og:locale" content="en-gb">
 
   
-    <meta property="article:published_time" content="2016-05-05T21:48:51">
+    <meta property="article:published_time" content="2020-04-04T00:00:00">
   
   
-    <meta property="article:modified_time" content="2016-05-05T21:48:51">
+    <meta property="article:modified_time" content="2020-04-04T00:00:00">
   
   
   
+  
+    
+      <meta property="article:tag" content="shiny">
+    
+      <meta property="article:tag" content="shinyfeedback">
+    
   
 
 
@@ -50,14 +60,14 @@
 
 
 
-    <title>About</title>
+    <title>Shiny, shiny feedback</title>
 
     <link rel="icon" href="/favicon.png">
     
 
     
 
-    <link rel="canonical" href="/about/">
+    <link rel="canonical" href="/2020/04/shiny-shiny-feedback/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -90,7 +100,7 @@ if (!doNotTrack) {
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">Playing with data</a>
@@ -108,7 +118,7 @@ if (!doNotTrack) {
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
     <ul class="sidebar-buttons">
@@ -208,7 +218,7 @@ if (!doNotTrack) {
 
       
 
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
@@ -218,19 +228,19 @@ if (!doNotTrack) {
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      About
+      Shiny, shiny feedback
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2016-05-05T21:48:51-07:00">
+      <time itemprop="datePublished" datetime="2020-04-04T00:00:00Z">
         
   
   
   
   
-    5  2016
+    4  2020
   
 
       </time>
@@ -242,13 +252,54 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>This is a &ldquo;hello world&rdquo; example website for the <a href="https://github.com/rstudio/blogdown"><strong>blogdown</strong></a> package. The theme was forked from <a href="https://github.com/jrutheiser/hugo-lithium-theme">@jrutheiser/hugo-lithium-theme</a> and modified by <a href="https://github.com/yihui/hugo-lithium-theme">Yihui Xie</a>.</p>
+              
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Sometimes you want to send a message to the user of your shiny app ,</p>
+<pre class="r"><code>feedback &lt;- function(input, id,  value_lower, value_upper, value_model_lower, value_model_upper, units) {
+
+    if(input&lt;value_lower | input&gt;value_upper) {
+      hideFeedback(id)
+      showFeedbackDanger(
+        inputId = id,
+        text = glue(&#39;The value entered, {input}, is outside of the range of accepted values&#39;)        )
+    } else if (input&lt;value_model_lower | input&gt;value_model_upper) {
+      hideFeedback(id)
+      showFeedbackWarning(
+        inputId = id,
+        text = glue(&quot;This model has been developed for values between {value_model_lower} and {value_model_upper} {units}. The entered value of {input} {units} is outside this range and the result of the calculations will be less reliable.&quot;)
+      )
+    } else {
+      hideFeedback(id)
+    }
+
+}</code></pre>
+<pre class="r"><code>observeEvent( input$wt, {  
+    req(input$wt)  
+    feedback(input$wt, id=&#39;wt&#39;, value_lower=wt_lower, value_upper = wt_upper, 
+             value_model_lower=wt_model_lower, value_model_upper=wt_model_upper, units=&#39;kg&#39;)
+})</code></pre>
+</div>
 
               
             </div>
           </div>
           <div id="post-footer" class="post-footer main-content-wrap">
             
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="/tags/shiny/">shiny</a>
+
+  <a class="tag tag--primary tag--small" href="/tags/shinyfeedback/">shinyfeedback</a>
+
+                  </div>
+                
               
             
             <div class="post-actions-wrap">
@@ -258,7 +309,7 @@ if (!doNotTrack) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2020/04/happy-easter/" data-tooltip="Happy EasteR">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -266,7 +317,7 @@ if (!doNotTrack) {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2020/02/writing-an-abstract-in-rmarkdown/" data-tooltip="Writing an abstract in Rmarkdown">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -284,19 +335,19 @@ if (!doNotTrack) {
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2020/04/shiny-shiny-feedback/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2020/04/shiny-shiny-feedback/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2020/04/shiny-shiny-feedback/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -326,7 +377,7 @@ if (!doNotTrack) {
 </footer>
 
       </div>
-      <div id="bottom-bar" class="post-bottom-bar" data-behavior="1">
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
         <div class="post-actions-wrap">
   
       <nav >
@@ -334,7 +385,7 @@ if (!doNotTrack) {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2020/04/happy-easter/" data-tooltip="Happy EasteR">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -342,7 +393,7 @@ if (!doNotTrack) {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2020/02/writing-an-abstract-in-rmarkdown/" data-tooltip="Writing an abstract in Rmarkdown">
               
                   <span class="hide-xs hide-sm text-small icon-mr"></span>
                   <i class="fa fa-angle-right"></i>
@@ -360,19 +411,19 @@ if (!doNotTrack) {
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2020/04/shiny-shiny-feedback/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2020/04/shiny-shiny-feedback/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/about/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2020/04/shiny-shiny-feedback/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -391,24 +442,24 @@ if (!doNotTrack) {
 </div>
 
       </div>
-      <div id="share-options-bar" class="share-options-bar" data-behavior="1">
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
   <i id="btn-close-shareoptions" class="fa fa-close"></i>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2Fabout%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2020%2F04%2Fshiny-shiny-feedback%2F">
           <i class="fa fa-facebook-official"></i><span>%!(EXTRA string=Facebook)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2Fabout%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2020%2F04%2Fshiny-shiny-feedback%2F">
           <i class="fa fa-twitter"></i><span>%!(EXTRA string=Twitter)</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2Fabout%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2020%2F04%2Fshiny-shiny-feedback%2F">
           <i class="fa fa-google-plus"></i><span>%!(EXTRA string=Google&#43;)</span>
         </a>
       </li>

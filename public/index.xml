@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Playing with data</title>
@@ -6,10 +6,40 @@
     <description>Recent content on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Tue, 17 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 11 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Happy EasteR</title>
+      <link>/2020/04/happy-easter/</link>
+      <pubDate>Sat, 11 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/happy-easter/</guid>
+      <description>Background I decided to send personalised Easter cards this year. The plan was to dig out photos of friend and make them more eastery. I found a lovely frame to add to the photos only to realise that I had no idea how to combine them. A quick internet search left me annoyed, so I decided to do what I always do. I turned to R!
+ Getting to work I used the magick package.</description>
+    </item>
+    
+    <item>
+      <title>Shiny, shiny feedback</title>
+      <link>/2020/04/shiny-shiny-feedback/</link>
+      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/04/shiny-shiny-feedback/</guid>
+      <description>Introduction Sometimes you want to send a message to the user of your shiny app ,
+feedback &amp;lt;- function(input, id, value_lower, value_upper, value_model_lower, value_model_upper, units) { if(input&amp;lt;value_lower | input&amp;gt;value_upper) { hideFeedback(id) showFeedbackDanger( inputId = id, text = glue(&amp;#39;The value entered, {input}, is outside of the range of accepted values&amp;#39;) ) } else if (input&amp;lt;value_model_lower | input&amp;gt;value_model_upper) { hideFeedback(id) showFeedbackWarning( inputId = id, text = glue(&amp;quot;This model has been developed for values between {value_model_lower} and {value_model_upper} {units}.</description>
+    </item>
+    
+    <item>
+      <title>Writing an abstract in Rmarkdown</title>
+      <link>/2020/02/writing-an-abstract-in-rmarkdown/</link>
+      <pubDate>Sat, 29 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/02/writing-an-abstract-in-rmarkdown/</guid>
+      <description>Background I’ve started a PhD! This has given me yet another reason to up my markdown game and this week I submitted my first abstract written in Rmarkdown. I’m planning on spending my PhD wasting way to much time obessing about my workflow. So why not get started? A few things worked well and some aspects still need some work.
+Word count When I started writing I kept knitting my document to check the word count but that very quickly got annoying.</description>
+    </item>
     
     <item>
       <title>Function of the week: uncount</title>
