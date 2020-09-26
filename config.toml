@@ -34,8 +34,8 @@ canonifyurls = true
 
 [author]
   name = "Emma Vestesson"
-  bio = "I first started learning R in the autumn of 2012 but stopped after a couple of months as I didn't use it. In January 2017 I rediscovered R again and this time I am sticking with it. After discovering blogdown and realising how many different short snippets of code I have hidden away on my computer I decided to share them on this blog instead."
-  job = "Data analyst"
+  bio = "I love all things R and data. I'm a senior data analyst at the Health Foundation and a part-time PhD at UCL Great Ormond Street Institute of Child Health. I am also an RStudio Certified Instructor in the tidyverse. This is where I share some of my coding projects - some more useful than others!   "
+  job = "Senior Data analyst"
   location = "London"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
   # gravatarEmail = "thibaud.lepretre@gmail.com"
