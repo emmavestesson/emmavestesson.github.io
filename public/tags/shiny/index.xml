@@ -6,21 +6,7 @@
     <description>Recent content in shiny on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 04 Apr 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Shiny, shiny feedback</title>
-      <link>/2020/04/shiny-shiny-feedback/</link>
-      <pubDate>Sat, 04 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/2020/04/shiny-shiny-feedback/</guid>
-      <description>Introduction Sometimes you want to send a message to the user of your shiny app ,
-feedback &amp;lt;- function(input, id, value_lower, value_upper, value_model_lower, value_model_upper, units) { if(input&amp;lt;value_lower | input&amp;gt;value_upper) { hideFeedback(id) showFeedbackDanger( inputId = id, text = glue(&amp;#39;The value entered, {input}, is outside of the range of accepted values&amp;#39;) ) } else if (input&amp;lt;value_model_lower | input&amp;gt;value_model_upper) { hideFeedback(id) showFeedbackWarning( inputId = id, text = glue(&amp;quot;This model has been developed for values between {value_model_lower} and {value_model_upper} {units}.</description>
-    </item>
-    
+    <lastBuildDate>Sat, 22 Sep 2018 00:00:00 +0000</lastBuildDate><atom:link href="/tags/shiny/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Settlers of Catan - the random generator</title>
       <link>/2018/09/settlers-of-catan-the-random-generator/</link>

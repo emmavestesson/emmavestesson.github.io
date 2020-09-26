@@ -6,11 +6,7 @@
     <description>Recent content in R on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Fri, 12 Jul 2019 00:00:00 +0000</lastBuildDate><atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Emma goes to useR! 2019</title>
       <link>/2019/07/user2019/</link>

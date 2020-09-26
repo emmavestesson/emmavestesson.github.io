@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>/</loc>
+    <lastmod>2020-04-11T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
     <lastmod>2020-04-11T00:00:00+00:00</lastmod>
   </url>
@@ -20,46 +25,6 @@
   <url>
     <loc>/tags/</loc>
     <lastmod>2020-04-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/shiny/</loc>
-    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2020/04/shiny-shiny-feedback/</loc>
-    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/shinyfeedback/</loc>
-    <lastmod>2020-04-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/phd/</loc>
-    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/phd/</loc>
-    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/rmarkdown/</loc>
-    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/2020/02/writing-an-abstract-in-rmarkdown/</loc>
-    <lastmod>2020-02-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -75,6 +40,11 @@
   <url>
     <loc>/tags/uncount/</loc>
     <lastmod>2019-09-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2019-07-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -104,6 +74,11 @@
   
   <url>
     <loc>/2018/09/settlers-of-catan-the-random-generator/</loc>
+    <lastmod>2018-09-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/shiny/</loc>
     <lastmod>2018-09-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -279,11 +254,6 @@
   
   <url>
     <loc>/about/</loc>
-    <lastmod>2016-05-05T21:48:51-07:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2016-05-05T21:48:51-07:00</lastmod>
   </url>
   

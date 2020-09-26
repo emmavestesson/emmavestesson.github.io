@@ -6,11 +6,7 @@
     <description>Recent content in dplyr on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/dplyr/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 13 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="/tags/dplyr/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Frequently Used Code</title>
       <link>/2019/01/frequently-used-code/</link>

@@ -6,11 +6,7 @@
     <description>Recent content in tableone on Playing with data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-gb</language>
-    <lastBuildDate>Sat, 13 Jan 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/tableone/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 13 Jan 2018 00:00:00 +0000</lastBuildDate><atom:link href="/tags/tableone/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Regressions using completly fake data!</title>
       <link>/2018/01/fake-data/</link>
